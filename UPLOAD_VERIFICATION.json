@@ -1,0 +1,38 @@
+{
+  "verified_payload_commit": "17ccc195cbb0b45444229cb9c6802dd964131a7a",
+  "repository": "https://github.com/jingy7802-bot/3d",
+  "visibility": "public",
+  "all_existing_original_payload_files_match_github_tree": true,
+  "payload_files_verified": 5822,
+  "render_frames_verified": 5701,
+  "text_files": 38,
+  "text_parts": 368,
+  "text_exact_reassembly": "PASS",
+  "remote_download_checks": [
+    {
+      "file": "Battlefield_Previs_V2_Implementation.zip",
+      "http_status": 200,
+      "bytes": 44968076,
+      "sha256": "a9d1e0aa11541246ae70f82095af977529400908cd6cc8ee25104e9cc2f96f2c",
+      "remote_download_verified": true
+    },
+    {
+      "file": "delivery_v2/battlefield_v2_previs.mp4",
+      "http_status": 200,
+      "bytes": 10923924,
+      "sha256": "0697eda8e7f8455b7dbdd96ff819ec0ae7b4da20c6983222018abf406043538a",
+      "remote_download_verified": true
+    },
+    {
+      "file": "delivery_v2/battlefield_v2.blend",
+      "http_status": 200,
+      "bytes": 33801948,
+      "sha256": "1bb9be01a1c8ebdeb3c6ec571ce0fe9c4c20f8539a96b8b59153bc904b627cbe",
+      "remote_download_verified": true
+    }
+  ],
+  "notes": [
+    "README and navigation metadata are updated in the next commit; original production artifacts remain byte-identical.",
+    "All 5701 PNG frames are included; use render_frames_index/INDEX.md because GitHub directory listings can be limited."
+  ]
+}

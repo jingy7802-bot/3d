@@ -335,16 +335,16 @@
     {
       "order": 5,
       "path": "README.md",
-      "bytes": 2783,
+      "bytes": 2811,
       "line_count": 45,
-      "sha256": "ed7b372a9ec678485902e4464fff40be7730290e3a6c02439b4356ceecff77ca",
+      "sha256": "37da11e3563e68e44bc9e5beb3c150eef519fd11b00ad243c06cf474caec1f29",
       "parts": [
         {
           "path": "005_README.md/part_001.txt",
           "line_start": 1,
           "line_end": 45,
-          "bytes": 2783,
-          "sha256": "ed7b372a9ec678485902e4464fff40be7730290e3a6c02439b4356ceecff77ca"
+          "bytes": 2811,
+          "sha256": "37da11e3563e68e44bc9e5beb3c150eef519fd11b00ad243c06cf474caec1f29"
         }
       ]
     },

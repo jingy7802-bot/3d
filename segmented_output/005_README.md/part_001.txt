@@ -30,7 +30,7 @@
 | 其他渲染、绘图和审计脚本 | `delivery_v2/*.py` |
 | Blender 完整工程与备份 | `delivery_v2/battlefield_v2.blend`、`.blend1` |
 | 连续预演视频 | `delivery_v2/battlefield_v2_previs.mp4` |
-| 全部 5,701 张真实渲染帧 | `delivery_v2/frames/frame_0001.png` 至 `frame_5701.png` |
+| 全部 5,701 张真实渲染帧 | [逐帧分页索引](render_frames_index/INDEX.md)；原图在 `delivery_v2/frames/` |
 | 最终代表帧 | `delivery_v2/review_frames/` |
 | 较早的检查帧 | `delivery_v2/checkpoints/` |
 | 俯视路线、高度和速度曲线 | `delivery_v2/camera_*.png` |
