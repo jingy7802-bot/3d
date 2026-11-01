@@ -1,0 +1,96 @@
+        "Forest path: lateral bends around obstacles plus vertical undulation.",
+        "Tactical layout: neutral cover slots, advance lanes and fire-direction anchors.",
+        "Water: broad 72m crossing, irregular wading crowd across the full river width, flat surface-floating casualties, submerged bodies, bullet impacts, hit/fall beats and assisted crossing.",
+        "Ground-level foreground: fine grass and low stones near the lens.",
+        "Wutonggou: Japanese perimeter encirclement -> woman carrying wounded man at doorway -> old wooden-shaft explosive ring pull -> house blast -> debris-frame passage -> river approach.",
+        "Underwater: sudden stop, backward recoil, lateral dodge, forward acceleration and exit.",
+        "Ground-level wide-angle section: near-lens grass tufts and low foreground stones.",
+        "Road after water: wide and open; deceleration before Old Meng.",
+        "Old Meng: low-angle full-to-medium-to-close push, low-angle arc from rear toward front, arm-shading gesture, then front heroic close-up and hold.",
+        "Final: direct pull-back through charging crowd, banked pass beneath natural rock arch, rising valley reveal and expanded high aerial view.",
+        "Camera banking: explicitly keyed at turns, dives, dodges and frame passages; level is restored at hero beats.",
+        "Camera focus: story-event targets; focal lengths animate from 24mm aerial wide to a 68mm Old Meng low-angle close-up.",
+        "Movement rhythm: fast passages bridge the staged performance peaks; camera holds are added at hit reactions, blast, water fall and box transfer.",
+        "Multiple segmented white-block people, layered battlefield blocking and simplified props; no facial detail, clothing texture or rig.",
+        "Blast flash, smoke expansion, falling branches, bullet tracers, blood-water tint and water impact puffs are simplified timing cues, not physical simulations.",
+        "Timeline: 1-900 @ 30 FPS; all actors, props, aircraft, bombs and environment events share one global timebase.",
+        "",
+        "Performance peak map:",
+        "Frame 1-110: four bombers approach; aviation bombs remain attached, release in staggered phases, descend through early/mid/terminal stages and impact at separate points.",
+        "Frame 118-145: Japanese close shooter fires; nearby soldier is hit and falls; adjacent soldier reacts. Frame 174-234: pinned soldier rescue and tree lift continue on the same timeline.",
+        "Frame 162-202: Chinese cover position returns fire; one soldier is hit; the second shooter ducks and looks toward him.",
+        "Frame 242-268: one retreating soldier glances back while continuing to withdraw.",
+        "Frame 340-408: Japanese perimeter advances; doorway pair remains visible; woman pulls the ring of a wooden-shaft explosive; house blast throws debris and soldiers outward.",
+        "Frame 418-522: broad river crowd wades across varied lanes; multiple flat surface bodies drift; one pair assists an injured soldier; hit/fall and bullet splash cues remain active.",
+        "Frame 538-553: sender extends the box, receiver secures it, sender releases, receiver moves away carrying it.",
+        "Frame 588-676: Old Meng raises an arm to shade his eyes, lowers it as the camera reaches the front, then holds the low-angle hero frame.",
+        "",
+        "Stage status:"
+    ]
+    for key, value in STATUS.items():
+        lines.append("%s : %s" % (key, value))
+    lines.extend(["", "Camera path samples (banked choreography):"])
+    cam = bpy.data.objects.get("BFP_V20_ACTIVE_CAMERA")
+    if cam:
+        for frame in (1, 22, 32, 52, 70, 90, 108, 124, 148, 172, 188, 204, 220, 244, 254, 274, 298, 322, 350, 370, 378, 388, 410, 430, 458, 466, 488, 512, 536, 582, 608, 622, 650, 664, 700, 742, 790, 830, 870, 900):
+            bpy.context.scene.frame_set(frame)
+            bpy.context.view_layer.update()
+            p = cam.matrix_world.translation
+            lines.append("Frame %d : %.2f, %.2f, %.2f" % (frame, p.x, p.y, p.z))
+    lines.extend(["", "Execution log:"])
+    lines.extend(REPORT)
+    txt.write("\n".join(lines))
+
+
+# ============================================================
+# MAIN
+# ============================================================
+
+def legacy_v12_main_unused():
+    log("START " + VERSION)
+    log("Blender version " + bpy.app.version_string)
+
+    clear_generated_collections()
+    hide_legacy_versions()
+    create_materials()
+
+    run_stage("LANDSCAPE_OPEN_SKY", build_landscape)
+    run_stage("IRREGULAR_DENSE_WOODLAND_AND_ROCK_PASSAGES", build_forest)
+    run_stage("TACTICAL_COVER_AND_ADVANCE_LAYOUT", build_tactical_layout)
+    run_stage("LIXINGOU_RAVINE", build_ravine)
+    run_stage("WUTONGGOU_BREACHED_HOUSE_AND_APPROACH_MARKERS", build_village)
+    run_stage("STATIC_HOUSE_BLAST_SMOKE_PLACEHOLDERS", build_house_blast_smoke)
+    run_stage("CURVED_RIVER_AND_UNDERWATER_OBSTACLES", build_river)
+    run_stage("WIDE_ROAD_AND_FUTURE_CROWD_LANES", build_wide_road_and_crowd_markers)
+    run_stage("LOW_FINE_GRASS_FOR_GROUND_LEVEL_WIDE_ANGLE", build_ground_grass)
+    run_stage("LOW_CAMERA_FOREGROUND_GROUND_ROCKS", build_ground_rocks)
+    run_stage("HUGE_WEST_VALLEY_FRAME", build_west_pass)
+    run_stage("WHITE_BLOCK_CHARACTERS_AND_PROPS", build_characters_and_props)
+    run_stage("STORYBOARD_CRITICAL_ACTIONS_AND_FRAME_GATES", build_storyboard_details)
+    run_stage("PACKED_TERRAIN_REFERENCE_BOARD", add_terrain_reference_board)
+    run_stage("ANIMATED_BATTLEFIELD_INTERACTIONS", build_battlefield_fx)
+    run_stage("ACTOR_INFORMED_CAMERA_ANIMATION", build_camera)
+    run_stage("CAMERA_PATH_DEBUG", build_camera_path_debug)
+    run_stage("LIGHTING", configure_lighting)
+    run_stage("SCENE_CONFIGURATION", configure_scene)
+    run_stage("FORCE_CAMERA_VIEW", force_camera_view)
+
+    cam = bpy.data.objects.get("BFP_V20_ACTIVE_CAMERA")
+    if cam:
+        samples = []
+        for frame in (1, 22, 32, 52, 70, 90, 108, 124, 148, 172, 188, 204, 220, 244, 254, 274, 298, 322, 350, 370, 378, 388, 410, 430, 458, 466, 488, 512, 536, 582, 608, 622, 650, 664, 700, 742, 790, 830, 870, 900):
+            bpy.context.scene.frame_set(frame)
+            bpy.context.view_layer.update()
+            p = cam.matrix_world.translation
+            samples.append((round(p.x, 2), round(p.y, 2), round(p.z, 2)))
+        STATUS["CAMERA_MOVEMENT_CHECK"] = "PASS" if len(set(samples)) > 1 else "FAIL"
+        log("Camera position samples: " + repr(samples))
+    else:
+        STATUS["CAMERA_MOVEMENT_CHECK"] = "FAIL - camera missing"
+
+    bpy.context.scene.frame_set(FRAME_START)
+    bpy.context.view_layer.update()
+    write_build_report()
+    log("FINISHED. Open BFP_V20_BUILD_REPORT if anything failed.")
+    try:
+        output_dir = get_script_directory()

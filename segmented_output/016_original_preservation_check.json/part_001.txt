@@ -1,0 +1,53 @@
+{
+  "pass": true,
+  "files": [
+    {
+      "file": "Battlefield_OneTake_Previs_V1_2_Package/Battlefield_OneTake_Previs_V1_2.py",
+      "sha256": "7f7b000693e2e23426d5720b1ca11c6e4a41e3b3bdeaadae6bb5b522b6bd10e6"
+    },
+    {
+      "file": "Battlefield_OneTake_Previs_V1_2_Package/Battlefield_OneTake_Previs_V1_2_CameraHeightProfile.png",
+      "sha256": "dd2d0aa6d6030417a964a19fed3b950966ba4ad0cd5f57f40caf55bd237235b3"
+    },
+    {
+      "file": "Battlefield_OneTake_Previs_V1_2_Package/Battlefield_OneTake_Previs_V1_2_CameraRoute_Detail.png",
+      "sha256": "c7d3ad9d990aeaffdb1f5e071f003748909c4de2b81d843a8d53b55fccc088a7"
+    },
+    {
+      "file": "Battlefield_OneTake_Previs_V1_2_Package/Battlefield_OneTake_Previs_V1_2_CameraRoute_TopView.png",
+      "sha256": "50d145ec15384b4cac900c5d68caf447d8aec87e7e54aab838d88d3a299d79b5"
+    },
+    {
+      "file": "Battlefield_OneTake_Previs_V1_2_Package/Battlefield_OneTake_Previs_V1_2_Record.md",
+      "sha256": "4c14db3da3eb1e0917ba3704d45d7a931bb83edbb1dcd68d8e39d847275ada2c"
+    },
+    {
+      "file": "Battlefield_OneTake_Previs_V1_2_Package/README_运行说明.md",
+      "sha256": "95ff1298f86ebbc6e78f5c52a5351fbbd4e2b6966abc2baffe5e34a33ded232b"
+    },
+    {
+      "file": "Battlefield_OneTake_Previs_V1_2_Package/storyboard_01_aircraft_pigeon_bombs.png",
+      "sha256": "a34615eb0521854e24609ebc09918609cd51780aa326fb48b570b0400f4a9fc2"
+    },
+    {
+      "file": "Battlefield_OneTake_Previs_V1_2_Package/storyboard_02_forest_battle_rescue.png",
+      "sha256": "de69ac27e4012eb9592dd0ba6eb3de14bc2ca5fb1ba6a94d8430d06dc863ff2c"
+    },
+    {
+      "file": "Battlefield_OneTake_Previs_V1_2_Package/storyboard_03_forest_japanese_advance.png",
+      "sha256": "3314ed3455d756ab931d9f9f6887878a8502fa3ba2a2127b60c48ee381c8bc1b"
+    },
+    {
+      "file": "Battlefield_OneTake_Previs_V1_2_Package/storyboard_04_house_explosion_river_handoff.png",
+      "sha256": "4be5b6a8c94106ae1da2fe9e144c3532896e7c1ccb2c565fbcd163e868bbf1cb"
+    },
+    {
+      "file": "Battlefield_OneTake_Previs_V1_2_Package/storyboard_05_old_meng_valley.png",
+      "sha256": "234be0d93fb4a0263607e1ecf67b4afc610482676b261a14d27cb1aaa3d8887d"
+    },
+    {
+      "file": "Battlefield_OneTake_Previs_V1_2_Package/terrain_reference.png",
+      "sha256": "29c1fb1dafec4e73db8c254e6f56340e0e92278505fbb26735c1c88f945a3e73"
+    }
+  ]
+}

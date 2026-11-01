@@ -1,0 +1,85 @@
+        dist=(p-worldq).length;sg=(p-worldq).dot(worldn)
+        if dist<RADIUS or sg<-.005:hits.append((ob.name,worldq,worldn,dist if sg>=0 else -dist))
+    return hits
+
+def validate():
+    global RADIUS
+    s=bpy.context.scene;cam=s.camera
+    RADIUS=s.get('camera_safety_radius_m',.22)+s.get('camera_margin_m',.12)
+    patch_ground()
+    final_assets()
+    ground_walkers()
+    air_dodge()
+    crowd_clearance()
+    tree,names,dyn,static=prepare_colliders()
+    print('COLLIDERS',len(static),len(dyn),flush=True)
+    original=[];adjusted=[];unresolved=[];corrections=[]
+    # Initial sampling every 3 frames, bake at this rate; final checks every frame below.
+    for f in range(1,s.frame_end+1,3):
+        s.frame_set(f);p=cam.matrix_world.translation.copy();q=cam.rotation_quaternion.copy()
+        original.append((f,p.copy(),q))
+        for it in range(16):
+            h=check_point(p,tree,names,dyn)
+            if not h:break
+            # Project along the actual outward surface normal, choosing largest violation.
+            name,near,n,d=min(h,key=lambda h:h[3]);p=near+n*(RADIUS+.10)
+        if (p-original[-1][1]).length>.01:corrections.append({'frame':f,'distance':(p-original[-1][1]).length})
+        adjusted.append((f,p,q))
+        if f%300==1:print('PATH',f,'adjusted',len(corrections),flush=True)
+    # Retain orientation, bake positions; linear interpolation prevents Bezier overshoot.
+    cam.animation_data_clear()
+    for f,p,q in adjusted:
+        cam.location=p;cam.rotation_quaternion=q
+        cam.keyframe_insert(data_path='location',frame=f);cam.keyframe_insert(data_path='rotation_quaternion',frame=f)
+    for fc in fcurve_list(cam):
+        for k in fc.keyframe_points:k.interpolation='LINEAR'
+    rows=[];last=None;minspeed=1e9;maxspeed=0;final_poses=[];repair_frames=[]
+    for f in range(1,s.frame_end+1):
+        s.frame_set(f);p=cam.matrix_world.translation.copy()
+        h=check_point(p,tree,names,dyn)
+        if h:repair_frames.append(f)
+        for iteration in range(24):
+            if not h:break
+            name,near,n,d=min(h,key=lambda h:h[3]);p=near+n*(RADIUS+.08)
+            h=check_point(p,tree,names,dyn)
+        q=cam.rotation_quaternion.copy()
+        focus=cam.data.dof.focus_object
+        if f in repair_frames and focus:
+            q=(focus.matrix_world.translation-p).to_track_quat('-Z','Y')
+            if q.dot(cam.rotation_quaternion)<0:q.negate()
+        final_poses.append((f,p.copy(),q))
+        for name,near,n,d in h:unresolved.append({'frame':f,'object':name,'signed_surface_distance':round(d,5)})
+        speed=(p-last).length*30 if last else 0
+        if last:minspeed=min(minspeed,speed);maxspeed=max(maxspeed,speed)
+        rows.append((f,(f-1)/30,p.x,p.y,p.z,speed));last=p
+        if f%600==0:print('VERIFY',f,'hits',len(unresolved),flush=True)
+    cam.animation_data_clear()
+    for f,p,q in final_poses:
+        cam.location=p;cam.rotation_quaternion=q
+        cam.keyframe_insert(data_path='location',frame=f);cam.keyframe_insert(data_path='rotation_quaternion',frame=f)
+    for fc in fcurve_list(cam):
+        for k in fc.keyframe_points:k.interpolation='LINEAR'
+    with (OUT/'camera_samples.csv').open('w') as fp:
+        w=csv.writer(fp);w.writerow(['frame','seconds','x_m','y_m','height_m','speed_m_s']);w.writerows(rows)
+    report={'runtime':bpy.app.version_string,'target_version_verified':False,'camera_radius_m':s.get('camera_safety_radius_m',.22),'safety_margin_m':s.get('camera_margin_m',.12),'static_mesh_count':len(static),'dynamic_mesh_count':len(dyn),'temporal_sample':'every output frame (30 fps), not continuous swept-volume proof','frames_checked':len(rows),'corrections':corrections,'per_frame_repairs':repair_frames,'remaining_collision_samples':len(unresolved),'collisions':unresolved,'min_speed_m_s':minspeed,'max_speed_m_s':maxspeed,'status':'PASS_SAMPLED' if not unresolved else 'FAIL','limitations':['Visibility and action readability require rendered review.','Nearest surface normal sign is conservative for intersecting mesh solids.','No subframe swept-volume verification.']}
+    (OUT/'collision_report.json').write_text(json.dumps(report,indent=2))
+    # Bounding box/frustum coverage and occlusion ray evidence for principal events.
+    beats=[('Pigeon',22,'OPENING_PIGEON_BODY'),('Aircraft',52,'JAPANESE_BOMBER_LEFT_NEAR_FUSELAGE'),('JP fire',118,'JP_CLOSE_REAR_SHOOTER_A_TORSO'),('CN fire',172,'CN_ROCK_COVER_SECOND_SHOOTER_TORSO'),('Rescue',302,'CN_FOREST_RESCUER_TORSO'),('Doorway',370,'WUTONGGOU_WOMAN_CARRYING_WOUNDED_MAN_TORSO'),('Water',450,'RIVER_SUPPORTING_SOLDIER_TORSO'),('Box',546,'RIVERBANK_HANDOFF_BOX'),('Meng back',594,'OLD_MENG_TORSO'),('Meng front',650,'OLD_MENG_HEAD')]
+    tm=[(1,0),(98,30),(232,59),(332,79),(410,103),(512,133),(564,146),(664,167),(900,190)]
+    def frame(old):
+        for (a,ta),(b,tb) in zip(tm,tm[1:]):
+            if old<=b:return round(1+(ta+(old-a)/(b-a)*(tb-ta))*30)
+    coverage=[]
+    for title,old,n in beats:
+        f=frame(old);s.frame_set(f);ob=bpy.data.objects.get(n)
+        if not ob:continue
+        pts=[world_to_camera_view(s,cam,ob.matrix_world@Vector(v)) for v in ob.bound_box]
+        center=ob.matrix_world.translation;delta=center-cam.matrix_world.translation
+        dg=bpy.context.evaluated_depsgraph_get();hit=s.ray_cast(dg,cam.matrix_world.translation,delta.normalized(),distance=delta.length-.02)
+        coverage.append({'beat':title,'frame':f,'object':n,'bbox_projected_height':max(p.y for p in pts)-min(p.y for p in pts),'in_frustum':any(0<p.x<1 and 0<p.y<1 and p.z>0 for p in pts),'first_occluder':hit[4].name if hit[0] else None,'manual_acceptance':'PENDING'})
+    (OUT/'visibility_report.json').write_text(json.dumps(coverage,indent=2))
+    s.frame_set(1)
+    bpy.ops.wm.save_as_mainfile(filepath=str(OUT/'battlefield_v2.blend'))
+    print('VALIDATION_DONE',len(unresolved),flush=True)
+
+if __name__=='__main__':validate()

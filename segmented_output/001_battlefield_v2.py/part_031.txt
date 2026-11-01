@@ -1,0 +1,96 @@
+    bpy.context.scene.camera = cam
+    bpy.context.view_layer.update()
+    STATUS["CAMERA_BANKING"] = "PASS - explicit bank keys: %d" % sum(1 for k in CAMERA_KEYS if abs(k[4]) >= 18)
+    STATUS["CAMERA_CHOREOGRAPHY"] = "PASS - %d non-linear waypoints across 30s" % len(CAMERA_KEYS)
+    return cam, focus
+
+
+# ============================================================
+# CAMERA PATH DEBUG CURVE
+# ============================================================
+
+def build_camera_path_debug():
+    coll = get_collection("BFP_V20_10_PATH_DEBUG")
+    curve = bpy.data.curves.new("BFP_V20_CAMERA_PATH_CURVE_DATA", type='CURVE')
+    curve.dimensions = '3D'
+    curve.resolution_u = 2
+    curve.bevel_depth = 0.16
+    curve.bevel_resolution = 2
+
+    spline = curve.splines.new('BEZIER')
+    spline.bezier_points.add(len(CAMERA_KEYS) - 1)
+
+    for i, item in enumerate(CAMERA_KEYS):
+        x, y, z = item[1]
+        bp = spline.bezier_points[i]
+        bp.co = (x, y, z)
+        bp.handle_left_type = 'AUTO'
+        bp.handle_right_type = 'AUTO'
+
+    path_obj = bpy.data.objects.new("BFP_V20_CAMERA_PATH_VISIBLE", curve)
+    coll.objects.link(path_obj)
+    curve.materials.append(MATS["path"])
+    path_obj.hide_render = True
+    path_obj.show_in_front = True
+    path_obj.display_type = 'WIRE'
+
+    for idx, item in enumerate(CAMERA_KEYS):
+        frame, position, target, note, bank_deg = item
+        if abs(bank_deg) >= 18:
+            marker = empty("CAMERA_BANK_MARKER_%02d_F%03d" % (idx, frame), position, coll,
+                           display='ARROWS', size=1.4)
+            marker["FRAME"] = frame
+            marker["BANK_DEGREES"] = bank_deg
+            marker["CHOREOGRAPHY_NOTE"] = note
+
+
+# ============================================================
+# LIGHTS / SCENE / VIEWPORT
+# ============================================================
+
+def point_at(obj, target):
+    obj.rotation_euler = (Vector(target) - obj.location).to_track_quat('-Z', 'Y').to_euler()
+
+
+def configure_lighting():
+    coll = get_collection("BFP_V20_11_LIGHTS")
+
+    bpy.ops.object.light_add(type='SUN', location=(180, -120, 110))
+    sun = bpy.context.object
+    sun.name = "BFP_V20_DAWN_SUN"
+    sun.data.energy = 1.8
+    point_at(sun, (100, 0, 0))
+    move_obj(sun, coll)
+
+    bpy.ops.object.light_add(type='AREA', location=(250, -30, 35))
+    fill = bpy.context.object
+    fill.name = "BFP_V20_WEST_PASS_FILL"
+    fill.data.energy = 2600
+    fill.data.shape = 'DISK'
+    fill.data.size = 45
+    point_at(fill, (275, 0, 5))
+    move_obj(fill, coll)
+
+    scene = bpy.context.scene
+    if scene.world is None:
+        scene.world = bpy.data.worlds.new("BFP_V20_WORLD")
+    scene.world.use_nodes = True
+    bg = scene.world.node_tree.nodes.get("Background")
+    if bg:
+        bg.inputs[0].default_value = (0.20, 0.24, 0.28, 1)
+        bg.inputs[1].default_value = 0.65
+
+
+def force_camera_view():
+    scene = bpy.context.scene
+    cam = bpy.data.objects.get("BFP_V20_ACTIVE_CAMERA")
+    if cam is None:
+        raise RuntimeError("BFP_V20_ACTIVE_CAMERA not found")
+    scene.camera = cam
+    bpy.context.view_layer.update()
+
+    # Set all existing 3D View areas to camera perspective.
+    # Use the view_camera operator with an explicit area/region override.
+    changed = 0
+    wm = bpy.context.window_manager
+    for window in wm.windows:

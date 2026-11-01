@@ -1,0 +1,2924 @@
+{
+  "part_count": 368,
+  "text_file_count": 38,
+  "files": [
+    {
+      "order": 1,
+      "path": "delivery_v2/battlefield_v2.py",
+      "bytes": 159776,
+      "line_count": 3510,
+      "sha256": "abd2f679f585c148c45984b7cbd0bc73bae3367702653d53d208157f8fcc985e",
+      "parts": [
+        {
+          "path": "001_battlefield_v2.py/part_001.txt",
+          "line_start": 1,
+          "line_end": 96,
+          "bytes": 2807,
+          "sha256": "b297c1bf749c5b4ce7b48ab801223feae51f4165d44f90037999fb5f0592ecaf"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_002.txt",
+          "line_start": 97,
+          "line_end": 192,
+          "bytes": 3437,
+          "sha256": "ceb7fb2eaabf06729282ac51a53712138e01d394f5b7f8b59335affdac48bf1a"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_003.txt",
+          "line_start": 193,
+          "line_end": 288,
+          "bytes": 3818,
+          "sha256": "ee4fd8a88f63bf1ebd04cc988217066d7787927902fc509f8bf28e60b5ea5437"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_004.txt",
+          "line_start": 289,
+          "line_end": 384,
+          "bytes": 3571,
+          "sha256": "f621e74278ac428b3dd86aba9003abb447688f464d3629aea1bb282172ac953f"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_005.txt",
+          "line_start": 385,
+          "line_end": 480,
+          "bytes": 4026,
+          "sha256": "94b8f2dbc57ad5e209363617965ba25550d40a95d38fbad37e3b6873c879d84c"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_006.txt",
+          "line_start": 481,
+          "line_end": 576,
+          "bytes": 3668,
+          "sha256": "5aed9444c7e654e8c614698f41bc0480f96b7f1a1fa60867ff8b45328cead0fe"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_007.txt",
+          "line_start": 577,
+          "line_end": 672,
+          "bytes": 3379,
+          "sha256": "cc0daf1ffc1af4a08dbb5097c123d297fd734da6a7c09282a712adc5ea11a771"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_008.txt",
+          "line_start": 673,
+          "line_end": 768,
+          "bytes": 3393,
+          "sha256": "2bf2e8ace300b76bd263d79cb9d47d69f48c2d390b58d91332a07dc92395fe71"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_009.txt",
+          "line_start": 769,
+          "line_end": 864,
+          "bytes": 3435,
+          "sha256": "36e2165b89a78d474eaed2b2fd34637542eb50c4911469cf47ddb220f8ce8996"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_010.txt",
+          "line_start": 865,
+          "line_end": 960,
+          "bytes": 2273,
+          "sha256": "2c2335f6b53ad138dff8cd0c59135bb87bf3db7144e92b01ba47147df6529513"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_011.txt",
+          "line_start": 961,
+          "line_end": 1056,
+          "bytes": 3623,
+          "sha256": "259a8b60c777cb86189f5bbaa0ed29e38ccb2ef836302646da083c8fafa506be"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_012.txt",
+          "line_start": 1057,
+          "line_end": 1152,
+          "bytes": 3065,
+          "sha256": "b6920e1f1702068ab0655f2105e48bfb88e4a5be96b6c3dca06036099ebed46d"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_013.txt",
+          "line_start": 1153,
+          "line_end": 1248,
+          "bytes": 3771,
+          "sha256": "adf57b0b9967a8d4ba7f48032ddff0a30dc7967fd70fef2fd6d133e5793ca783"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_014.txt",
+          "line_start": 1249,
+          "line_end": 1344,
+          "bytes": 2816,
+          "sha256": "b8a005a7d6c9d248914c56c35b28a1a1db7fddb57215233e7a39363d4234f3d4"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_015.txt",
+          "line_start": 1345,
+          "line_end": 1440,
+          "bytes": 4168,
+          "sha256": "d1d144634c8c91fc56d891134f24b2ff9af67e1f7cdd97ac018995ad2623e938"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_016.txt",
+          "line_start": 1441,
+          "line_end": 1536,
+          "bytes": 4430,
+          "sha256": "2cbd59d7f6ad0e5073888d337456d3b7b07c382bb10bdb97a30f469e8ed5945c"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_017.txt",
+          "line_start": 1537,
+          "line_end": 1632,
+          "bytes": 5474,
+          "sha256": "4cd4bea365d3f73dfe29229ff5c6ee3fb26bfd30b2767c3b1bf77f322e0031e3"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_018.txt",
+          "line_start": 1633,
+          "line_end": 1728,
+          "bytes": 4669,
+          "sha256": "6baa42a9c3df7a971fef4916ba220518e69843c00814b4436119856f5b064458"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_019.txt",
+          "line_start": 1729,
+          "line_end": 1824,
+          "bytes": 5073,
+          "sha256": "7e48c011d4c95bc40a5437f44590553d0ac92a20aeb10987083ef76c2686d32d"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_020.txt",
+          "line_start": 1825,
+          "line_end": 1920,
+          "bytes": 4495,
+          "sha256": "86b99ed17d4aba5425a549a9377ec0ea21a59b34adab0cdf259736e6e558847a"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_021.txt",
+          "line_start": 1921,
+          "line_end": 2016,
+          "bytes": 4863,
+          "sha256": "21884ed608577a46984ca812aa386ddcd05d461c607ac480a1d412b4cec8e1e8"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_022.txt",
+          "line_start": 2017,
+          "line_end": 2112,
+          "bytes": 4370,
+          "sha256": "a3985d4ba4a583174a74982a6324318565ff077c3b73d2f798f16c55426ea71d"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_023.txt",
+          "line_start": 2113,
+          "line_end": 2208,
+          "bytes": 4436,
+          "sha256": "2c15261916a4f51ca8f746bf08443cfae628d59c3db83e2e5abec155f271d918"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_024.txt",
+          "line_start": 2209,
+          "line_end": 2304,
+          "bytes": 5499,
+          "sha256": "b2b850eaf0a3899aa7ff388d488d9bb6a42a1bcb878e56f44dc395527b58fd09"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_025.txt",
+          "line_start": 2305,
+          "line_end": 2400,
+          "bytes": 4616,
+          "sha256": "8de7facaccee1828cc4e8f5252ca25cf3713787d9bbe4d46720e977b23d5fad9"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_026.txt",
+          "line_start": 2401,
+          "line_end": 2496,
+          "bytes": 5141,
+          "sha256": "c1bc560e82702f0bd231e55498e8bbc6e5484272c6acb9191135152ea64b83c9"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_027.txt",
+          "line_start": 2497,
+          "line_end": 2592,
+          "bytes": 5342,
+          "sha256": "e1b46491d3ea6cd95260822cac57d24deaff51bc5cbb5e517d967340598f9e20"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_028.txt",
+          "line_start": 2593,
+          "line_end": 2688,
+          "bytes": 5218,
+          "sha256": "74571cdc4d8ecffe382610d855c926fdd75ebc7a0e83d52b7e7e53dff826a826"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_029.txt",
+          "line_start": 2689,
+          "line_end": 2784,
+          "bytes": 6442,
+          "sha256": "1e2947c64cc257e2f4eef7335cd3a310a621776b74d4bd3a2821d13ac9c2b7dd"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_030.txt",
+          "line_start": 2785,
+          "line_end": 2880,
+          "bytes": 4372,
+          "sha256": "d3e80ee73e90933cdb82686b52ea10d78455388f6d07afbe9150b244cd70a1b5"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_031.txt",
+          "line_start": 2881,
+          "line_end": 2976,
+          "bytes": 3325,
+          "sha256": "4c12766e376d4ba1578cf22e62b84a62085dfc38d6a1cdcff475c2236bed2ec0"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_032.txt",
+          "line_start": 2977,
+          "line_end": 3072,
+          "bytes": 5003,
+          "sha256": "1274e7158869d8baaac83f8b2621ff4e7f204aca3b1a7d2b5afdc9eff3484605"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_033.txt",
+          "line_start": 3073,
+          "line_end": 3168,
+          "bytes": 6789,
+          "sha256": "2915aaaf74973475b39431ca9f3a83ff7042f642d8d0effd58b4a4ba161fec06"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_034.txt",
+          "line_start": 3169,
+          "line_end": 3264,
+          "bytes": 4813,
+          "sha256": "af3778921fb8e46782defc11a5ba43fa294156dd05d5d15a61ea2d109a016c40"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_035.txt",
+          "line_start": 3265,
+          "line_end": 3360,
+          "bytes": 5649,
+          "sha256": "fb712ab86480fb5651800c01d91bc08da3a730458c6e72eb6d4ba9371f91ab60"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_036.txt",
+          "line_start": 3361,
+          "line_end": 3456,
+          "bytes": 5097,
+          "sha256": "8a3138cb4d71fccb1f8514b0a7aa0a6dc953a90242684f45d9e860b306d734ad"
+        },
+        {
+          "path": "001_battlefield_v2.py/part_037.txt",
+          "line_start": 3457,
+          "line_end": 3510,
+          "bytes": 3410,
+          "sha256": "454ce4e44abc060bdd5a625fcde704a0302a99beed20dac59c2db8792d81e34a"
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "path": "delivery_v2/validate_scene.py",
+      "bytes": 15665,
+      "line_count": 277,
+      "sha256": "52029ad54a1e0f5c7809c964574cb60766cf420d93c1d5e3558b18af92b72c63",
+      "parts": [
+        {
+          "path": "002_validate_scene.py/part_001.txt",
+          "line_start": 1,
+          "line_end": 96,
+          "bytes": 4412,
+          "sha256": "82d35d984de48535a0d9518f388d33f5a415a65a13abebc3b8ff008a18903baa"
+        },
+        {
+          "path": "002_validate_scene.py/part_002.txt",
+          "line_start": 97,
+          "line_end": 192,
+          "bytes": 5340,
+          "sha256": "403c7a65def93d4ed2f3837c5f5e3dcf3871c48e7b5ba3e92edee25e13d9be6a"
+        },
+        {
+          "path": "002_validate_scene.py/part_003.txt",
+          "line_start": 193,
+          "line_end": 277,
+          "bytes": 5913,
+          "sha256": "24c1bfcab676089b35839b72d88beb3b442d4707dcff9f6339dc95b04d85e7cc"
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "path": ".gitattributes",
+      "bytes": 81,
+      "line_count": 2,
+      "sha256": "23fa1cb8bf82004cd7c9e6c1b6af7ffd2058cab2063bca598da9b9b3b00f06e2",
+      "parts": [
+        {
+          "path": "003_.gitattributes/part_001.txt",
+          "line_start": 1,
+          "line_end": 2,
+          "bytes": 81,
+          "sha256": "23fa1cb8bf82004cd7c9e6c1b6af7ffd2058cab2063bca598da9b9b3b00f06e2"
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "path": ".gitignore",
+      "bytes": 23,
+      "line_count": 2,
+      "sha256": "6feaded4e28ea86e001a6751b4e3d960e8b7c31b9616ff9936b79297086e809b",
+      "parts": [
+        {
+          "path": "004_.gitignore/part_001.txt",
+          "line_start": 1,
+          "line_end": 2,
+          "bytes": 23,
+          "sha256": "6feaded4e28ea86e001a6751b4e3d960e8b7c31b9616ff9936b79297086e809b"
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "path": "README.md",
+      "bytes": 2783,
+      "line_count": 45,
+      "sha256": "ed7b372a9ec678485902e4464fff40be7730290e3a6c02439b4356ceecff77ca",
+      "parts": [
+        {
+          "path": "005_README.md/part_001.txt",
+          "line_start": 1,
+          "line_end": 45,
+          "bytes": 2783,
+          "sha256": "ed7b372a9ec678485902e4464fff40be7730290e3a6c02439b4356ceecff77ca"
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "path": "delivery_v2/README_运行与验收.md",
+      "bytes": 4793,
+      "line_count": 58,
+      "sha256": "576c6d965b2f4e58595911a5587901905336b58b4e1d9512597edcc368109ffc",
+      "parts": [
+        {
+          "path": "006_README_运行与验收.md/part_001.txt",
+          "line_start": 1,
+          "line_end": 58,
+          "bytes": 4793,
+          "sha256": "576c6d965b2f4e58595911a5587901905336b58b4e1d9512597edcc368109ffc"
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "path": "delivery_v2/audit.log",
+      "bytes": 642,
+      "line_count": 6,
+      "sha256": "b61a375dc5e548bbf51446d652c863dfb09d80014ce2f3a7d1e49d55bc52480c",
+      "parts": [
+        {
+          "path": "007_audit.log/part_001.txt",
+          "line_start": 1,
+          "line_end": 6,
+          "bytes": 642,
+          "sha256": "b61a375dc5e548bbf51446d652c863dfb09d80014ce2f3a7d1e49d55bc52480c"
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "path": "delivery_v2/build.log",
+      "bytes": 1475,
+      "line_count": 54,
+      "sha256": "81a24b437f5f6c4fd98bd25a1588a716be17ff65bebf1fb308a5389cf47e3670",
+      "parts": [
+        {
+          "path": "008_build.log/part_001.txt",
+          "line_start": 1,
+          "line_end": 54,
+          "bytes": 1475,
+          "sha256": "81a24b437f5f6c4fd98bd25a1588a716be17ff65bebf1fb308a5389cf47e3670"
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "path": "delivery_v2/camera_samples.csv",
+      "bytes": 523504,
+      "line_count": 5702,
+      "sha256": "d5dcadc0f7c706237002bb2c562da9173c9f0264bbc7975e429e0fa45ce1c835",
+      "parts": [
+        {
+          "path": "009_camera_samples.csv/part_001.txt",
+          "line_start": 1,
+          "line_end": 96,
+          "bytes": 8872,
+          "sha256": "0724ddc0746e64ef4b9617098d7214f71443d845671a3a5cfc6cc3026df9fa59"
+        },
+        {
+          "path": "009_camera_samples.csv/part_002.txt",
+          "line_start": 97,
+          "line_end": 192,
+          "bytes": 9085,
+          "sha256": "f9178deb39c0cc49615c3295a62159b5eb387e17c84ee13280ce5feb6ffb888a"
+        },
+        {
+          "path": "009_camera_samples.csv/part_003.txt",
+          "line_start": 193,
+          "line_end": 288,
+          "bytes": 9042,
+          "sha256": "88b0d86325bd2547c71e0d1f997b32f6da9fd49efcb1d7bd64a7fb98cba25fa8"
+        },
+        {
+          "path": "009_camera_samples.csv/part_004.txt",
+          "line_start": 289,
+          "line_end": 384,
+          "bytes": 9164,
+          "sha256": "98d87f99df9a0d5bc6fe4b41886141d946acee3728855a9ef1f9eb30ed90eb97"
+        },
+        {
+          "path": "009_camera_samples.csv/part_005.txt",
+          "line_start": 385,
+          "line_end": 480,
+          "bytes": 9142,
+          "sha256": "a418645bf6cb9d41f41a0af533fd36f2352fd63351d6ee6e8eab90453402b291"
+        },
+        {
+          "path": "009_camera_samples.csv/part_006.txt",
+          "line_start": 481,
+          "line_end": 576,
+          "bytes": 9132,
+          "sha256": "c5c0ccb23c2dbeb8fe4818914044ba3ac7dd35628693c62394d6549a43ff1a5a"
+        },
+        {
+          "path": "009_camera_samples.csv/part_007.txt",
+          "line_start": 577,
+          "line_end": 672,
+          "bytes": 9107,
+          "sha256": "d1518c036bdc9b96e54bbae3b64908de590684e1fcc16a8bb9b13120c2d6aad1"
+        },
+        {
+          "path": "009_camera_samples.csv/part_008.txt",
+          "line_start": 673,
+          "line_end": 768,
+          "bytes": 9194,
+          "sha256": "38ff41d4b50799b2f91432c2e6bcc931238a465e5feb00c871644bdd9fee8070"
+        },
+        {
+          "path": "009_camera_samples.csv/part_009.txt",
+          "line_start": 769,
+          "line_end": 864,
+          "bytes": 9127,
+          "sha256": "54cfba95e4e73277a89493d7c7c874979a42cdc5ebc31f544cf7664566c8627c"
+        },
+        {
+          "path": "009_camera_samples.csv/part_010.txt",
+          "line_start": 865,
+          "line_end": 960,
+          "bytes": 9069,
+          "sha256": "995b3ffe21557727ef1a0053fcc0373e3346bba44ea2c4b97bc29cc13283eaf4"
+        },
+        {
+          "path": "009_camera_samples.csv/part_011.txt",
+          "line_start": 961,
+          "line_end": 1056,
+          "bytes": 9142,
+          "sha256": "b0eace54966dc8399de098b34bb4be400f654cf09a15557029a6379700df9619"
+        },
+        {
+          "path": "009_camera_samples.csv/part_012.txt",
+          "line_start": 1057,
+          "line_end": 1152,
+          "bytes": 9168,
+          "sha256": "9adea268f9d3101157d4b1b8374426fde908e4f582e9bbc5079dec41c3c16566"
+        },
+        {
+          "path": "009_camera_samples.csv/part_013.txt",
+          "line_start": 1153,
+          "line_end": 1248,
+          "bytes": 8577,
+          "sha256": "35f733a7d67d6c74e5aedca86d63864db18f3ec7417e836704caa8d11a689099"
+        },
+        {
+          "path": "009_camera_samples.csv/part_014.txt",
+          "line_start": 1249,
+          "line_end": 1344,
+          "bytes": 8802,
+          "sha256": "fa57b786cf653a55a5317edf493d671463135db232ae9f7cec15383dd7751896"
+        },
+        {
+          "path": "009_camera_samples.csv/part_015.txt",
+          "line_start": 1345,
+          "line_end": 1440,
+          "bytes": 9251,
+          "sha256": "f08dfae9ffd9966e9149e7ac621c76e445135142103e8831ac660843291af048"
+        },
+        {
+          "path": "009_camera_samples.csv/part_016.txt",
+          "line_start": 1441,
+          "line_end": 1536,
+          "bytes": 9186,
+          "sha256": "b6d7c9d082bb1d092d5c1009b77f614a5fe93a5cece8cc28fee5e9f3d9bf5ffe"
+        },
+        {
+          "path": "009_camera_samples.csv/part_017.txt",
+          "line_start": 1537,
+          "line_end": 1632,
+          "bytes": 9173,
+          "sha256": "2ab8790e8902a1d4687af60e96b7e39cfb2865072dc4b64eabf193d179f5a07d"
+        },
+        {
+          "path": "009_camera_samples.csv/part_018.txt",
+          "line_start": 1633,
+          "line_end": 1728,
+          "bytes": 9117,
+          "sha256": "ae6026bee8b66c914b0f85fa73cbe3071eb8b0e34f14f729b89538d906076ebc"
+        },
+        {
+          "path": "009_camera_samples.csv/part_019.txt",
+          "line_start": 1729,
+          "line_end": 1824,
+          "bytes": 8929,
+          "sha256": "7d533e2ec5a4f2c4370dad0168b7b7d3bb773afbc070d45619bc0e2c758e5d16"
+        },
+        {
+          "path": "009_camera_samples.csv/part_020.txt",
+          "line_start": 1825,
+          "line_end": 1920,
+          "bytes": 8705,
+          "sha256": "ec7899943130b430b13b6046b984488aac69f2a5b4905a8faffd0cbb3aa24fe2"
+        },
+        {
+          "path": "009_camera_samples.csv/part_021.txt",
+          "line_start": 1921,
+          "line_end": 2016,
+          "bytes": 7739,
+          "sha256": "934c45f9400394ff533368089387256bd965688e01a70ba1a08dc90601adf1fe"
+        },
+        {
+          "path": "009_camera_samples.csv/part_022.txt",
+          "line_start": 2017,
+          "line_end": 2112,
+          "bytes": 8899,
+          "sha256": "6effc8dfff5381e0a4ca58b809e56d5103e2db97cdee91e6f693f8a3cf7d79fe"
+        },
+        {
+          "path": "009_camera_samples.csv/part_023.txt",
+          "line_start": 2113,
+          "line_end": 2208,
+          "bytes": 7751,
+          "sha256": "b7650c757c274eb395ed1cba6956a0ec0c62c18a2baa71c08cbad3b828939127"
+        },
+        {
+          "path": "009_camera_samples.csv/part_024.txt",
+          "line_start": 2209,
+          "line_end": 2304,
+          "bytes": 8316,
+          "sha256": "71b6c129be792eaa8027cb8d10716482ae401daab5dfa2dfe2e066fe41c4b953"
+        },
+        {
+          "path": "009_camera_samples.csv/part_025.txt",
+          "line_start": 2305,
+          "line_end": 2400,
+          "bytes": 9071,
+          "sha256": "5714c4a48031a581623723035decafcc54b00fb60893258c6b06f0be767fb3c1"
+        },
+        {
+          "path": "009_camera_samples.csv/part_026.txt",
+          "line_start": 2401,
+          "line_end": 2496,
+          "bytes": 9045,
+          "sha256": "17793bcb4d4710cbb79a39359039efebdd3d6e94cbaef801994f3e92c95af59b"
+        },
+        {
+          "path": "009_camera_samples.csv/part_027.txt",
+          "line_start": 2497,
+          "line_end": 2592,
+          "bytes": 9002,
+          "sha256": "1581185846cd9540bd0d85b3713a6225526fdc803a5d335d8188485c2ae7a567"
+        },
+        {
+          "path": "009_camera_samples.csv/part_028.txt",
+          "line_start": 2593,
+          "line_end": 2688,
+          "bytes": 8251,
+          "sha256": "91d5e2972723c886b8be9a3cc7e5f09e64ad785658c3783b36942985b5943f2a"
+        },
+        {
+          "path": "009_camera_samples.csv/part_029.txt",
+          "line_start": 2689,
+          "line_end": 2784,
+          "bytes": 8652,
+          "sha256": "c603d28255a796ff33acf0eaed5b6a2bda4e131cdc2beaaede7f970a18ac7744"
+        },
+        {
+          "path": "009_camera_samples.csv/part_030.txt",
+          "line_start": 2785,
+          "line_end": 2880,
+          "bytes": 8006,
+          "sha256": "320c964c67558cd530d3e8355b6d697868c062b12bb61f4d87aaeaedc3b2996d"
+        },
+        {
+          "path": "009_camera_samples.csv/part_031.txt",
+          "line_start": 2881,
+          "line_end": 2976,
+          "bytes": 8889,
+          "sha256": "d563238bcd9150b7d8151ebc95567a19aac194a2e9c817a891e0a65bf75dce7e"
+        },
+        {
+          "path": "009_camera_samples.csv/part_032.txt",
+          "line_start": 2977,
+          "line_end": 3072,
+          "bytes": 9043,
+          "sha256": "db9c6dbf90930c72e5efdfd4c41bbbd7b3f57b7821cd8cfb2cd93ae695111d37"
+        },
+        {
+          "path": "009_camera_samples.csv/part_033.txt",
+          "line_start": 3073,
+          "line_end": 3168,
+          "bytes": 9033,
+          "sha256": "1c4e4b2d9562277932114a2f9972e1c45a4a4e313819d20af6a0afe66bdf8795"
+        },
+        {
+          "path": "009_camera_samples.csv/part_034.txt",
+          "line_start": 3169,
+          "line_end": 3264,
+          "bytes": 9189,
+          "sha256": "335d897f8f049f4f30161a63470e4027d3ab5ec950994fa3194a6b15915679e7"
+        },
+        {
+          "path": "009_camera_samples.csv/part_035.txt",
+          "line_start": 3265,
+          "line_end": 3360,
+          "bytes": 9201,
+          "sha256": "090a9b90d0e856821599d2473412fdddebc5ccdcb9fc221486328148e43c2682"
+        },
+        {
+          "path": "009_camera_samples.csv/part_036.txt",
+          "line_start": 3361,
+          "line_end": 3456,
+          "bytes": 8102,
+          "sha256": "6c523f8faab5b37b4ca269bfd15336e00f1c537fd8c88b9ae2614201c268bf41"
+        },
+        {
+          "path": "009_camera_samples.csv/part_037.txt",
+          "line_start": 3457,
+          "line_end": 3552,
+          "bytes": 8844,
+          "sha256": "1d65a247862cb064c8506a0c480526b098ccc056e2fc43fd8f5fa5a558a7123b"
+        },
+        {
+          "path": "009_camera_samples.csv/part_038.txt",
+          "line_start": 3553,
+          "line_end": 3648,
+          "bytes": 9299,
+          "sha256": "dba7e1a1c0559facfe46ab29dbad0110cd608fb350173287eeb244a16b622502"
+        },
+        {
+          "path": "009_camera_samples.csv/part_039.txt",
+          "line_start": 3649,
+          "line_end": 3744,
+          "bytes": 9261,
+          "sha256": "f90975ac8eaa658cbe423bbb1ca019faeebfefc455efdcd5dad146134989a789"
+        },
+        {
+          "path": "009_camera_samples.csv/part_040.txt",
+          "line_start": 3745,
+          "line_end": 3840,
+          "bytes": 9299,
+          "sha256": "aa9fc22cf79c9bd911c63a975d0164ebdbbd438384438da6bfb9ddcd56307472"
+        },
+        {
+          "path": "009_camera_samples.csv/part_041.txt",
+          "line_start": 3841,
+          "line_end": 3936,
+          "bytes": 9141,
+          "sha256": "3821f4130f757ddaaf085fa20c9e81c25b52f18578b2d6584b128e976e997050"
+        },
+        {
+          "path": "009_camera_samples.csv/part_042.txt",
+          "line_start": 3937,
+          "line_end": 4032,
+          "bytes": 9158,
+          "sha256": "757d25ae523d545152f307d091f10391286989a2b239f9509008bdacdfafd316"
+        },
+        {
+          "path": "009_camera_samples.csv/part_043.txt",
+          "line_start": 4033,
+          "line_end": 4128,
+          "bytes": 9218,
+          "sha256": "b3f85e4b76413481d10abb54e657d7a744537f65da04cb8c0a73455db0ed3585"
+        },
+        {
+          "path": "009_camera_samples.csv/part_044.txt",
+          "line_start": 4129,
+          "line_end": 4224,
+          "bytes": 8593,
+          "sha256": "617856c96e11035738ce6e2fb2122c2f73f7628198f1f643146cf0adf2245f72"
+        },
+        {
+          "path": "009_camera_samples.csv/part_045.txt",
+          "line_start": 4225,
+          "line_end": 4320,
+          "bytes": 8335,
+          "sha256": "2a09dc30d21ff1bc53418a94f6fb31b5a6b9096afab773b50ff9cba0e4138292"
+        },
+        {
+          "path": "009_camera_samples.csv/part_046.txt",
+          "line_start": 4321,
+          "line_end": 4416,
+          "bytes": 9081,
+          "sha256": "6f19719025f5602d665843435b4704f44430cee3426c411eee0024304c9e3443"
+        },
+        {
+          "path": "009_camera_samples.csv/part_047.txt",
+          "line_start": 4417,
+          "line_end": 4512,
+          "bytes": 8935,
+          "sha256": "db117fdbab27c9ac7b8908c7a6ae4130c8c5ffa9fe43f6e864e09b9d53bae411"
+        },
+        {
+          "path": "009_camera_samples.csv/part_048.txt",
+          "line_start": 4513,
+          "line_end": 4608,
+          "bytes": 8286,
+          "sha256": "2dfff159ed7a1c0b4e0f0093f7f1a0ed7ddb9a6a8cc7446cd1e7d58d49d3c990"
+        },
+        {
+          "path": "009_camera_samples.csv/part_049.txt",
+          "line_start": 4609,
+          "line_end": 4704,
+          "bytes": 9138,
+          "sha256": "e147912ce4a1abe99a60a88808dd06959d65c1cfe1cedacd348ced14de086bcb"
+        },
+        {
+          "path": "009_camera_samples.csv/part_050.txt",
+          "line_start": 4705,
+          "line_end": 4800,
+          "bytes": 9175,
+          "sha256": "9c053c3c32ec7aed38ca6f2354e8e6d13ecb4fd2ddf224f89f0dee3ed871412f"
+        },
+        {
+          "path": "009_camera_samples.csv/part_051.txt",
+          "line_start": 4801,
+          "line_end": 4896,
+          "bytes": 9179,
+          "sha256": "0a1cc8a1c68f7786594409fa2c39d7f09f6e74a9cbd3868e4e1dedaf9b940c85"
+        },
+        {
+          "path": "009_camera_samples.csv/part_052.txt",
+          "line_start": 4897,
+          "line_end": 4992,
+          "bytes": 8274,
+          "sha256": "9da95db951a56b048f653e83886a2ed86db473aa385a8c3e3f39dc10070bbe59"
+        },
+        {
+          "path": "009_camera_samples.csv/part_053.txt",
+          "line_start": 4993,
+          "line_end": 5088,
+          "bytes": 7662,
+          "sha256": "13da9ecc7f6065af378305f296d6b17925936cce23a2cc98081d4eebd9c348e0"
+        },
+        {
+          "path": "009_camera_samples.csv/part_054.txt",
+          "line_start": 5089,
+          "line_end": 5184,
+          "bytes": 7613,
+          "sha256": "0f052b581acf102a1b7b449427c8250382602b86b69665c2850f37f596db017d"
+        },
+        {
+          "path": "009_camera_samples.csv/part_055.txt",
+          "line_start": 5185,
+          "line_end": 5280,
+          "bytes": 7622,
+          "sha256": "c688887c94ea58bdd887af92c77e4f70989f3972443de681e22c09fe2c0da309"
+        },
+        {
+          "path": "009_camera_samples.csv/part_056.txt",
+          "line_start": 5281,
+          "line_end": 5376,
+          "bytes": 8854,
+          "sha256": "d242c4d8d0910233b46394d852d6de3750cffac6a574b186d60e5b033c76b331"
+        },
+        {
+          "path": "009_camera_samples.csv/part_057.txt",
+          "line_start": 5377,
+          "line_end": 5472,
+          "bytes": 9007,
+          "sha256": "7cb9b293a3ffa40ed1eba983cf74acd523830488c0d92afa28e4c75b1c6cd07a"
+        },
+        {
+          "path": "009_camera_samples.csv/part_058.txt",
+          "line_start": 5473,
+          "line_end": 5568,
+          "bytes": 9024,
+          "sha256": "dde21ece4f20d7c6c3755c9ff089c3812bc26266dc74d5576f463d3ad5688c93"
+        },
+        {
+          "path": "009_camera_samples.csv/part_059.txt",
+          "line_start": 5569,
+          "line_end": 5664,
+          "bytes": 8345,
+          "sha256": "d426d8873f7e4958fe53aa578bd853f7d02b4f9037042b5fd5a04063a694db95"
+        },
+        {
+          "path": "009_camera_samples.csv/part_060.txt",
+          "line_start": 5665,
+          "line_end": 5702,
+          "bytes": 2988,
+          "sha256": "936b4edfdeeb139b1e488fa822f519731eecbf02b1455b7984709b507ff02a6c"
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "path": "delivery_v2/collision_report.json",
+      "bytes": 1293,
+      "line_count": 53,
+      "sha256": "68ae08ddf864f685c1c2d01e79652414091aaed7529f28a52f2d21ef4ad4086f",
+      "parts": [
+        {
+          "path": "010_collision_report.json/part_001.txt",
+          "line_start": 1,
+          "line_end": 53,
+          "bytes": 1293,
+          "sha256": "68ae08ddf864f685c1c2d01e79652414091aaed7529f28a52f2d21ef4ad4086f"
+        }
+      ]
+    },
+    {
+      "order": 11,
+      "path": "delivery_v2/encode.log",
+      "bytes": 96,
+      "line_count": 2,
+      "sha256": "494af2ebbeb73db3d1525179ce641bdd5aae0ab55f5e0be52642b7c246b6c865",
+      "parts": [
+        {
+          "path": "011_encode.log/part_001.txt",
+          "line_start": 1,
+          "line_end": 2,
+          "bytes": 96,
+          "sha256": "494af2ebbeb73db3d1525179ce641bdd5aae0ab55f5e0be52642b7c246b6c865"
+        }
+      ]
+    },
+    {
+      "order": 12,
+      "path": "delivery_v2/event_tracks.csv",
+      "bytes": 83714,
+      "line_count": 1104,
+      "sha256": "6c5f5b86db66c6d63de8c0cc469f1204e56553eff5dcd439b5a1dafea79cd863",
+      "parts": [
+        {
+          "path": "012_event_tracks.csv/part_001.txt",
+          "line_start": 1,
+          "line_end": 96,
+          "bytes": 7247,
+          "sha256": "9afe425001030a5f0d65bdcb5b792ae1ff4ecdc78529defe2dfab04e3b927a9a"
+        },
+        {
+          "path": "012_event_tracks.csv/part_002.txt",
+          "line_start": 97,
+          "line_end": 192,
+          "bytes": 7535,
+          "sha256": "e7151b41924820895f626926f01c614c5421e1cb3c019c9538bd5512a18a62d4"
+        },
+        {
+          "path": "012_event_tracks.csv/part_003.txt",
+          "line_start": 193,
+          "line_end": 288,
+          "bytes": 7722,
+          "sha256": "c481f0f8be1b771e275c9361f1ca2e527c64bd9eddcda65fbe208054995d80d1"
+        },
+        {
+          "path": "012_event_tracks.csv/part_004.txt",
+          "line_start": 289,
+          "line_end": 384,
+          "bytes": 7444,
+          "sha256": "5ebb37a319d267eb27aaa3cfdc33560949d6f7b2ff57e6ce6cacee6a558b5ec6"
+        },
+        {
+          "path": "012_event_tracks.csv/part_005.txt",
+          "line_start": 385,
+          "line_end": 480,
+          "bytes": 7460,
+          "sha256": "4dcee3fa1be3c98c41994f64e12ef705896bc23ac670046dff2ef655bafc6520"
+        },
+        {
+          "path": "012_event_tracks.csv/part_006.txt",
+          "line_start": 481,
+          "line_end": 576,
+          "bytes": 7382,
+          "sha256": "1fdedeb3c09f51d1c8703bc90e87c8420dcff94ecaa5bf9141314ca573fc1821"
+        },
+        {
+          "path": "012_event_tracks.csv/part_007.txt",
+          "line_start": 577,
+          "line_end": 672,
+          "bytes": 7858,
+          "sha256": "8205eaef4d4938cce4b4f1ae547f78dc4f9dcb71f1f4325aa79c19731db8c6d1"
+        },
+        {
+          "path": "012_event_tracks.csv/part_008.txt",
+          "line_start": 673,
+          "line_end": 768,
+          "bytes": 7768,
+          "sha256": "2ada0a337deef4525eeb7762a1cb5bbc1cdce7b7eaeebba9c7062c351cad95a9"
+        },
+        {
+          "path": "012_event_tracks.csv/part_009.txt",
+          "line_start": 769,
+          "line_end": 864,
+          "bytes": 7321,
+          "sha256": "c10f1a7bb07ba7e259987423cedb30b1f4524343cf93fda914816c87bd31e9b8"
+        },
+        {
+          "path": "012_event_tracks.csv/part_010.txt",
+          "line_start": 865,
+          "line_end": 960,
+          "bytes": 6559,
+          "sha256": "4068f2ac6896941c5b02ee7bcb7974cb16c91bd128644e0293157272e55740f2"
+        },
+        {
+          "path": "012_event_tracks.csv/part_011.txt",
+          "line_start": 961,
+          "line_end": 1056,
+          "bytes": 5801,
+          "sha256": "6dfc42b58009844c9dbfb4897894a0a178b49ff245f2ad269af11567435354d8"
+        },
+        {
+          "path": "012_event_tracks.csv/part_012.txt",
+          "line_start": 1057,
+          "line_end": 1104,
+          "bytes": 3617,
+          "sha256": "9634369be350079988933cbf24e8c42269e92ce676cb017e2ef942258dfa0792"
+        }
+      ]
+    },
+    {
+      "order": 13,
+      "path": "delivery_v2/final_audit.py",
+      "bytes": 5618,
+      "line_count": 86,
+      "sha256": "ce66c617911a20acb6d60069d0653b27e716cdb93730c85cf1b39c391373f714",
+      "parts": [
+        {
+          "path": "013_final_audit.py/part_001.txt",
+          "line_start": 1,
+          "line_end": 86,
+          "bytes": 5618,
+          "sha256": "ce66c617911a20acb6d60069d0653b27e716cdb93730c85cf1b39c391373f714"
+        }
+      ]
+    },
+    {
+      "order": 14,
+      "path": "delivery_v2/inspect_scene.py",
+      "bytes": 466,
+      "line_count": 8,
+      "sha256": "7681b816f8a25b5f62e40280c1f254143379aab0d45fa57609ffd692128a9eb3",
+      "parts": [
+        {
+          "path": "014_inspect_scene.py/part_001.txt",
+          "line_start": 1,
+          "line_end": 8,
+          "bytes": 466,
+          "sha256": "7681b816f8a25b5f62e40280c1f254143379aab0d45fa57609ffd692128a9eb3"
+        }
+      ]
+    },
+    {
+      "order": 15,
+      "path": "delivery_v2/old_meng_os.srt",
+      "bytes": 177,
+      "line_count": 7,
+      "sha256": "e9ec3cadf5ad2a442c7daa97f049b06f2f59442365d9862eac57c9f018542401",
+      "parts": [
+        {
+          "path": "015_old_meng_os.srt/part_001.txt",
+          "line_start": 1,
+          "line_end": 7,
+          "bytes": 177,
+          "sha256": "e9ec3cadf5ad2a442c7daa97f049b06f2f59442365d9862eac57c9f018542401"
+        }
+      ]
+    },
+    {
+      "order": 16,
+      "path": "delivery_v2/original_preservation_check.json",
+      "bytes": 2363,
+      "line_count": 53,
+      "sha256": "618ce0616dbe5b3036e693c492f9b0bd4cc709df2efeeec1d5aaed328d3fd4de",
+      "parts": [
+        {
+          "path": "016_original_preservation_check.json/part_001.txt",
+          "line_start": 1,
+          "line_end": 53,
+          "bytes": 2363,
+          "sha256": "618ce0616dbe5b3036e693c492f9b0bd4cc709df2efeeec1d5aaed328d3fd4de"
+        }
+      ]
+    },
+    {
+      "order": 17,
+      "path": "delivery_v2/plot_camera.py",
+      "bytes": 1109,
+      "line_count": 16,
+      "sha256": "ce3328c4b2da703bf71fc6b75f456263106258ba38c5c62c7893f84abbdebb37",
+      "parts": [
+        {
+          "path": "017_plot_camera.py/part_001.txt",
+          "line_start": 1,
+          "line_end": 16,
+          "bytes": 1109,
+          "sha256": "ce3328c4b2da703bf71fc6b75f456263106258ba38c5c62c7893f84abbdebb37"
+        }
+      ]
+    },
+    {
+      "order": 18,
+      "path": "delivery_v2/render_air_clearance.log",
+      "bytes": 8782,
+      "line_count": 280,
+      "sha256": "4590695dfe9439878ca6a1e2a7dd0eea8b1c576259f56df59bbb97a625a42145",
+      "parts": [
+        {
+          "path": "018_render_air_clearance.log/part_001.txt",
+          "line_start": 1,
+          "line_end": 96,
+          "bytes": 3213,
+          "sha256": "c6f138fee8159b27e98801ec0edbef0bc454de41d78ec0349f92e4f13f03d865"
+        },
+        {
+          "path": "018_render_air_clearance.log/part_002.txt",
+          "line_start": 97,
+          "line_end": 192,
+          "bytes": 2944,
+          "sha256": "838d85feab58a7ab1f6e64cb33563da2e7e83a3669ba15f1e26f250bed19b8e4"
+        },
+        {
+          "path": "018_render_air_clearance.log/part_003.txt",
+          "line_start": 193,
+          "line_end": 280,
+          "bytes": 2625,
+          "sha256": "7c4cdfaa7a635ce7ca569c9aaaf78e03b6ac5bd645d7d38795be46b1d2546acf"
+        }
+      ]
+    },
+    {
+      "order": 19,
+      "path": "delivery_v2/render_checkpoints.log",
+      "bytes": 3630,
+      "line_count": 107,
+      "sha256": "6cb6a7a7ad605facbd5c7be08eb1d75eee52f6b97464f7748f9c535d59d2d3d3",
+      "parts": [
+        {
+          "path": "019_render_checkpoints.log/part_001.txt",
+          "line_start": 1,
+          "line_end": 96,
+          "bytes": 3340,
+          "sha256": "687e64bc996367899f59e15ac8785565b49f1f2efe4e19ebb5599faf2c4701e3"
+        },
+        {
+          "path": "019_render_checkpoints.log/part_002.txt",
+          "line_start": 97,
+          "line_end": 107,
+          "bytes": 290,
+          "sha256": "faac72219a8cbfc5b5f08425ad48cce4d6d5842b1eb149aca0b7a06a5e4f0717"
+        }
+      ]
+    },
+    {
+      "order": 20,
+      "path": "delivery_v2/render_crowd_clearance.log",
+      "bytes": 26264,
+      "line_count": 850,
+      "sha256": "c3b8a850b52c50dde0ee44a2553ab6988ad8ac7965ced03ea9ac388081aea688",
+      "parts": [
+        {
+          "path": "020_render_crowd_clearance.log/part_001.txt",
+          "line_start": 1,
+          "line_end": 96,
+          "bytes": 3215,
+          "sha256": "a087586f78b0968003667c40988c81feb7e1fd6682284fc5b1e3a57802c8e8fd"
+        },
+        {
+          "path": "020_render_crowd_clearance.log/part_002.txt",
+          "line_start": 97,
+          "line_end": 192,
+          "bytes": 2944,
+          "sha256": "7a7a190e06fd47a679c4fe94a6ec6d434fd7bac1bc648df8ee06fba06a270b8b"
+        },
+        {
+          "path": "020_render_crowd_clearance.log/part_003.txt",
+          "line_start": 193,
+          "line_end": 288,
+          "bytes": 2944,
+          "sha256": "e8a723822ab6186d04d98b12542ce944c9ffa529cb4b778e9bda974e6c5a858f"
+        },
+        {
+          "path": "020_render_crowd_clearance.log/part_004.txt",
+          "line_start": 289,
+          "line_end": 384,
+          "bytes": 2944,
+          "sha256": "0c0b5f3c105bb7713988c13e4e9358c5b7972f226264a7142cad5f52616dcd20"
+        },
+        {
+          "path": "020_render_crowd_clearance.log/part_005.txt",
+          "line_start": 385,
+          "line_end": 480,
+          "bytes": 2944,
+          "sha256": "a85ba6b37998c3c84c8fbe6027d3a371f3e5f99f4ffc868073f7dfa488bd153b"
+        },
+        {
+          "path": "020_render_crowd_clearance.log/part_006.txt",
+          "line_start": 481,
+          "line_end": 576,
+          "bytes": 2944,
+          "sha256": "13c5fcaccdbb439d5a60ff0dd2c0cb74ad2d812092c4fcb45507b6f82751f1ff"
+        },
+        {
+          "path": "020_render_crowd_clearance.log/part_007.txt",
+          "line_start": 577,
+          "line_end": 672,
+          "bytes": 2944,
+          "sha256": "6037e606c3bc9c3d7aeaa6ad36a5e5733e9acd10f91497eb154877fef8fa3e11"
+        },
+        {
+          "path": "020_render_crowd_clearance.log/part_008.txt",
+          "line_start": 673,
+          "line_end": 768,
+          "bytes": 2944,
+          "sha256": "ac028123ff684a62fca76f7ead1917447ee7e9aacc71ee78a381dbadd68b1adf"
+        },
+        {
+          "path": "020_render_crowd_clearance.log/part_009.txt",
+          "line_start": 769,
+          "line_end": 850,
+          "bytes": 2441,
+          "sha256": "70f0548dce64a89886cb72bc702781e392d2d62d34d0ded670ede8577333b5a7"
+        }
+      ]
+    },
+    {
+      "order": 21,
+      "path": "delivery_v2/render_fast.py",
+      "bytes": 2399,
+      "line_count": 47,
+      "sha256": "c59de598fa6929866c7344516abe0545e862f582db86bd8076577d51d7a05ab9",
+      "parts": [
+        {
+          "path": "021_render_fast.py/part_001.txt",
+          "line_start": 1,
+          "line_end": 47,
+          "bytes": 2399,
+          "sha256": "c59de598fa6929866c7344516abe0545e862f582db86bd8076577d51d7a05ab9"
+        }
+      ]
+    },
+    {
+      "order": 22,
+      "path": "delivery_v2/render_part1.log",
+      "bytes": 262609,
+      "line_count": 8557,
+      "sha256": "82773ad2633ab5debd0e73c5580cd243304864ff2c4d1415d40758c489f4cac0",
+      "parts": [
+        {
+          "path": "022_render_part1.log/part_001.txt",
+          "line_start": 1,
+          "line_end": 96,
+          "bytes": 3212,
+          "sha256": "6937e7a1d8cf2fa8f792c19af261b77aa3722c289af9794937b45872cdcc572b"
+        },
+        {
+          "path": "022_render_part1.log/part_002.txt",
+          "line_start": 97,
+          "line_end": 192,
+          "bytes": 2944,
+          "sha256": "e04375fae2a964da12ea051437e215a6b1a132348de9df7334246eb9ed64c75a"
+        },
+        {
+          "path": "022_render_part1.log/part_003.txt",
+          "line_start": 193,
+          "line_end": 288,
+          "bytes": 2944,
+          "sha256": "788c7e36865c3a016e39db9efd10718c5dc02e73e583236ff6c531606acbcc1f"
+        },
+        {
+          "path": "022_render_part1.log/part_004.txt",
+          "line_start": 289,
+          "line_end": 384,
+          "bytes": 2944,
+          "sha256": "dbe0257271d3ce12d119e2b53faee3c8dc4f8f374dc15e2ae6374beb16488e75"
+        },
+        {
+          "path": "022_render_part1.log/part_005.txt",
+          "line_start": 385,
+          "line_end": 480,
+          "bytes": 2944,
+          "sha256": "8d24bb15df63b411c3f2948cfd912c765896982717933cf012281a6e12846a75"
+        },
+        {
+          "path": "022_render_part1.log/part_006.txt",
+          "line_start": 481,
+          "line_end": 576,
+          "bytes": 2944,
+          "sha256": "17480f8439421aa4ecfbb9d842b021df5a7af4342d27161dd69f59adf50648be"
+        },
+        {
+          "path": "022_render_part1.log/part_007.txt",
+          "line_start": 577,
+          "line_end": 672,
+          "bytes": 2944,
+          "sha256": "028576aa0f415346d267cf827d6c422270d6e910a1316c2bc2b2d61d72e3fff3"
+        },
+        {
+          "path": "022_render_part1.log/part_008.txt",
+          "line_start": 673,
+          "line_end": 768,
+          "bytes": 2944,
+          "sha256": "f7548168f6d6f252b2ed99f2fcf8f43ab5bfffa10b6387241ca1bbc3257f9550"
+        },
+        {
+          "path": "022_render_part1.log/part_009.txt",
+          "line_start": 769,
+          "line_end": 864,
+          "bytes": 2944,
+          "sha256": "bde8b9a190bb1dac1bbd9ef62252aee5b880da580ce8d6455373d93f54e45211"
+        },
+        {
+          "path": "022_render_part1.log/part_010.txt",
+          "line_start": 865,
+          "line_end": 960,
+          "bytes": 2944,
+          "sha256": "ff2baba765901a4315fc87bb15a4616bb05fc618f95b69cb2ec13b36aa21e6f2"
+        },
+        {
+          "path": "022_render_part1.log/part_011.txt",
+          "line_start": 961,
+          "line_end": 1056,
+          "bytes": 2944,
+          "sha256": "88b50322a9318e1bed4539658625d5d3176f74af39a8a865bd84ef81b1f23f5c"
+        },
+        {
+          "path": "022_render_part1.log/part_012.txt",
+          "line_start": 1057,
+          "line_end": 1152,
+          "bytes": 2944,
+          "sha256": "8c7a8689bb6dcf4b9f59d1c04621495a4872fbbaf13da7660313f38b8206e72f"
+        },
+        {
+          "path": "022_render_part1.log/part_013.txt",
+          "line_start": 1153,
+          "line_end": 1248,
+          "bytes": 2944,
+          "sha256": "29cb2043d26540a238e81906b04bef7ef7d5c65bf8686dd0dcd358f7d6dce814"
+        },
+        {
+          "path": "022_render_part1.log/part_014.txt",
+          "line_start": 1249,
+          "line_end": 1344,
+          "bytes": 2944,
+          "sha256": "d057cba1d489874ebaa0d52ee38b8e19a1f2f41cca79ab43b6de814f0d827bf2"
+        },
+        {
+          "path": "022_render_part1.log/part_015.txt",
+          "line_start": 1345,
+          "line_end": 1440,
+          "bytes": 2944,
+          "sha256": "ed3eeb81d764339f5f81443e46eb54084ea7ea90a2c03ee91a9771ab3a2df043"
+        },
+        {
+          "path": "022_render_part1.log/part_016.txt",
+          "line_start": 1441,
+          "line_end": 1536,
+          "bytes": 2944,
+          "sha256": "e23f46203b3189ce0f441aefa5f2293d8ef462720cd77266ec7df94d148e9bb8"
+        },
+        {
+          "path": "022_render_part1.log/part_017.txt",
+          "line_start": 1537,
+          "line_end": 1632,
+          "bytes": 2944,
+          "sha256": "1dfbcff729084867ab37b98945fc2315978ef73de98b3303c14d796d2c491bb8"
+        },
+        {
+          "path": "022_render_part1.log/part_018.txt",
+          "line_start": 1633,
+          "line_end": 1728,
+          "bytes": 2944,
+          "sha256": "83eb4eae6cd7bc0dffb2831a4525348fb678accf57bc72a747cbd528415f6462"
+        },
+        {
+          "path": "022_render_part1.log/part_019.txt",
+          "line_start": 1729,
+          "line_end": 1824,
+          "bytes": 2944,
+          "sha256": "1afc2090f61771ddf8b38beff50390cf717bc30190fab7330651ff53cdbb5402"
+        },
+        {
+          "path": "022_render_part1.log/part_020.txt",
+          "line_start": 1825,
+          "line_end": 1920,
+          "bytes": 2944,
+          "sha256": "1faa1ae81017923908215cd6e513138ff4dbef1e6722fb3f11edc74bc9fa983d"
+        },
+        {
+          "path": "022_render_part1.log/part_021.txt",
+          "line_start": 1921,
+          "line_end": 2016,
+          "bytes": 2944,
+          "sha256": "716028e95cce0771503683b709651d86dacdb63ccdd0d426085c8c635e6cd349"
+        },
+        {
+          "path": "022_render_part1.log/part_022.txt",
+          "line_start": 2017,
+          "line_end": 2112,
+          "bytes": 2944,
+          "sha256": "382498d1d899db4f87882887fbad9e7d96001d0a5ef3e9c4031a92a62be7bb92"
+        },
+        {
+          "path": "022_render_part1.log/part_023.txt",
+          "line_start": 2113,
+          "line_end": 2208,
+          "bytes": 2944,
+          "sha256": "1c954629db20669cb6274cb2b1a8ccfaf026899ca54fa3d128b0f77d2416fcd3"
+        },
+        {
+          "path": "022_render_part1.log/part_024.txt",
+          "line_start": 2209,
+          "line_end": 2304,
+          "bytes": 2944,
+          "sha256": "dd34f65bd7c6bf3bc170e9e59e30b583a092676581bfee8d7faa503c93df91b9"
+        },
+        {
+          "path": "022_render_part1.log/part_025.txt",
+          "line_start": 2305,
+          "line_end": 2400,
+          "bytes": 2944,
+          "sha256": "678a796fbd131a013d68fd3c00a68889856df5502b69c5b2d9a031181035e718"
+        },
+        {
+          "path": "022_render_part1.log/part_026.txt",
+          "line_start": 2401,
+          "line_end": 2496,
+          "bytes": 2944,
+          "sha256": "8f352986b398d364ad8599a600a37de777c6bd15e1e142e5675a9d07c2ce04a3"
+        },
+        {
+          "path": "022_render_part1.log/part_027.txt",
+          "line_start": 2497,
+          "line_end": 2592,
+          "bytes": 2944,
+          "sha256": "f83ff000f604ca8dd346756928f7b88e1c4fd7de21c01d6e16e3b9647187040c"
+        },
+        {
+          "path": "022_render_part1.log/part_028.txt",
+          "line_start": 2593,
+          "line_end": 2688,
+          "bytes": 2944,
+          "sha256": "94e31828ea8937ddb4afa0e1900a26c9972bf2d15f117be7bb131447c25eb000"
+        },
+        {
+          "path": "022_render_part1.log/part_029.txt",
+          "line_start": 2689,
+          "line_end": 2784,
+          "bytes": 2944,
+          "sha256": "4f0cbfaeeb71ffc882fd3be29004c9a2b2d59244ab27b2ae5a8153d6da21cc77"
+        },
+        {
+          "path": "022_render_part1.log/part_030.txt",
+          "line_start": 2785,
+          "line_end": 2880,
+          "bytes": 2944,
+          "sha256": "008f1388a7e4436afac7b1b4ffe8d483051f1c8fcf040d088ef812ef791467b2"
+        },
+        {
+          "path": "022_render_part1.log/part_031.txt",
+          "line_start": 2881,
+          "line_end": 2976,
+          "bytes": 2944,
+          "sha256": "8c727aee8d5664d9dff67469236337663b20ab980180e0f5c36fddac8d75c2e3"
+        },
+        {
+          "path": "022_render_part1.log/part_032.txt",
+          "line_start": 2977,
+          "line_end": 3072,
+          "bytes": 2944,
+          "sha256": "e93129c64f676145aa9a06ee43c549ce9e876c7c7a41852eae91eada7a23c559"
+        },
+        {
+          "path": "022_render_part1.log/part_033.txt",
+          "line_start": 3073,
+          "line_end": 3168,
+          "bytes": 2944,
+          "sha256": "7f30d32d0dbd22e4f140de4014a9bc5099e1a37e21095994caca6814a1f10f50"
+        },
+        {
+          "path": "022_render_part1.log/part_034.txt",
+          "line_start": 3169,
+          "line_end": 3264,
+          "bytes": 2944,
+          "sha256": "2c1913293b74edae8c093d2b0ac876c0e948d3941637da3877bf1351c3c03587"
+        },
+        {
+          "path": "022_render_part1.log/part_035.txt",
+          "line_start": 3265,
+          "line_end": 3360,
+          "bytes": 2944,
+          "sha256": "5d5887509c44bdbba7891a181b76438c1c4042c8d709afb665786f2d51d80c5c"
+        },
+        {
+          "path": "022_render_part1.log/part_036.txt",
+          "line_start": 3361,
+          "line_end": 3456,
+          "bytes": 2944,
+          "sha256": "63bb32b96c1df2b900564a174df9955de73e16d6e720622653ad336f9dabd3ab"
+        },
+        {
+          "path": "022_render_part1.log/part_037.txt",
+          "line_start": 3457,
+          "line_end": 3552,
+          "bytes": 2944,
+          "sha256": "d84c9c1be7258c709425d5bf4d3b1b3c5662d86dbd0b7b3d13977ab9cf167aba"
+        },
+        {
+          "path": "022_render_part1.log/part_038.txt",
+          "line_start": 3553,
+          "line_end": 3648,
+          "bytes": 2944,
+          "sha256": "082c4dbb1b6d673fc99981cad2cfd56e8849bac3a8a860d026aab4bd81df99da"
+        },
+        {
+          "path": "022_render_part1.log/part_039.txt",
+          "line_start": 3649,
+          "line_end": 3744,
+          "bytes": 2944,
+          "sha256": "3768b5c84428f3529e61d67e2bdafa760b466f0e89d797ebcbe3a4d9c1fdb2d9"
+        },
+        {
+          "path": "022_render_part1.log/part_040.txt",
+          "line_start": 3745,
+          "line_end": 3840,
+          "bytes": 2944,
+          "sha256": "1b6de1baa37a8f58aefa5e6a3448e9b6d8e8afbe98279f4c3ac721d6865753c1"
+        },
+        {
+          "path": "022_render_part1.log/part_041.txt",
+          "line_start": 3841,
+          "line_end": 3936,
+          "bytes": 2944,
+          "sha256": "d5fd937a02d9adc0f9949d63cc2b10c068052250f70ac9eb99e9ad791fad6bcc"
+        },
+        {
+          "path": "022_render_part1.log/part_042.txt",
+          "line_start": 3937,
+          "line_end": 4032,
+          "bytes": 2944,
+          "sha256": "308273a7a611f5df45fb3f081d902222edb7e4bb27c99b8a97830a77143e52f0"
+        },
+        {
+          "path": "022_render_part1.log/part_043.txt",
+          "line_start": 4033,
+          "line_end": 4128,
+          "bytes": 2944,
+          "sha256": "93d4bca9dff410450afdb030aa882f851989da3cbe1bb62d8aded1e40859aef5"
+        },
+        {
+          "path": "022_render_part1.log/part_044.txt",
+          "line_start": 4129,
+          "line_end": 4224,
+          "bytes": 2944,
+          "sha256": "f9f41287acb1ccdaac31a01453b7f3a337009c385403705bb5b1f85febdbc940"
+        },
+        {
+          "path": "022_render_part1.log/part_045.txt",
+          "line_start": 4225,
+          "line_end": 4320,
+          "bytes": 2944,
+          "sha256": "28803b42e0e0a55393f9b89b924413c97aa0bcba374423b82cc14598b3a67f3b"
+        },
+        {
+          "path": "022_render_part1.log/part_046.txt",
+          "line_start": 4321,
+          "line_end": 4416,
+          "bytes": 2944,
+          "sha256": "15870b29ac62599d80b2e38102e53348667d316aa4afcdbf17580245ba7b4ba0"
+        },
+        {
+          "path": "022_render_part1.log/part_047.txt",
+          "line_start": 4417,
+          "line_end": 4512,
+          "bytes": 2944,
+          "sha256": "3c628b76079e6ecef09f19e3cccebba02dd3f3122f799f4592edf460ee57865d"
+        },
+        {
+          "path": "022_render_part1.log/part_048.txt",
+          "line_start": 4513,
+          "line_end": 4608,
+          "bytes": 2944,
+          "sha256": "622842db688233916829c1d643e4317e0969519c704970968c67031e775d2956"
+        },
+        {
+          "path": "022_render_part1.log/part_049.txt",
+          "line_start": 4609,
+          "line_end": 4704,
+          "bytes": 2944,
+          "sha256": "b6d6a2199479c9bd554c35726516a0eaa30a5dae8de429042cd785a4e7581e3e"
+        },
+        {
+          "path": "022_render_part1.log/part_050.txt",
+          "line_start": 4705,
+          "line_end": 4800,
+          "bytes": 2944,
+          "sha256": "04c76cfa27cf886f4f56a96f3252c6f4d2a88de7faf24903ef18598db52ee5da"
+        },
+        {
+          "path": "022_render_part1.log/part_051.txt",
+          "line_start": 4801,
+          "line_end": 4896,
+          "bytes": 2944,
+          "sha256": "f62df759124c4e38a2ff418f2f23295ba5818250cd4b433426dbd96f2c50c32c"
+        },
+        {
+          "path": "022_render_part1.log/part_052.txt",
+          "line_start": 4897,
+          "line_end": 4992,
+          "bytes": 2944,
+          "sha256": "e66552ef440014e3909f2dd9d5edbfad695906506bcc585b38e550dc187719ba"
+        },
+        {
+          "path": "022_render_part1.log/part_053.txt",
+          "line_start": 4993,
+          "line_end": 5088,
+          "bytes": 2944,
+          "sha256": "69fcbd548fd0448c0052e669a272d5084c8f2d279d3a73a1f48b6118f5e0a45e"
+        },
+        {
+          "path": "022_render_part1.log/part_054.txt",
+          "line_start": 5089,
+          "line_end": 5184,
+          "bytes": 2944,
+          "sha256": "cdc40617e04cd004f858f235308035f18dd03d789f92344d5c00a2ef250a9780"
+        },
+        {
+          "path": "022_render_part1.log/part_055.txt",
+          "line_start": 5185,
+          "line_end": 5280,
+          "bytes": 2944,
+          "sha256": "a585a2ed2785f63b914e1b176e7201eef75a508c727da693109c73dfb5abd332"
+        },
+        {
+          "path": "022_render_part1.log/part_056.txt",
+          "line_start": 5281,
+          "line_end": 5376,
+          "bytes": 2944,
+          "sha256": "0f5485523f5a2c90e7763800aeb5b6f2f64080a101853e12854ba9e39f023055"
+        },
+        {
+          "path": "022_render_part1.log/part_057.txt",
+          "line_start": 5377,
+          "line_end": 5472,
+          "bytes": 2944,
+          "sha256": "d9d2667c3c4f2a77c43623b96ec69edb7e2ce239022e2bf06deb5dfcf3333aeb"
+        },
+        {
+          "path": "022_render_part1.log/part_058.txt",
+          "line_start": 5473,
+          "line_end": 5568,
+          "bytes": 2944,
+          "sha256": "caf1b4adc897a2e904dccbe758e14551a3b2e2adc8f1a161c14314b8a932ba19"
+        },
+        {
+          "path": "022_render_part1.log/part_059.txt",
+          "line_start": 5569,
+          "line_end": 5664,
+          "bytes": 2944,
+          "sha256": "2cc5170dbc4a8d175e486d7317bccfdb6f0f202fd2a5fe216e94f9b18df5226a"
+        },
+        {
+          "path": "022_render_part1.log/part_060.txt",
+          "line_start": 5665,
+          "line_end": 5760,
+          "bytes": 2944,
+          "sha256": "c3d2a3000f57354dd489e4e8dea0daa600a083d6a65d85dab6a51a7cfb117ed2"
+        },
+        {
+          "path": "022_render_part1.log/part_061.txt",
+          "line_start": 5761,
+          "line_end": 5856,
+          "bytes": 2944,
+          "sha256": "993137c5904f2a4ccf9e7f6b70fba8184d88c4193d2357a3418ac27651192eb0"
+        },
+        {
+          "path": "022_render_part1.log/part_062.txt",
+          "line_start": 5857,
+          "line_end": 5952,
+          "bytes": 2944,
+          "sha256": "9ec6fddc100147a60252a1dee35773f9709075017f027f8ce48303833a6a23d8"
+        },
+        {
+          "path": "022_render_part1.log/part_063.txt",
+          "line_start": 5953,
+          "line_end": 6048,
+          "bytes": 2944,
+          "sha256": "1cc11163512c43f64b5bb52e0cf2059191b4eee98394cb20d0453becd2cadba7"
+        },
+        {
+          "path": "022_render_part1.log/part_064.txt",
+          "line_start": 6049,
+          "line_end": 6144,
+          "bytes": 2944,
+          "sha256": "7e9e0142cd6b182fa3728fb3196e31794e4a44b1b0f8a63c7b83b6a80234aee0"
+        },
+        {
+          "path": "022_render_part1.log/part_065.txt",
+          "line_start": 6145,
+          "line_end": 6240,
+          "bytes": 2944,
+          "sha256": "a7816f6012f9b8e9fa61e1fb76df430afd1f51680f0937cb4111ca50bec187e9"
+        },
+        {
+          "path": "022_render_part1.log/part_066.txt",
+          "line_start": 6241,
+          "line_end": 6336,
+          "bytes": 2944,
+          "sha256": "5fa926e16c2a4add54a5fd08ea0090f6a9b12115cbb3df5c9427c7be380846eb"
+        },
+        {
+          "path": "022_render_part1.log/part_067.txt",
+          "line_start": 6337,
+          "line_end": 6432,
+          "bytes": 2944,
+          "sha256": "0404b9fc716d8227a4c0c473518e2c4c8927f0a825c2ab151a4074178f7658a8"
+        },
+        {
+          "path": "022_render_part1.log/part_068.txt",
+          "line_start": 6433,
+          "line_end": 6528,
+          "bytes": 2944,
+          "sha256": "df77999b36dc93f75f41037303841f1b540ebbf1d052a7bb768535a96f49d762"
+        },
+        {
+          "path": "022_render_part1.log/part_069.txt",
+          "line_start": 6529,
+          "line_end": 6624,
+          "bytes": 2944,
+          "sha256": "bac3177bb571e5a6a159667649c29fa8cd3e492faca5ad00f152820b60cb4d28"
+        },
+        {
+          "path": "022_render_part1.log/part_070.txt",
+          "line_start": 6625,
+          "line_end": 6720,
+          "bytes": 2944,
+          "sha256": "a04b9e3052193a91b5183e58e5c325c07f2e20f28c837f46a1f51ffd9c432bcd"
+        },
+        {
+          "path": "022_render_part1.log/part_071.txt",
+          "line_start": 6721,
+          "line_end": 6816,
+          "bytes": 2944,
+          "sha256": "70d050b59fedf589081230752cfe8a27acda242e581d3dbe68a98951d4fe4713"
+        },
+        {
+          "path": "022_render_part1.log/part_072.txt",
+          "line_start": 6817,
+          "line_end": 6912,
+          "bytes": 2944,
+          "sha256": "92ef6e770bac19a42c532cdae3d9bf4a639897363c45469a0d62204428cdd6fe"
+        },
+        {
+          "path": "022_render_part1.log/part_073.txt",
+          "line_start": 6913,
+          "line_end": 7008,
+          "bytes": 2944,
+          "sha256": "3c90fa7479f4962cf5f3b82cc14373a7556dc09890430508ef7de6c48a09b861"
+        },
+        {
+          "path": "022_render_part1.log/part_074.txt",
+          "line_start": 7009,
+          "line_end": 7104,
+          "bytes": 2944,
+          "sha256": "377121551d41c8b310fff0d1f7116735ab8545757df186b67a48f2ad65770710"
+        },
+        {
+          "path": "022_render_part1.log/part_075.txt",
+          "line_start": 7105,
+          "line_end": 7200,
+          "bytes": 2944,
+          "sha256": "c95b1ff60b6cf8245a3debe30a1419a9df058b017df7853da0e3e92740d09fc3"
+        },
+        {
+          "path": "022_render_part1.log/part_076.txt",
+          "line_start": 7201,
+          "line_end": 7296,
+          "bytes": 2944,
+          "sha256": "1134626583d8b0610907228bcf4c0ce757c61a1cc20583480372e429f5b8aa6a"
+        },
+        {
+          "path": "022_render_part1.log/part_077.txt",
+          "line_start": 7297,
+          "line_end": 7392,
+          "bytes": 2944,
+          "sha256": "d029641773fac6c1606ddb153a8d344c254ae3d5132847ad789d05364079291f"
+        },
+        {
+          "path": "022_render_part1.log/part_078.txt",
+          "line_start": 7393,
+          "line_end": 7488,
+          "bytes": 2944,
+          "sha256": "2957d0e3ef45e9e39b7a905e20684ccfe2d0dd9abf4045095a984126e53d5d77"
+        },
+        {
+          "path": "022_render_part1.log/part_079.txt",
+          "line_start": 7489,
+          "line_end": 7584,
+          "bytes": 2944,
+          "sha256": "a52a4deebe7fb70ba64492fc443bc367d9e4151e08c91b2ec37875595cecba90"
+        },
+        {
+          "path": "022_render_part1.log/part_080.txt",
+          "line_start": 7585,
+          "line_end": 7680,
+          "bytes": 2944,
+          "sha256": "0802cca6d0da13c0f56d637be99eb64b39c439b79ea85d6dca97d49db5116edd"
+        },
+        {
+          "path": "022_render_part1.log/part_081.txt",
+          "line_start": 7681,
+          "line_end": 7776,
+          "bytes": 2944,
+          "sha256": "4fcf3114fd829fda0a64e254035e0fa62be39720922079530d698940c8e650c1"
+        },
+        {
+          "path": "022_render_part1.log/part_082.txt",
+          "line_start": 7777,
+          "line_end": 7872,
+          "bytes": 2944,
+          "sha256": "3c4f2b418d4e568e9db461dbc99e27ca54058cedf65291702a97d6941e9db100"
+        },
+        {
+          "path": "022_render_part1.log/part_083.txt",
+          "line_start": 7873,
+          "line_end": 7968,
+          "bytes": 2944,
+          "sha256": "79bc2888706c3edae1bcac15a574e8c42a356c759cbff49e80c19ff20640407c"
+        },
+        {
+          "path": "022_render_part1.log/part_084.txt",
+          "line_start": 7969,
+          "line_end": 8064,
+          "bytes": 2944,
+          "sha256": "3f3fffa46d89223e77afb92478fdfcdd00e9745d06c1961a464f1ad780c0665e"
+        },
+        {
+          "path": "022_render_part1.log/part_085.txt",
+          "line_start": 8065,
+          "line_end": 8160,
+          "bytes": 2944,
+          "sha256": "cb0b2c2c0bcf003b3a829b81ca7581a8da3aa7d9be1cb67b3bd6fa968fd7bcc2"
+        },
+        {
+          "path": "022_render_part1.log/part_086.txt",
+          "line_start": 8161,
+          "line_end": 8256,
+          "bytes": 2944,
+          "sha256": "cdf47b5be4f0898958a3e99baaa722337c334d2eab128f092d5f50a27a984b20"
+        },
+        {
+          "path": "022_render_part1.log/part_087.txt",
+          "line_start": 8257,
+          "line_end": 8352,
+          "bytes": 2944,
+          "sha256": "7cd39d869027fb07cae273e2d409b9985ddbe3496c0e95a94a0d78398fc1ac1f"
+        },
+        {
+          "path": "022_render_part1.log/part_088.txt",
+          "line_start": 8353,
+          "line_end": 8448,
+          "bytes": 2944,
+          "sha256": "b421dac4dd1d28f5adfd3796cb54330cb7fc4bfbfb4af138599f46180890a214"
+        },
+        {
+          "path": "022_render_part1.log/part_089.txt",
+          "line_start": 8449,
+          "line_end": 8544,
+          "bytes": 2944,
+          "sha256": "806d22ad6a18c59a3f9d25240279348126cb38af56446fe1ad15668d963e099e"
+        },
+        {
+          "path": "022_render_part1.log/part_090.txt",
+          "line_start": 8545,
+          "line_end": 8557,
+          "bytes": 325,
+          "sha256": "f865b366b862831f7f3d377345e38a9a39bf51e6e45c4a1a66eb6c5d815ef27b"
+        }
+      ]
+    },
+    {
+      "order": 23,
+      "path": "delivery_v2/render_part2.log",
+      "bytes": 262704,
+      "line_count": 8560,
+      "sha256": "e2bebc51e409254cce9ecc66786190fb4e4747827b073e30663e897e3d246165",
+      "parts": [
+        {
+          "path": "023_render_part2.log/part_001.txt",
+          "line_start": 1,
+          "line_end": 96,
+          "bytes": 3215,
+          "sha256": "b48802566effb08a9c5be1eead56c91c784f58fb5fa887aca2e971848be51de6"
+        },
+        {
+          "path": "023_render_part2.log/part_002.txt",
+          "line_start": 97,
+          "line_end": 192,
+          "bytes": 2944,
+          "sha256": "15c096a92fe5f39e9b203e693bdd5f872ca2a98a44bb741cd1b09a53bf8467dc"
+        },
+        {
+          "path": "023_render_part2.log/part_003.txt",
+          "line_start": 193,
+          "line_end": 288,
+          "bytes": 2944,
+          "sha256": "acdb6b587811b082a8d186b75d50bde31179853f9de034b1607c480fe4077660"
+        },
+        {
+          "path": "023_render_part2.log/part_004.txt",
+          "line_start": 289,
+          "line_end": 384,
+          "bytes": 2944,
+          "sha256": "b13e3d1f2801787d57371a1e5dea55af9530067adde9d0796789b5e6227c1597"
+        },
+        {
+          "path": "023_render_part2.log/part_005.txt",
+          "line_start": 385,
+          "line_end": 480,
+          "bytes": 2944,
+          "sha256": "68fd14de5ecf7f5b13811d14e933c757d54b24256a1bc80971d0a1403d077d0d"
+        },
+        {
+          "path": "023_render_part2.log/part_006.txt",
+          "line_start": 481,
+          "line_end": 576,
+          "bytes": 2944,
+          "sha256": "abbd555322071de5b556c430f32a892aae247d1b00bd49ec7337a90bf9032224"
+        },
+        {
+          "path": "023_render_part2.log/part_007.txt",
+          "line_start": 577,
+          "line_end": 672,
+          "bytes": 2944,
+          "sha256": "fabd46ee6ade4f096cdf142fd3888cc6441e42be55b9a49588f0e32a431141cf"
+        },
+        {
+          "path": "023_render_part2.log/part_008.txt",
+          "line_start": 673,
+          "line_end": 768,
+          "bytes": 2944,
+          "sha256": "d59bb7f0e8a6b7a626e06577349c97916028b21d530ee133855ca1def312411c"
+        },
+        {
+          "path": "023_render_part2.log/part_009.txt",
+          "line_start": 769,
+          "line_end": 864,
+          "bytes": 2944,
+          "sha256": "6863c728d9e206b1ab07bf9a2ffee25fe66a68f1d213bf88c07608255889ea42"
+        },
+        {
+          "path": "023_render_part2.log/part_010.txt",
+          "line_start": 865,
+          "line_end": 960,
+          "bytes": 2944,
+          "sha256": "be5e83a0add34f3dd114867aa3dbe8fdf53bcdadc9e41bb910b44259f684ce9c"
+        },
+        {
+          "path": "023_render_part2.log/part_011.txt",
+          "line_start": 961,
+          "line_end": 1056,
+          "bytes": 2944,
+          "sha256": "5c8ae35da643cc285cd1293bf99278f8661898eb2856def222a8f6d5c6882439"
+        },
+        {
+          "path": "023_render_part2.log/part_012.txt",
+          "line_start": 1057,
+          "line_end": 1152,
+          "bytes": 2944,
+          "sha256": "25e591c4b7cafec63cd3b50cd0ac40ff7140e59d2962280294d5af3120b7db45"
+        },
+        {
+          "path": "023_render_part2.log/part_013.txt",
+          "line_start": 1153,
+          "line_end": 1248,
+          "bytes": 2944,
+          "sha256": "3d9af5566752e9309a6ef6e38cae33a4739c1f309b24160adf2b27a05719ef54"
+        },
+        {
+          "path": "023_render_part2.log/part_014.txt",
+          "line_start": 1249,
+          "line_end": 1344,
+          "bytes": 2944,
+          "sha256": "49c5b716a63eeb9e6d9a6b04d13fd0063535526b8c6e21a8e8a45965223b794c"
+        },
+        {
+          "path": "023_render_part2.log/part_015.txt",
+          "line_start": 1345,
+          "line_end": 1440,
+          "bytes": 2944,
+          "sha256": "9fce3591f3cbe7905814e7c948780793f74a0c7d5d53259169abb4db2717cdbd"
+        },
+        {
+          "path": "023_render_part2.log/part_016.txt",
+          "line_start": 1441,
+          "line_end": 1536,
+          "bytes": 2944,
+          "sha256": "1a81a34f5f96a59a035c3443545edd7f990038f922e894b7bc4f7cf7d4752434"
+        },
+        {
+          "path": "023_render_part2.log/part_017.txt",
+          "line_start": 1537,
+          "line_end": 1632,
+          "bytes": 2944,
+          "sha256": "be0ee508e536b25a41964412ff1b2d28e0979ebcbd6be2df8ea68ae09da89793"
+        },
+        {
+          "path": "023_render_part2.log/part_018.txt",
+          "line_start": 1633,
+          "line_end": 1728,
+          "bytes": 2944,
+          "sha256": "8e088a95398ddbded9c229d7fe0fb992840c988d4080da1f0669fa19b0ccbb8d"
+        },
+        {
+          "path": "023_render_part2.log/part_019.txt",
+          "line_start": 1729,
+          "line_end": 1824,
+          "bytes": 2944,
+          "sha256": "4dde21f815eba563019225d4d50b73f358498bcdc31f75a748eef935bf6dcb69"
+        },
+        {
+          "path": "023_render_part2.log/part_020.txt",
+          "line_start": 1825,
+          "line_end": 1920,
+          "bytes": 2944,
+          "sha256": "6e796664b35d7641edef1d1c6138f7cb6bfe1bf9056f1e2a14809f95a3b3f105"
+        },
+        {
+          "path": "023_render_part2.log/part_021.txt",
+          "line_start": 1921,
+          "line_end": 2016,
+          "bytes": 2944,
+          "sha256": "3a3f3732843afcfb28ac73883c0cd9b2c2a9599d250323db8409b8e763ce644b"
+        },
+        {
+          "path": "023_render_part2.log/part_022.txt",
+          "line_start": 2017,
+          "line_end": 2112,
+          "bytes": 2944,
+          "sha256": "a99eecaf541e11f4b498efac4c93c65ad3a408200181fe373e958f6d8cd77da6"
+        },
+        {
+          "path": "023_render_part2.log/part_023.txt",
+          "line_start": 2113,
+          "line_end": 2208,
+          "bytes": 2944,
+          "sha256": "9a70748d38d124c0258a72bb2f34224e0919eedc32bc82ad3fba37d6dc95af16"
+        },
+        {
+          "path": "023_render_part2.log/part_024.txt",
+          "line_start": 2209,
+          "line_end": 2304,
+          "bytes": 2944,
+          "sha256": "796b914632b006c0ddfcb44a265c4e11dc5615d98d5b5c248f0868088a467079"
+        },
+        {
+          "path": "023_render_part2.log/part_025.txt",
+          "line_start": 2305,
+          "line_end": 2400,
+          "bytes": 2944,
+          "sha256": "0c7a6944a8c625925aa3507bb19bef4c4a8c10c3c6fb91fe959d70461c55fff5"
+        },
+        {
+          "path": "023_render_part2.log/part_026.txt",
+          "line_start": 2401,
+          "line_end": 2496,
+          "bytes": 2944,
+          "sha256": "ddb7088718caf22060489adbc86eee089b20eb0ce8129d0d79b8e66485224822"
+        },
+        {
+          "path": "023_render_part2.log/part_027.txt",
+          "line_start": 2497,
+          "line_end": 2592,
+          "bytes": 2944,
+          "sha256": "b9f34c9069a7112d6bf6bc46b669d1a9f83d0cc3f7bb7caa9e1a63adee6debc7"
+        },
+        {
+          "path": "023_render_part2.log/part_028.txt",
+          "line_start": 2593,
+          "line_end": 2688,
+          "bytes": 2944,
+          "sha256": "2d713caf8efc792a41e337ec3bd093d03767c2f22716a85778c414ce67eb80ac"
+        },
+        {
+          "path": "023_render_part2.log/part_029.txt",
+          "line_start": 2689,
+          "line_end": 2784,
+          "bytes": 2944,
+          "sha256": "b9f9dac0ad9656c0eeb7fd9c99449c3b4609bc118e301bce87c005c50b295aca"
+        },
+        {
+          "path": "023_render_part2.log/part_030.txt",
+          "line_start": 2785,
+          "line_end": 2880,
+          "bytes": 2944,
+          "sha256": "3c073d1c9add4914a67053223dc3516952464bfc62b21fa281c547600eec9213"
+        },
+        {
+          "path": "023_render_part2.log/part_031.txt",
+          "line_start": 2881,
+          "line_end": 2976,
+          "bytes": 2944,
+          "sha256": "97fc5a66059738a2b2518b9b5f5f55ebf3745f78ae3022f51a3b3e5b65b850a4"
+        },
+        {
+          "path": "023_render_part2.log/part_032.txt",
+          "line_start": 2977,
+          "line_end": 3072,
+          "bytes": 2944,
+          "sha256": "aa0f5f3b8cd19769471bcdf5820262d0b6fd432aca757d4eaacd856535d7517f"
+        },
+        {
+          "path": "023_render_part2.log/part_033.txt",
+          "line_start": 3073,
+          "line_end": 3168,
+          "bytes": 2944,
+          "sha256": "e52c5b30b6ddce8855a6a6e2b935f2aceb40694985a4a83de29d1cf94012e9d8"
+        },
+        {
+          "path": "023_render_part2.log/part_034.txt",
+          "line_start": 3169,
+          "line_end": 3264,
+          "bytes": 2944,
+          "sha256": "6dd9b6aa7c2b29d91fe87f02af375cfa3809d1ee3f86aa852c03d2d6b70124f8"
+        },
+        {
+          "path": "023_render_part2.log/part_035.txt",
+          "line_start": 3265,
+          "line_end": 3360,
+          "bytes": 2944,
+          "sha256": "05d1a8ae40e460ef78d134f7c8db43b1052284ce21ee455fda54084924e214e0"
+        },
+        {
+          "path": "023_render_part2.log/part_036.txt",
+          "line_start": 3361,
+          "line_end": 3456,
+          "bytes": 2944,
+          "sha256": "2d1ec9b106bee3bcf21db64565c2fde2246a80f54ff914d636cc3ba2942e0bca"
+        },
+        {
+          "path": "023_render_part2.log/part_037.txt",
+          "line_start": 3457,
+          "line_end": 3552,
+          "bytes": 2944,
+          "sha256": "d833ba89f3b430bbb65483bc24623d4855b2c1cd957da5f017263280e0be27db"
+        },
+        {
+          "path": "023_render_part2.log/part_038.txt",
+          "line_start": 3553,
+          "line_end": 3648,
+          "bytes": 2944,
+          "sha256": "bfc70d744f0c9fd254d25391139a9802f1e671ae3015cc8c227e8475a9c5fa03"
+        },
+        {
+          "path": "023_render_part2.log/part_039.txt",
+          "line_start": 3649,
+          "line_end": 3744,
+          "bytes": 2944,
+          "sha256": "b8a1e02f4b3ff3630603cd3feb86c643307bf40df2bdc6458680671089d44f4f"
+        },
+        {
+          "path": "023_render_part2.log/part_040.txt",
+          "line_start": 3745,
+          "line_end": 3840,
+          "bytes": 2944,
+          "sha256": "9d41d52c88618027d482781eb7bb5dc64f9c94169306072d990f75fecdfaf766"
+        },
+        {
+          "path": "023_render_part2.log/part_041.txt",
+          "line_start": 3841,
+          "line_end": 3936,
+          "bytes": 2944,
+          "sha256": "81058a3fdaf381b38e4bb8aa0b8986e4e386dfe5a0d3ab81c47d7a76ce5c54df"
+        },
+        {
+          "path": "023_render_part2.log/part_042.txt",
+          "line_start": 3937,
+          "line_end": 4032,
+          "bytes": 2944,
+          "sha256": "ddc6e114eeaf1d9e66bcf4e4f219718c3a8897bc18b2d9dfa2f2b308d8766a73"
+        },
+        {
+          "path": "023_render_part2.log/part_043.txt",
+          "line_start": 4033,
+          "line_end": 4128,
+          "bytes": 2944,
+          "sha256": "6936ffd4edee5cdedb666b061034352e704babf51449f4b322fc5b9e9ecafe9e"
+        },
+        {
+          "path": "023_render_part2.log/part_044.txt",
+          "line_start": 4129,
+          "line_end": 4224,
+          "bytes": 2944,
+          "sha256": "3d0a776c3884a4a18badacb8fffeb2e3efae647214c3c42042a46fec819a7a4c"
+        },
+        {
+          "path": "023_render_part2.log/part_045.txt",
+          "line_start": 4225,
+          "line_end": 4320,
+          "bytes": 2944,
+          "sha256": "3c59e255a79ca6e2164113ff78561eef16a18ef72affa43893ce8a2c174cbd50"
+        },
+        {
+          "path": "023_render_part2.log/part_046.txt",
+          "line_start": 4321,
+          "line_end": 4416,
+          "bytes": 2944,
+          "sha256": "9cb8daf27200b51e3d0c5cb02ab4d4f19a1c2a51823c9ed0a8987a87c540ad2a"
+        },
+        {
+          "path": "023_render_part2.log/part_047.txt",
+          "line_start": 4417,
+          "line_end": 4512,
+          "bytes": 2944,
+          "sha256": "f205827d8c05e3d8518ef2ea0700a87d577219cb3640b0a7f723325edaeffa78"
+        },
+        {
+          "path": "023_render_part2.log/part_048.txt",
+          "line_start": 4513,
+          "line_end": 4608,
+          "bytes": 2944,
+          "sha256": "16ee7883260d7e9a3e0038dc517b5fbaa06662c7f471789714e9fc7f868ece49"
+        },
+        {
+          "path": "023_render_part2.log/part_049.txt",
+          "line_start": 4609,
+          "line_end": 4704,
+          "bytes": 2944,
+          "sha256": "1ae0328287c1c99209eba259ddc8c5c850e4bd7d781818eb2a12c3a21c91d8e0"
+        },
+        {
+          "path": "023_render_part2.log/part_050.txt",
+          "line_start": 4705,
+          "line_end": 4800,
+          "bytes": 2944,
+          "sha256": "48c0ee7520157f07ba35335aa3458753ea34d32c7d44bf295e171615be87cdff"
+        },
+        {
+          "path": "023_render_part2.log/part_051.txt",
+          "line_start": 4801,
+          "line_end": 4896,
+          "bytes": 2944,
+          "sha256": "8ecb452bb6f06fc3f657ea6fdde1e6223ce1e2e71ed11da8ff9419d2092f9093"
+        },
+        {
+          "path": "023_render_part2.log/part_052.txt",
+          "line_start": 4897,
+          "line_end": 4992,
+          "bytes": 2944,
+          "sha256": "8384123736486f29961f847f2aeaaccff8ee9032563504321dbf406d57acdc3a"
+        },
+        {
+          "path": "023_render_part2.log/part_053.txt",
+          "line_start": 4993,
+          "line_end": 5088,
+          "bytes": 2944,
+          "sha256": "ee5d26172616ea4cbad8ea897141614aa7a74b3bff97bccacef8db53ed3bbbc2"
+        },
+        {
+          "path": "023_render_part2.log/part_054.txt",
+          "line_start": 5089,
+          "line_end": 5184,
+          "bytes": 2944,
+          "sha256": "0d727be7c7f5943091ea01328e7241990064115ca6d546afa8c114a596b20c7e"
+        },
+        {
+          "path": "023_render_part2.log/part_055.txt",
+          "line_start": 5185,
+          "line_end": 5280,
+          "bytes": 2944,
+          "sha256": "086f9470334f29961a2653c07b43ec0463385275d38c6c2a9de36a64287729a1"
+        },
+        {
+          "path": "023_render_part2.log/part_056.txt",
+          "line_start": 5281,
+          "line_end": 5376,
+          "bytes": 2944,
+          "sha256": "9c65ec6de14992d66341781df8091707010ee443a241d8c174367efaefa065c2"
+        },
+        {
+          "path": "023_render_part2.log/part_057.txt",
+          "line_start": 5377,
+          "line_end": 5472,
+          "bytes": 2944,
+          "sha256": "9b1a9278a2bd2d9ba62d3e517c3dfdfbf8127d8e2464cd1ee5e81668f34a8980"
+        },
+        {
+          "path": "023_render_part2.log/part_058.txt",
+          "line_start": 5473,
+          "line_end": 5568,
+          "bytes": 2944,
+          "sha256": "d4a5c30984ff713a3f72d42a3a7dad1e5b4a6b1d32f869100c89914eeddc8962"
+        },
+        {
+          "path": "023_render_part2.log/part_059.txt",
+          "line_start": 5569,
+          "line_end": 5664,
+          "bytes": 2944,
+          "sha256": "dc11f1c69c9e98a22ce7aef88703a5875b480f0615e4b78b35bb8f55de18a3d0"
+        },
+        {
+          "path": "023_render_part2.log/part_060.txt",
+          "line_start": 5665,
+          "line_end": 5760,
+          "bytes": 2944,
+          "sha256": "631c26377f4b2d60edeaaa6bba903845216de36bcef1aaba580f93a7c57c038d"
+        },
+        {
+          "path": "023_render_part2.log/part_061.txt",
+          "line_start": 5761,
+          "line_end": 5856,
+          "bytes": 2944,
+          "sha256": "7e317f72b0c3e52fb9433de8edef46b6db176bf4688339ac465f7e114fbcaac0"
+        },
+        {
+          "path": "023_render_part2.log/part_062.txt",
+          "line_start": 5857,
+          "line_end": 5952,
+          "bytes": 2944,
+          "sha256": "50e829a6926e37705addad5045d4db019cf26e68608fd1f386fbb3ef7ccbbaa8"
+        },
+        {
+          "path": "023_render_part2.log/part_063.txt",
+          "line_start": 5953,
+          "line_end": 6048,
+          "bytes": 2944,
+          "sha256": "e37b251afd1bfa33e5a2ad314117b22afffa86c5f6f29cb3ec0516b17665eb5b"
+        },
+        {
+          "path": "023_render_part2.log/part_064.txt",
+          "line_start": 6049,
+          "line_end": 6144,
+          "bytes": 2944,
+          "sha256": "6e5cd2edc15657a84fc009f1c5285b2625f078ccb21423f3546b9cf4937766f9"
+        },
+        {
+          "path": "023_render_part2.log/part_065.txt",
+          "line_start": 6145,
+          "line_end": 6240,
+          "bytes": 2944,
+          "sha256": "3b6785debb7014b497cd70df8f9c540f52255644971fa2dea2378216b9760aa6"
+        },
+        {
+          "path": "023_render_part2.log/part_066.txt",
+          "line_start": 6241,
+          "line_end": 6336,
+          "bytes": 2944,
+          "sha256": "e0d4dde844110c5d3cb1dc911a3c29753607f1e8f4c87cdf6ad998803db2a94f"
+        },
+        {
+          "path": "023_render_part2.log/part_067.txt",
+          "line_start": 6337,
+          "line_end": 6432,
+          "bytes": 2944,
+          "sha256": "7a87a72fbbab5e7aa542071afd3d0b9ca05f5e1cdff9ebdbba5c64c5c0f3b913"
+        },
+        {
+          "path": "023_render_part2.log/part_068.txt",
+          "line_start": 6433,
+          "line_end": 6528,
+          "bytes": 2944,
+          "sha256": "bdf7d3456615b27e486840aaa9d83b2df324b5f7dff03ff35801797227c83469"
+        },
+        {
+          "path": "023_render_part2.log/part_069.txt",
+          "line_start": 6529,
+          "line_end": 6624,
+          "bytes": 2944,
+          "sha256": "70387e0d1a875559b18f243aa0057b83e37d259539ffb28db83322b41325e7f9"
+        },
+        {
+          "path": "023_render_part2.log/part_070.txt",
+          "line_start": 6625,
+          "line_end": 6720,
+          "bytes": 2944,
+          "sha256": "da737e3da4d54b528704f601a9ff0baa4e2eabae13aa0b74b85025daaba49ae6"
+        },
+        {
+          "path": "023_render_part2.log/part_071.txt",
+          "line_start": 6721,
+          "line_end": 6816,
+          "bytes": 2944,
+          "sha256": "af2d32ae48b43f28c97f7e9ddd505884f3faa4823b523efa47f8bf029f775738"
+        },
+        {
+          "path": "023_render_part2.log/part_072.txt",
+          "line_start": 6817,
+          "line_end": 6912,
+          "bytes": 2944,
+          "sha256": "dbd04c8be29f115631f4441534758d9aa99d90e84bbdc25a9b5844b9b9104d2f"
+        },
+        {
+          "path": "023_render_part2.log/part_073.txt",
+          "line_start": 6913,
+          "line_end": 7008,
+          "bytes": 2944,
+          "sha256": "2d5841e990eabc863de44d105e13ca2aa07e722e2778063fd134b2c9def17672"
+        },
+        {
+          "path": "023_render_part2.log/part_074.txt",
+          "line_start": 7009,
+          "line_end": 7104,
+          "bytes": 2944,
+          "sha256": "e70ff32cac194d8871f9eadbea964d653289670d10d74067d70c55926e7ded6c"
+        },
+        {
+          "path": "023_render_part2.log/part_075.txt",
+          "line_start": 7105,
+          "line_end": 7200,
+          "bytes": 2944,
+          "sha256": "43623179c99483be3eb073953bac21584c708b2baec3f5a01c246128c0a6aa3e"
+        },
+        {
+          "path": "023_render_part2.log/part_076.txt",
+          "line_start": 7201,
+          "line_end": 7296,
+          "bytes": 2944,
+          "sha256": "a682e3c2fab9fb20e0e1340975988b5cbb83113096e495d00c362393f855b8e7"
+        },
+        {
+          "path": "023_render_part2.log/part_077.txt",
+          "line_start": 7297,
+          "line_end": 7392,
+          "bytes": 2944,
+          "sha256": "f255f026d9229a12370f36521c54c4f221fd4a14507313e29956b3ff83da9ecd"
+        },
+        {
+          "path": "023_render_part2.log/part_078.txt",
+          "line_start": 7393,
+          "line_end": 7488,
+          "bytes": 2944,
+          "sha256": "87a69d670ea1f73ce5e4054401c5c406426e54b1a227a204bf9d7eef7f2972bd"
+        },
+        {
+          "path": "023_render_part2.log/part_079.txt",
+          "line_start": 7489,
+          "line_end": 7584,
+          "bytes": 2944,
+          "sha256": "d02e15ba0289863f894c50b057d6a47984a6e56a056e2935faf3305ea014897f"
+        },
+        {
+          "path": "023_render_part2.log/part_080.txt",
+          "line_start": 7585,
+          "line_end": 7680,
+          "bytes": 2944,
+          "sha256": "ea9bda6f65ee2ff617ea7489f86ad208fcf29bea5b3293cf6065fdf476bf78a5"
+        },
+        {
+          "path": "023_render_part2.log/part_081.txt",
+          "line_start": 7681,
+          "line_end": 7776,
+          "bytes": 2944,
+          "sha256": "30413421ecec5e9940d6b6390cfaf5e3534b27e671de70a00edbb49b104cb2eb"
+        },
+        {
+          "path": "023_render_part2.log/part_082.txt",
+          "line_start": 7777,
+          "line_end": 7872,
+          "bytes": 2944,
+          "sha256": "90d432b520d8d0ff16e0e266ba674910a8e61ec96e33c2022f6626c887a60321"
+        },
+        {
+          "path": "023_render_part2.log/part_083.txt",
+          "line_start": 7873,
+          "line_end": 7968,
+          "bytes": 2944,
+          "sha256": "389891866b8ffaf30ff9ffb165365f0dd6eaf739db55188a7945f755b66e3dba"
+        },
+        {
+          "path": "023_render_part2.log/part_084.txt",
+          "line_start": 7969,
+          "line_end": 8064,
+          "bytes": 2944,
+          "sha256": "cbdd3858648d0eb4b30070868361542964e276648722e9cf8e905ed77ada3002"
+        },
+        {
+          "path": "023_render_part2.log/part_085.txt",
+          "line_start": 8065,
+          "line_end": 8160,
+          "bytes": 2944,
+          "sha256": "2ecc220cbc599903a2a766b213b38f26cacd6da5632583ede531f7f347451292"
+        },
+        {
+          "path": "023_render_part2.log/part_086.txt",
+          "line_start": 8161,
+          "line_end": 8256,
+          "bytes": 2944,
+          "sha256": "00d587f514dc536941c434de5c751387e7d0f82fec90c06d1691050712b8532c"
+        },
+        {
+          "path": "023_render_part2.log/part_087.txt",
+          "line_start": 8257,
+          "line_end": 8352,
+          "bytes": 2944,
+          "sha256": "72a46c254afef14caed712a09a5c79e61129195cb5f4e4f23651661fbfcb49d1"
+        },
+        {
+          "path": "023_render_part2.log/part_088.txt",
+          "line_start": 8353,
+          "line_end": 8448,
+          "bytes": 2944,
+          "sha256": "a19ceead61525d979826736c2acba13ed80afc8533935084f67c95fe9d532c40"
+        },
+        {
+          "path": "023_render_part2.log/part_089.txt",
+          "line_start": 8449,
+          "line_end": 8544,
+          "bytes": 2944,
+          "sha256": "023f145e54a9d647c54379c81d4be34d2f7ffa43edc52ec2d7daaae1b42966e6"
+        },
+        {
+          "path": "023_render_part2.log/part_090.txt",
+          "line_start": 8545,
+          "line_end": 8560,
+          "bytes": 417,
+          "sha256": "43784244e61dac1885599ec43462caff959cb47cca6c8bdbdd8450a854644297"
+        }
+      ]
+    },
+    {
+      "order": 24,
+      "path": "delivery_v2/render_previs.py",
+      "bytes": 810,
+      "line_count": 16,
+      "sha256": "d72e6e974a5246530bfe89a2e072d55761fb6f077153b68bd3e8256c7a10f15c",
+      "parts": [
+        {
+          "path": "024_render_previs.py/part_001.txt",
+          "line_start": 1,
+          "line_end": 16,
+          "bytes": 810,
+          "sha256": "d72e6e974a5246530bfe89a2e072d55761fb6f077153b68bd3e8256c7a10f15c"
+        }
+      ]
+    },
+    {
+      "order": 25,
+      "path": "delivery_v2/repeatability.log",
+      "bytes": 1704,
+      "line_count": 42,
+      "sha256": "7d93cafc3bb90a9f1148bac5b9b927250a46cc27fb84baccc701d2f69a85679f",
+      "parts": [
+        {
+          "path": "025_repeatability.log/part_001.txt",
+          "line_start": 1,
+          "line_end": 42,
+          "bytes": 1704,
+          "sha256": "7d93cafc3bb90a9f1148bac5b9b927250a46cc27fb84baccc701d2f69a85679f"
+        }
+      ]
+    },
+    {
+      "order": 26,
+      "path": "delivery_v2/repeatability_check.json",
+      "bytes": 220,
+      "line_count": 15,
+      "sha256": "e0e5bb9c04111ca066aa8cde2d16dfd91714da69416927420a625beb358927fc",
+      "parts": [
+        {
+          "path": "026_repeatability_check.json/part_001.txt",
+          "line_start": 1,
+          "line_end": 15,
+          "bytes": 220,
+          "sha256": "e0e5bb9c04111ca066aa8cde2d16dfd91714da69416927420a625beb358927fc"
+        }
+      ]
+    },
+    {
+      "order": 27,
+      "path": "delivery_v2/seal.log",
+      "bytes": 139,
+      "line_count": 6,
+      "sha256": "745ed7dd54ae5230a23fefac87cfbcc5d87083cfc2f88314d9ffd9840c11080d",
+      "parts": [
+        {
+          "path": "027_seal.log/part_001.txt",
+          "line_start": 1,
+          "line_end": 6,
+          "bytes": 139,
+          "sha256": "745ed7dd54ae5230a23fefac87cfbcc5d87083cfc2f88314d9ffd9840c11080d"
+        }
+      ]
+    },
+    {
+      "order": 28,
+      "path": "delivery_v2/seal_project.py",
+      "bytes": 1482,
+      "line_count": 20,
+      "sha256": "b208ed029109996410661bb42c542d4620e1c35591f494ce5e73827be5412b32",
+      "parts": [
+        {
+          "path": "028_seal_project.py/part_001.txt",
+          "line_start": 1,
+          "line_end": 20,
+          "bytes": 1482,
+          "sha256": "b208ed029109996410661bb42c542d4620e1c35591f494ce5e73827be5412b32"
+        }
+      ]
+    },
+    {
+      "order": 29,
+      "path": "delivery_v2/structure_checks.json",
+      "bytes": 518,
+      "line_count": 20,
+      "sha256": "6313a1703b4780b567deb3db30afb9117a133aaf546eee67a69af2ed447ca17c",
+      "parts": [
+        {
+          "path": "029_structure_checks.json/part_001.txt",
+          "line_start": 1,
+          "line_end": 20,
+          "bytes": 518,
+          "sha256": "6313a1703b4780b567deb3db30afb9117a133aaf546eee67a69af2ed447ca17c"
+        }
+      ]
+    },
+    {
+      "order": 30,
+      "path": "delivery_v2/validation.log",
+      "bytes": 772,
+      "line_count": 36,
+      "sha256": "e2e040d0aab96aa8883f5ad07f62cccd2bb0c80765a705a6fa740ac041f65e1c",
+      "parts": [
+        {
+          "path": "030_validation.log/part_001.txt",
+          "line_start": 1,
+          "line_end": 36,
+          "bytes": 772,
+          "sha256": "e2e040d0aab96aa8883f5ad07f62cccd2bb0c80765a705a6fa740ac041f65e1c"
+        }
+      ]
+    },
+    {
+      "order": 31,
+      "path": "delivery_v2/validation_final.log",
+      "bytes": 746,
+      "line_count": 36,
+      "sha256": "f3145aa322578e4881b4c9b83e2fea9f9a13bb0d1c05f63ad54d516c4674653b",
+      "parts": [
+        {
+          "path": "031_validation_final.log/part_001.txt",
+          "line_start": 1,
+          "line_end": 36,
+          "bytes": 746,
+          "sha256": "f3145aa322578e4881b4c9b83e2fea9f9a13bb0d1c05f63ad54d516c4674653b"
+        }
+      ]
+    },
+    {
+      "order": 32,
+      "path": "delivery_v2/video_probe.json",
+      "bytes": 304,
+      "line_count": 18,
+      "sha256": "4d10cd905c375f6ac29962867d853c83ef461a498f3d6e9db89feba027316f62",
+      "parts": [
+        {
+          "path": "032_video_probe.json/part_001.txt",
+          "line_start": 1,
+          "line_end": 18,
+          "bytes": 304,
+          "sha256": "4d10cd905c375f6ac29962867d853c83ef461a498f3d6e9db89feba027316f62"
+        }
+      ]
+    },
+    {
+      "order": 33,
+      "path": "delivery_v2/video_validation.json",
+      "bytes": 579,
+      "line_count": 30,
+      "sha256": "252dda2e4584ba99a3a657a98ae7d47271acfb65efd1179a44328ae5eeccd278",
+      "parts": [
+        {
+          "path": "033_video_validation.json/part_001.txt",
+          "line_start": 1,
+          "line_end": 30,
+          "bytes": 579,
+          "sha256": "252dda2e4584ba99a3a657a98ae7d47271acfb65efd1179a44328ae5eeccd278"
+        }
+      ]
+    },
+    {
+      "order": 34,
+      "path": "delivery_v2/visibility_report.json",
+      "bytes": 2554,
+      "line_count": 92,
+      "sha256": "ffc921d65969b0909efb0bcff736c573cfea6d951032687ff95c76d5b147c489",
+      "parts": [
+        {
+          "path": "034_visibility_report.json/part_001.txt",
+          "line_start": 1,
+          "line_end": 92,
+          "bytes": 2554,
+          "sha256": "ffc921d65969b0909efb0bcff736c573cfea6d951032687ff95c76d5b147c489"
+        }
+      ]
+    },
+    {
+      "order": 35,
+      "path": "delivery_v2/验收记录.md",
+      "bytes": 4764,
+      "line_count": 44,
+      "sha256": "657f2ebc759afa86297e5b4955c96a95dce446766771b52efa5e2c4723011777",
+      "parts": [
+        {
+          "path": "035_验收记录.md/part_001.txt",
+          "line_start": 1,
+          "line_end": 44,
+          "bytes": 4764,
+          "sha256": "657f2ebc759afa86297e5b4955c96a95dce446766771b52efa5e2c4723011777"
+        }
+      ]
+    },
+    {
+      "order": 36,
+      "path": "reference_original/Battlefield_OneTake_Previs_V1_2_Package/Battlefield_OneTake_Previs_V1_2.py",
+      "bytes": 143437,
+      "line_count": 3204,
+      "sha256": "7f7b000693e2e23426d5720b1ca11c6e4a41e3b3bdeaadae6bb5b522b6bd10e6",
+      "parts": [
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_001.txt",
+          "line_start": 1,
+          "line_end": 96,
+          "bytes": 3788,
+          "sha256": "1599da9102a6bc8cc8029d8756273f7de0bdb0a57a1377c09b682f239736ad5a"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_002.txt",
+          "line_start": 97,
+          "line_end": 192,
+          "bytes": 3343,
+          "sha256": "53d49eadaa39e9c764404c5c9bbb15444d9437439afa176c5e8351cda9b2240c"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_003.txt",
+          "line_start": 193,
+          "line_end": 288,
+          "bytes": 4150,
+          "sha256": "ca8855be89fe6df96107808cb39fa460c24518b387298ba9af8b5acceb35b7f6"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_004.txt",
+          "line_start": 289,
+          "line_end": 384,
+          "bytes": 3261,
+          "sha256": "500fbfd4b001d31379e9145a01c02b910c510bba28649b2c584ad4b413c4b9d8"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_005.txt",
+          "line_start": 385,
+          "line_end": 480,
+          "bytes": 4105,
+          "sha256": "3d6b8c9037acd9631bbe25e540770085185ed03d36443d8cd751280aa1ca03af"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_006.txt",
+          "line_start": 481,
+          "line_end": 576,
+          "bytes": 3687,
+          "sha256": "2235ffe282a6b364bfb5b45c17052aa1e1816b00a88b922c5d66284e35cd800c"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_007.txt",
+          "line_start": 577,
+          "line_end": 672,
+          "bytes": 3472,
+          "sha256": "f700218ed7d056f2501b203aa962ac1a83169d80b8c2d499651d773211413b2f"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_008.txt",
+          "line_start": 673,
+          "line_end": 768,
+          "bytes": 3272,
+          "sha256": "ed3d233c8e7c8e53be51cd90276fa94a8995d2851034972e263c86e46a5ef355"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_009.txt",
+          "line_start": 769,
+          "line_end": 864,
+          "bytes": 3250,
+          "sha256": "72926665677f30bb9320ae9080cd19724416699edcb505be528223580d7c51a2"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_010.txt",
+          "line_start": 865,
+          "line_end": 960,
+          "bytes": 2761,
+          "sha256": "947e59196aa1df47c0a486b4b616d7bd4b6fff35f23d7b6d53b8032d8d13013b"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_011.txt",
+          "line_start": 961,
+          "line_end": 1056,
+          "bytes": 3205,
+          "sha256": "9f0bb739b1b21576122eade8d67f03f12572d70f6bc68fe93200b42be11565bf"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_012.txt",
+          "line_start": 1057,
+          "line_end": 1152,
+          "bytes": 3134,
+          "sha256": "57247f4cd135da384c564fedb82a73a43e158e5b78f2a6fb8ffb7874cc0adad0"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_013.txt",
+          "line_start": 1153,
+          "line_end": 1248,
+          "bytes": 3769,
+          "sha256": "7c777338a7ec401894bc0a83308d7b87a7ff217304ea249ecb68929bd07188fd"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_014.txt",
+          "line_start": 1249,
+          "line_end": 1344,
+          "bytes": 2949,
+          "sha256": "f6b83f8fb968b76b5910efb273c9c440dd2e922a75372685a8f54efa5b46403e"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_015.txt",
+          "line_start": 1345,
+          "line_end": 1440,
+          "bytes": 4054,
+          "sha256": "fe6191f5ae4d5c9a3dc0ed2490c1c0e96b414742eb1994450e1e9de59eb4dc32"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_016.txt",
+          "line_start": 1441,
+          "line_end": 1536,
+          "bytes": 4227,
+          "sha256": "f24f58a338ba01643e77d6471cdf36be013d647697987d5db5d11d89e4b21a11"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_017.txt",
+          "line_start": 1537,
+          "line_end": 1632,
+          "bytes": 5022,
+          "sha256": "60c2a6b02c8d1f4bdbaf78594fd6a0e54340120f81c58aa7d345b84ad311998e"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_018.txt",
+          "line_start": 1633,
+          "line_end": 1728,
+          "bytes": 5062,
+          "sha256": "c18ef076de9b13185889015492f5419f29fd1b39e1b56de4de94f62ba64024ed"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_019.txt",
+          "line_start": 1729,
+          "line_end": 1824,
+          "bytes": 4991,
+          "sha256": "33a564e72e276f1d5fed577d16030165a60f291a829a64f877e532a9518a35c9"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_020.txt",
+          "line_start": 1825,
+          "line_end": 1920,
+          "bytes": 4661,
+          "sha256": "ac15b0d337888ca670b77f0107dd5bb77453f3ae6fb747ccc03cb27b32955889"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_021.txt",
+          "line_start": 1921,
+          "line_end": 2016,
+          "bytes": 4394,
+          "sha256": "70acc91d05a43e8df31cf8e560a50826afa5c92d8f8c538287c6138affa0b6c2"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_022.txt",
+          "line_start": 2017,
+          "line_end": 2112,
+          "bytes": 4976,
+          "sha256": "f95b624d5ebdfcc151796432625234576ca48d700741aef8fdbeca1814448673"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_023.txt",
+          "line_start": 2113,
+          "line_end": 2208,
+          "bytes": 4430,
+          "sha256": "3c7a83f981a707a28f04d369415805c85c71d112756e8f1e5ff98aa9dc2e9cd6"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_024.txt",
+          "line_start": 2209,
+          "line_end": 2304,
+          "bytes": 5059,
+          "sha256": "68f4d0c9fa70f99b0c8e12a06e0f72a038aee79e2a05b467e1e03535667d21da"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_025.txt",
+          "line_start": 2305,
+          "line_end": 2400,
+          "bytes": 5081,
+          "sha256": "9477ffb0024fa833e9c25af5e74df6197a5b5e3ed4ceb7db0f62a561f3aae67a"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_026.txt",
+          "line_start": 2401,
+          "line_end": 2496,
+          "bytes": 4911,
+          "sha256": "12ed6e38a75fd703d91d41133533ab21bdf26796eb7a2422999baa843a47b6e6"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_027.txt",
+          "line_start": 2497,
+          "line_end": 2592,
+          "bytes": 5287,
+          "sha256": "e1decbaf1e07ab11d7bfcb8526d114ce97a46a1c7550b663596bfb51de5fb43b"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_028.txt",
+          "line_start": 2593,
+          "line_end": 2688,
+          "bytes": 4719,
+          "sha256": "635f0e18edad628107a1425a19ec9575079e84039bae551e29c599e9784483d9"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_029.txt",
+          "line_start": 2689,
+          "line_end": 2784,
+          "bytes": 6599,
+          "sha256": "e2595a041f1afadad8270b97a9d135f2995307963ba3933046aced052f45fb53"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_030.txt",
+          "line_start": 2785,
+          "line_end": 2880,
+          "bytes": 5053,
+          "sha256": "d2cc9297eb00f019ec97a31921a6124a066f2af599968892b7e318afbcf512ab"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_031.txt",
+          "line_start": 2881,
+          "line_end": 2976,
+          "bytes": 3427,
+          "sha256": "c9d9acadac864daf3005beaa0b3b1c9d3ddb7cbf4d546df18b0748defc22367d"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_032.txt",
+          "line_start": 2977,
+          "line_end": 3072,
+          "bytes": 4248,
+          "sha256": "3b6ce5b7d4c658929948aaea20d7cd30a34f35ae33b65636569aa7a06e33feb0"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_033.txt",
+          "line_start": 3073,
+          "line_end": 3168,
+          "bytes": 7235,
+          "sha256": "8ff830f286446725b11efe4cab4c4d5456a5bc8576f02d05c329b55e57f87da5"
+        },
+        {
+          "path": "036_Battlefield_OneTake_Previs_V1_2.py/part_034.txt",
+          "line_start": 3169,
+          "line_end": 3204,
+          "bytes": 1855,
+          "sha256": "68e4150ff17a9c2f12cbcb7e018b84a2c41c27d9bee329a366cf594625305f14"
+        }
+      ]
+    },
+    {
+      "order": 37,
+      "path": "reference_original/Battlefield_OneTake_Previs_V1_2_Package/Battlefield_OneTake_Previs_V1_2_Record.md",
+      "bytes": 4675,
+      "line_count": 56,
+      "sha256": "4c14db3da3eb1e0917ba3704d45d7a931bb83edbb1dcd68d8e39d847275ada2c",
+      "parts": [
+        {
+          "path": "037_Battlefield_OneTake_Previs_V1_2_Record.md/part_001.txt",
+          "line_start": 1,
+          "line_end": 56,
+          "bytes": 4675,
+          "sha256": "4c14db3da3eb1e0917ba3704d45d7a931bb83edbb1dcd68d8e39d847275ada2c"
+        }
+      ]
+    },
+    {
+      "order": 38,
+      "path": "reference_original/Battlefield_OneTake_Previs_V1_2_Package/README_运行说明.md",
+      "bytes": 2353,
+      "line_count": 31,
+      "sha256": "95ff1298f86ebbc6e78f5c52a5351fbbd4e2b6966abc2baffe5e34a33ded232b",
+      "parts": [
+        {
+          "path": "038_README_运行说明.md/part_001.txt",
+          "line_start": 1,
+          "line_end": 31,
+          "bytes": 2353,
+          "sha256": "95ff1298f86ebbc6e78f5c52a5351fbbd4e2b6966abc2baffe5e34a33ded232b"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+# -*- coding: utf-8 -*-
+"""
+Battlefield One-Take Previs V2 implementation draft.
+Baseline: user requirements V1.0; original attachment V1.2 remains unchanged.
+Runtime tested: Blender 4.3.2. Blender 5.2.x is NOT verified.
+Default master timeline: 190 seconds, 30 FPS; one active animated camera.
+Entry point at file end: main_v2(), then companion validate_scene.py.
+Edit CFG and V2_KEYS near the lower part of this file for pacing and camera.
+Construction helpers inherited from V1.2 precede the V2 implementation section.
+See 验收记录.md for tests and unresolved acceptance criteria.
+"""
+
+import bpy
+import math
+import random
+import traceback
+import os
+from mathutils import Vector, Quaternion
+
+# ============================================================
+# CONFIG
+# ============================================================
+
+VERSION = "V2.0"
+FPS = 30
+FRAME_START = 1
+FRAME_END = 900
+SEED = 20261030
+random.seed(SEED)
+
+COLLECTIONS = [
+    "BFP_V20_01_LAND",
+    "BFP_V20_02_FOREST",
+    "BFP_V20_03_RAVINE",
+    "BFP_V20_04_VILLAGE",
+    "BFP_V20_05_RIVER",
+    "BFP_V20_06_WEST_PASS",
+    "BFP_V20_07_WIDE_ROAD",
+    "BFP_V20_08_FUTURE_MARKERS",
+    "BFP_V20_09_CAMERA",
+    "BFP_V20_10_PATH_DEBUG",
+    "BFP_V20_11_LIGHTS",
+    "BFP_V20_12_SMOKE_PLACEHOLDERS",
+    "BFP_V20_13_GROUND_GRASS",
+    "BFP_V20_14_TACTICAL_MARKERS",
+    "BFP_V20_15_GROUND_ROCKS",
+    "BFP_V20_16_CHARACTERS",
+    "BFP_V20_17_PROPS",
+    "BFP_V20_18_BATTLE_FX",
+    "BFP_V20_19_STORYBOARD_ACTIONS",
+    "BFP_V20_20_TERRAIN_REFERENCE",
+]
+
+REPORT = []
+STATUS = {}
+MATS = {}
+
+
+# ============================================================
+# REPORT / COLLECTION MANAGEMENT
+# ============================================================
+
+def log(msg):
+    REPORT.append(str(msg))
+    print("[BFP V2]", msg)
+
+
+def get_script_directory():
+    """Resolve the folder containing this script, including Blender Text Editor execution."""
+    candidates = []
+    try:
+        candidates.append(os.path.dirname(os.path.abspath(__file__)))
+    except Exception:
+        pass
+    try:
+        for text_block in bpy.data.texts:
+            fp = getattr(text_block, "filepath", "")
+            if fp and ("V1_2" in text_block.name or fp.lower().endswith(".py")):
+                resolved = bpy.path.abspath(fp)
+                candidates.append(os.path.dirname(os.path.abspath(resolved)))
+    except Exception:
+        pass
+    try:
+        if bpy.data.filepath:
+            candidates.append(os.path.dirname(os.path.abspath(bpy.data.filepath)))
+    except Exception:
+        pass
+    candidates.extend([os.getcwd(), bpy.path.abspath("//")])
+    for folder in candidates:
+        if folder and os.path.isdir(folder):
+            return folder
+    return os.getcwd()
+
+
+def get_collection(name):
+    coll = bpy.data.collections.get(name)

@@ -1,0 +1,96 @@
+"""Run inside Blender after construction; physical mesh checks, camera bake and reports."""
+import bpy, math, json, csv
+from pathlib import Path
+from mathutils import Vector
+from mathutils.bvhtree import BVHTree
+from bpy_extras.object_utils import world_to_camera_view
+OUT=Path(__file__).parent
+RADIUS=.34
+
+def fcurve_list(ob):
+    if not ob.animation_data or not ob.animation_data.action:return []
+    try:return list(ob.animation_data.action.fcurves)
+    except AttributeError:
+        return [fc for l in ob.animation_data.action.layers for st in l.strips for cb in st.channelbags for fc in cb.fcurves]
+
+def patch_ground():
+    if bpy.context.scene.get('v2_ground_patched'):return
+    bpy.context.scene['v2_ground_patched']=True
+    terrain=bpy.data.objects['BATTLEFIELD_CONTINUOUS_MOUNTAIN_TERRAIN']
+    for v in terrain.data.vertices:
+        x,y,z=v.co
+        if -195<x<355 and abs(y)<42:
+            w=max(0,min(1,(42-abs(y))/8))
+            if x<69: floor=0
+            elif x<80:floor=-1.05*(x-69)/11
+            elif x<188:floor=-1.05
+            elif x<201:floor=-1.05*(201-x)/13
+            else:floor=max(0,(x-230)*.018)
+            v.co.z=z*(1-w)+floor*w
+    terrain.data.update()
+    for ob in bpy.data.objects:
+        if 'BROAD_RIVERBED' in ob.name:
+            for v in ob.data.vertices:v.co.z=-1.05
+        if 'RIVERBED_CASUALTY' in ob.name or 'RIVER_EXTRA_BODY' in ob.name:
+            if not ob.parent:ob.location.z=-.95
+        if ob.type=='EMPTY' and not ob.parent and ob.name.endswith('_ROOT') and ob.location.x>230 and ob.location.z<.3:
+            for fc in fcurve_list(ob):
+                if fc.data_path=='location' and fc.array_index==2:
+                    for k in fc.keyframe_points:
+                        k.co.y+=max(0,(ob.location.x-230)*.018)
+            ob.location.z+=max(0,(ob.location.x-230)*.018)
+    # House blast is actual structural change, not smoke on an intact building.
+    for ob in bpy.data.objects:
+        if 'BREACHED_HOUSE' in ob.name or 'BREACHED_ROOF' in ob.name:
+            base=ob.location.copy()
+            for frame,dx,dy,dz in [(1,0,0,0),(2810,0,0,0),(2940,1,4,-1.3),(3100,2,6,-2.3)]:
+                ob.location=base+Vector((dx,dy,dz));ob.keyframe_insert(data_path='location',frame=frame)
+    bpy.context.scene.frame_set(1);bpy.context.view_layer.update()
+
+
+def crowd_clearance():
+    s=bpy.context.scene
+    if s.get('v2_crowd_clearance'):return
+    s['v2_crowd_clearance']=True
+    cfg=json.loads(bpy.data.texts['V2_CONFIG'].as_string())
+    tm=cfg['time_map']
+    def tf(old):
+        for (a,ta),(b,tb) in zip(tm,tm[1:]):
+            if old<=b:return 1+(ta+(old-a)/(b-a)*(tb-ta))*30
+    center=tf(664+(5110-5011)*236/690)
+    lo=round(tf(564+(4970-4381)*100/630));hi=round(tf(664+(5250-5011)*236/690))
+    width=65*(tm[-1][1]-tm[-2][1])/23
+    fc=next(fc for fc in fcurve_list(s.camera) if fc.data_path=='location' and fc.array_index==2)
+    vals=[(f,fc.evaluate(f)+cfg.get('crowd_clearance_height_m',1.5)*math.exp(-((f-center)/width)**2)) for f in range(lo,hi+1)]
+    for f,z in vals:fc.keyframe_points.insert(f,z,options={'FAST'})
+    fc.update()
+
+
+def air_dodge():
+    s=bpy.context.scene
+    if s.get('v2_air_dodge'):return
+    s['v2_air_dodge']=True
+    cam=s.camera
+    fc=next(fc for fc in fcurve_list(cam) if fc.data_path=='location' and fc.array_index==1)
+    # A planned smooth lateral clearance arc under the bomb release corridor.
+    cfg=json.loads(bpy.data.texts['V2_CONFIG'].as_string())
+    factor=(cfg['time_map'][1][1]-cfg['time_map'][0][1])/30
+    center=1+518*factor;width=16*factor
+    lo,hi=round(1+479*factor),round(1+569*factor)
+    values=[(f,fc.evaluate(f)-2*math.exp(-((f-center)/width)**2)) for f in range(lo,hi+1)]
+    for f,y in values:fc.keyframe_points.insert(f,y,options={'FAST'})
+    fc.update()
+
+
+def final_assets():
+    s=bpy.context.scene
+    if s.get('v2_final_assets'):return
+    s['v2_final_assets']=True
+    tm=[(1,0),(98,30),(232,59),(332,79),(410,103),(512,133),(564,146),(664,167),(900,190)]
+    def tf(old):
+        for (a,ta),(b,tb) in zip(tm,tm[1:]):
+            if old<=b:return 1+(ta+(old-a)/(b-a)*(tb-ta))*30
+    for i in range(8):
+        bomb=bpy.data.objects['V2_AIR_BOMB_%02d_ROOT'%i]
+        plane=bpy.data.objects['JAPANESE_BOMBER_LEFT_NEAR_ROOT' if i%2==0 else 'JAPANESE_BOMBER_RIGHT_NEAR_ROOT']
+        pcs={fc.array_index:fc for fc in fcurve_list(plane) if fc.data_path=='location'}

@@ -1,0 +1,15 @@
+{
+  "runs": [
+    {
+      "objects": 4632,
+      "generated_objects": 4629,
+      "collections": 18
+    },
+    {
+      "objects": 4632,
+      "generated_objects": 4629,
+      "collections": 18
+    }
+  ],
+  "pass": true
+}

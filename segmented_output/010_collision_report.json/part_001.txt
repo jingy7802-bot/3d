@@ -1,0 +1,53 @@
+{
+  "runtime": "4.3.2",
+  "target_version_verified": false,
+  "camera_radius_m": 0.22,
+  "safety_margin_m": 0.12,
+  "static_mesh_count": 1499,
+  "dynamic_mesh_count": 1818,
+  "temporal_sample": "every output frame (30 fps), not continuous swept-volume proof",
+  "frames_checked": 5701,
+  "corrections": [
+    {
+      "frame": 5095,
+      "distance": 0.7931839834049186
+    },
+    {
+      "frame": 5122,
+      "distance": 0.40218127775677237
+    }
+  ],
+  "per_frame_repairs": [
+    1025,
+    1026,
+    1043,
+    1044,
+    1646,
+    1647,
+    1721,
+    1850,
+    1851,
+    3248,
+    5093,
+    5094,
+    5124
+  ],
+  "remaining_collision_samples": 0,
+  "collisions": [],
+  "min_speed_m_s": 0.030853851032403002,
+  "max_speed_m_s": 31.01762669059084,
+  "status": "PASS_SAMPLED",
+  "limitations": [
+    "Visibility and action readability require rendered review.",
+    "Nearest surface normal sign is conservative for intersecting mesh solids.",
+    "No subframe swept-volume verification."
+  ],
+  "supplemental_asset_check": {
+    "frames_checked": 1903,
+    "scope": "Before release attached bombs; village carrier clothing. All other solids retained from full 5701-frame run.",
+    "static_mesh_count": 1499,
+    "dynamic_mesh_count": 1820,
+    "collisions": []
+  },
+  "asset_repair_frames": []
+}

@@ -1,0 +1,96 @@
+        (17, 1.3, 3.2),
+        MATS["ruin"],
+        village,
+        rot=(0.02, 0.0, -0.03)
+    )
+    cube(
+        "WUTONGGOU_BREACHED_HOUSE_RIGHT_WALL",
+        (37, -0.8, 1.45),
+        (17, 1.3, 3.0),
+        MATS["ruin"],
+        village,
+        rot=(-0.03, 0.0, 0.02)
+    )
+    cube(
+        "WUTONGGOU_BREACHED_ROOF_FRAGMENT_A",
+        (33, -7, 4.4),
+        (5.5, 11.5, 0.55),
+        MATS["roof"],
+        village,
+        rot=(0.02, 0.05, 0.02)
+    )
+    cube(
+        "WUTONGGOU_BREACHED_ROOF_FRAGMENT_B",
+        (43.5, -7, 4.8),
+        (3.5, 8.5, 0.45),
+        MATS["roof"],
+        village,
+        rot=(-0.04, 0.08, -0.03)
+    )
+
+    # Rubble stays at the corridor margins, leaving the camera lane open.
+    for i in range(12):
+        x = random.uniform(29, 46)
+        side = random.choice((-1, 1))
+        y = -7 + side * random.uniform(5.0, 7.2)
+        ico(
+            "WUTONGGOU_BREACH_RUBBLE_%02d" % i,
+            (x, y, -0.1),
+            (random.uniform(0.8, 1.8), random.uniform(0.5, 1.2), random.uniform(0.4, 0.9)),
+            MATS["rock"],
+            village,
+            sub=1
+        )
+
+    markers = get_collection("BFP_V20_08_FUTURE_MARKERS")
+    empty(
+        "FUTURE_HOUSE_EXPLOSION_WUTONGGOU",
+        (38, -7, 3.2),
+        markers,
+        display='CIRCLE',
+        size=4.0
+    )
+    approach = empty(
+        "FUTURE_JAPANESE_APPROACH_TO_HOUSE",
+        (59, 7, 0),
+        markers,
+        display='ARROWS',
+        size=3.0
+    )
+    approach.rotation_euler.z = math.pi
+
+    advance_01 = empty(
+        "FUTURE_JAPANESE_ADVANCE_POINT_01",
+        (53, 4, 0),
+        markers,
+        display='ARROWS',
+        size=2.0
+    )
+    advance_01.rotation_euler.z = math.pi
+
+    advance_02 = empty(
+        "FUTURE_JAPANESE_ADVANCE_POINT_02",
+        (46, 0, 0),
+        markers,
+        display='ARROWS',
+        size=2.0
+    )
+    advance_02.rotation_euler.z = math.pi
+    empty(
+        "FUTURE_CAMERA_SMOKE_ENTRY",
+        (30, -7, 2.4),
+        markers,
+        display='SPHERE',
+        size=1.5
+    )
+    empty(
+        "FUTURE_CAMERA_SMOKE_EXIT",
+        (51, -4, 2.5),
+        markers,
+        display='SPHERE',
+        size=1.5
+    )
+    empty(
+        "FUTURE_CAMERA_WATER_ENTRY",
+        (75, 1, 0),
+        markers,

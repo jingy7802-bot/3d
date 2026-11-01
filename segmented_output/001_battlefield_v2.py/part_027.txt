@@ -1,0 +1,96 @@
+        pin_ring.location = loc
+        pin_ring.rotation_euler = rot
+        pin_ring.keyframe_insert(data_path="location", frame=frame)
+        pin_ring.keyframe_insert(data_path="rotation_euler", frame=frame)
+    for frame, angle in [(350, -0.18), (362, -0.55), (370, -1.08), (376, -0.42)]:
+        woman["right_arm"].rotation_euler.y = angle
+        woman["right_arm"].keyframe_insert(data_path="rotation_euler", frame=frame)
+
+    # Additional Japanese perimeter positions create a genuine encirclement, not a single line.
+    for i, (loc, yaw) in enumerate([
+        ((43, -18, 0), math.pi), ((47, -14, 0), math.pi), ((52, -10, 0), math.pi),
+        ((56, -3, 0), math.pi), ((55, 7, 0), math.pi), ((49, 14, 0), math.pi),
+        ((42, 11, 0), math.pi), ((45, 3, 0), math.pi),
+    ]):
+        jp = make_actor("JP_WUTONGGOU_PERIMETER_%02d" % i, loc, yaw=yaw,
+                        faction="jp", rifle=True)
+        for frame, arm_angle in [(350, -0.60), (364, -0.74), (376, -0.80)]:
+            jp["left_arm"].rotation_euler.y = arm_angle
+            jp["right_arm"].rotation_euler.y = arm_angle
+            jp["left_arm"].keyframe_insert(data_path="rotation_euler", frame=frame)
+            jp["right_arm"].keyframe_insert(data_path="rotation_euler", frame=frame)
+
+    # A few house fragments are kicked outward by the blast and settle while the camera passes through.
+    for i, spec in enumerate([
+        ((37, -12, 2.2), (31, -18, 4.2)), ((40, -2, 2.8), (48, 4, 5.0)),
+        ((35, -5, 3.8), (27, -2, 6.2)), ((43, -8, 2.0), (52, -12, 3.5)),
+        ((39, -10, 4.5), (44, -18, 7.0)),
+    ]):
+        a, b = spec
+        debris = ico("WUTONGGOU_BLAST_FLYING_DEBRIS_%02d" % i, a,
+                     (0.65, 0.42, 0.28), MATS["roof"], action_coll, sub=1)
+        debris.keyframe_insert(data_path="location", frame=376)
+        debris.location = b
+        debris.rotation_euler = (random.uniform(-1, 1), random.uniform(-1, 1), random.uniform(-1, 1))
+        debris.keyframe_insert(data_path="location", frame=388)
+        debris.keyframe_insert(data_path="rotation_euler", frame=388)
+        debris.location = (b[0] + 1.5, b[1] + 1.0, 0.25)
+        debris.keyframe_insert(data_path="location", frame=408)
+
+    # RIVER: expand the crossing from a handful of figures to a populated, irregular field.
+    for i in range(60):
+        x = random.uniform(92, 184)
+        y = random.uniform(-31, 31)
+        start = (x, y, -0.62 + random.uniform(-0.10, 0.06))
+        end = (x + random.uniform(5.0, 13.0),
+               y + random.uniform(-5.0, 5.0), start[2])
+        actor = make_actor("CN_RIVER_CROWD_WADER_%02d" % i, start,
+                           yaw=random.uniform(-0.16, 0.16), faction="cn",
+                           rifle=(i % 5 == 0))
+        animate_wading_actor(actor, [
+            (418 + random.randint(0, 16), start, 0.0),
+            (468 + random.randint(-5, 8), ((start[0] + end[0]) * 0.5,
+                                         (start[1] + end[1]) * 0.5, start[2]), 0.0),
+            (522 + random.randint(-8, 10), end, 0.0),
+        ])
+
+    # Floating bodies lie flat at the surface, distributed across the full river width.
+    float_specs = [
+        (94, -28, "supine", "cn"), (101, 19, "side", "jp"),
+        (111, -12, "prone", "cn"), (119, 29, "supine", "cn"),
+        (128, -31, "side", "jp"), (137, 14, "supine", "cn"),
+        (146, -20, "prone", "cn"), (153, 30, "side", "jp"),
+        (164, -8, "supine", "cn"), (172, 22, "prone", "cn"),
+        (181, -27, "side", "jp"), (188, 9, "supine", "cn"),
+    ]
+    for i, (x, y, pose, faction) in enumerate(float_specs):
+        body = make_casualty("RIVER_SURFACE_FLOAT_V12_%02d" % i,
+                             (x, y, 0.04), yaw=random.uniform(-1.2, 1.2),
+                             faction=faction, pose=pose)
+        animate_wounded_body(body, 420 + i * 4, 520 + i * 2,
+                             dx=random.uniform(0.12, 0.42), dy=random.uniform(-0.18, 0.18))
+
+    # Additional river debris floats slowly with the current.
+    for i, (x, y) in enumerate([(103, 25), (132, -26), (159, 4), (181, -14)]):
+        log_obj = beam_between("RIVER_FLOATING_TIMBER_%02d" % i,
+                               (x, y, 0.16), (x + 2.4, y + 0.5, 0.16),
+                               0.16, MATS["trunk"], action_coll)
+        log_obj.keyframe_insert(data_path="location", frame=420 + i * 5)
+        log_obj.location.x += 1.2
+        log_obj.location.y += 0.8
+        log_obj.keyframe_insert(data_path="location", frame=520 + i * 4)
+
+    # Natural rock arch at the final valley entrance: the camera flies through its open center.
+    pass_coll = get_collection("BFP_V20_06_WEST_PASS")
+    beam_between("WEST_VALLEY_ROCK_ARCH_CROWN", (330, -42, 55), (330, 42, 55),
+                 5.5, MATS["rock"], pass_coll)
+    beam_between("WEST_VALLEY_ROCK_ARCH_LEFT_SUPPORT", (330, -42, 55), (330, -42, 5),
+                 5.0, MATS["rock"], pass_coll)
+    beam_between("WEST_VALLEY_ROCK_ARCH_RIGHT_SUPPORT", (330, 42, 55), (330, 42, 5),
+                 5.0, MATS["rock"], pass_coll)
+
+    log("Storyboard details added: rescue, doorway pair, wooden-shaft grenade, encirclement, broad river crowd, surface casualties and natural frame gates.")
+
+
+def add_terrain_reference_board():
+    """Pack the supplied terrain image into the .blend as a non-rendering reference board."""

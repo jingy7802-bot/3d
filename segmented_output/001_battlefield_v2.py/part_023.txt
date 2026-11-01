@@ -1,0 +1,96 @@
+
+    ravine_rear_runner = make_actor("CN_RAVINE_REAR_RUNNER", (-57, 10, 0), yaw=0.0, faction="cn", rifle=True)
+    animate_actor(ravine_rear_runner, [
+        (278, (-57, 10, 0), 0.0),
+        (314, (-49, 9, 0), 0.0),
+        (338, (-44, 8, 0), 0.0),
+    ], run=True)
+    ravine_far_jp = make_actor("JP_RAVINE_FAR_THREAT", (-20, 18, 0), yaw=0.0, faction="jp", rifle=True)
+
+    # 3) Wutonggou: Japanese squad advances in a staggered formation toward the damaged house.
+    jp_specs = [
+        ((62, 8, 0), (45, 3, 0)),
+        ((66, 1, 0), (48, -1, 0)),
+        ((59, 14, 0), (42, 6, 0)),
+        ((68, -5, 0), (50, -5, 0)),
+        ((57, -1, 0), (40, -4, 0)),
+        ((64, 20, 0), (48, 12, 0)),
+    ]
+    for i, (start, end) in enumerate(jp_specs):
+        actor = make_actor("JP_WUTONGGOU_ADVANCE_%02d" % i, start, yaw=math.pi,
+                           faction="jp", rifle=True)
+        animate_actor(actor, [
+            (278, start, math.pi),
+            (306, ((start[0] + end[0]) * 0.5, (start[1] + end[1]) * 0.5, 0), math.pi),
+            (334, end, math.pi),
+        ], run=True)
+
+    jp_house_close_left = make_actor("JP_HOUSE_CLOSE_LEFT", (50, -2, 0), yaw=math.pi, faction="jp", rifle=True)
+    jp_house_close_right = make_actor("JP_HOUSE_CLOSE_RIGHT", (53, 2, 0), yaw=math.pi, faction="jp", rifle=True)
+    animate_actor(jp_house_close_left, [
+        (340, (50, -2, 0), math.pi),
+        (360, (44, -2, 0), math.pi),
+        (376, (40, -2, 0), math.pi),
+    ], run=True)
+    animate_actor(jp_house_close_right, [
+        (344, (53, 2, 0), math.pi),
+        (364, (47, 2, 0), math.pi),
+        (378, (43, 2, 0), math.pi),
+    ], run=True)
+    house_bg_jp = make_actor("JP_HOUSE_BACKGROUND_PINCER", (49, 12, 0), yaw=math.pi, faction="jp", rifle=True)
+    animate_actor(house_bg_jp, [
+        (352, (49, 12, 0), math.pi),
+        (378, (46, 10, 0), math.pi),
+        (404, (43, 8, 0), math.pi),
+    ], run=True)
+
+    for i in range(3):
+        actor = make_actor("JP_HOUSE_BLAST_FALL_%02d" % i,
+                           (40 + i * 1.5, -1 + i * 3.0, 0),
+                           yaw=math.pi, faction="jp", rifle=True)
+        animate_hit_fall_performance(actor, 384 + i * 2, 398 + i * 2, direction=1.0)
+    jp_house_close = make_actor("JP_HOUSE_CLOSE_SHOOTER", (36, -1, 0),
+                                yaw=0.0, faction="jp", rifle=True)
+    jp_house_close["left_arm"].rotation_euler.y = -0.7
+    jp_house_close["right_arm"].rotation_euler.y = -0.7
+    animate_rifle_burst(jp_house_close, [360, 366, 372], recover_frame=378, recoil=0.08)
+
+
+    # Chinese defenders occupy low cover away from the camera's breach corridor.
+    defender_a = make_actor("CN_WUTONGGOU_COVER_A", (24, -18, 0), yaw=0.0,
+                            faction="cn", posture="crouch", rifle=True)
+    defender_b = make_actor("CN_WUTONGGOU_COVER_B", (31, -18, 0), yaw=0.0,
+                            faction="cn", posture="crouch", rifle=True)
+    make_casualty("CN_WUTONGGOU_CASUALTY_A", (16, -11, -0.25), yaw=0.5, faction="cn", pose="side")
+    make_casualty("JP_WUTONGGOU_CASUALTY_A", (52, 18, -0.25), yaw=-0.6, faction="jp", pose="prone")
+
+    # 4) Huangcaoguan river: bodies on the riverbed and moving soldiers in shallow water.
+    water_bodies = [
+        ((92, 7, -3.45), 0.2, "prone", "cn"),
+        ((108, -8, -3.50), -0.8, "side", "cn"),
+        ((124, 6, -3.45), 1.1, "supine", "jp"),
+        ((143, -8, -3.45), -0.4, "prone", "cn"),
+        ((158, 7, -3.50), 0.7, "side", "cn"),
+        ((176, -5, -3.45), -1.2, "supine", "jp"),
+        ((184, 9, -3.45), 0.3, "prone", "cn"),
+    ]
+    for i, (loc, yaw, pose, faction) in enumerate(water_bodies):
+        make_casualty("RIVERBED_CASUALTY_%02d" % i, loc, yaw=yaw,
+                      faction=faction, pose=pose, submerged=True)
+
+    water_runners = [
+        ((96, 4, -0.72), (108, 4, -0.72)),
+        ((113, -5, -0.72), (126, -5, -0.72)),
+        ((133, 9, -0.72), (145, 9, -0.72)),
+        ((153, -10, -0.72), (166, -10, -0.72)),
+    ]
+    for i, (start, end) in enumerate(water_runners):
+        actor = make_actor("CN_SHALLOW_WATER_RUNNER_%02d" % i, start, yaw=0.0,
+                           faction="cn", rifle=(i % 2 == 0))
+        animate_wading_actor(actor, [
+            (360, start, 0.0),
+            (410, ((start[0] + end[0]) * 0.5, (start[1] + end[1]) * 0.5, start[2]), 0.0),
+            (455, end, 0.0),
+        ])
+
+    for i, (loc, yaw, pose, faction) in enumerate([

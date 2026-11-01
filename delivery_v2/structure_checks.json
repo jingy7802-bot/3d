@@ -1,0 +1,20 @@
+{
+  "fps_30": true,
+  "frame_end": 5701,
+  "single_camera": "BFP_V20_ACTIVE_CAMERA",
+  "pigeon_exists": true,
+  "meng_exists": true,
+  "carrier_exists": true,
+  "wounded_exists": true,
+  "box_exists": true,
+  "surface_float_count": 40,
+  "major_wader_count": 60,
+  "bank_runner_count": 20,
+  "aircraft_count": 4,
+  "bomb_count": 12,
+  "orbit_start_degrees": 180.0,
+  "orbit_end_degrees": 0.010819191455602823,
+  "orbit_angular_travel_degrees": 179.9891808085444,
+  "runtime": "4.3.2",
+  "blender_5_2_verified": false
+}

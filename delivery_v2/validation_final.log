@@ -1,0 +1,36 @@
+COLLIDERS 1499 1818
+PATH 1 adjusted 0
+PATH 301 adjusted 0
+PATH 601 adjusted 0
+PATH 901 adjusted 0
+PATH 1201 adjusted 0
+PATH 1501 adjusted 0
+PATH 1801 adjusted 0
+PATH 2101 adjusted 0
+PATH 2401 adjusted 0
+PATH 2701 adjusted 0
+PATH 3001 adjusted 0
+PATH 3301 adjusted 0
+PATH 3601 adjusted 0
+PATH 3901 adjusted 0
+PATH 4201 adjusted 0
+PATH 4501 adjusted 0
+PATH 4801 adjusted 0
+PATH 5101 adjusted 1
+PATH 5401 adjusted 2
+PATH 5701 adjusted 2
+VERIFY 600 hits 0
+VERIFY 1200 hits 0
+VERIFY 1800 hits 0
+VERIFY 2400 hits 0
+VERIFY 3000 hits 0
+VERIFY 3600 hits 0
+VERIFY 4200 hits 0
+VERIFY 4800 hits 0
+VERIFY 5400 hits 0
+Info: Saved "battlefield_v2.blend"
+VALIDATION_DONE 0
+Blender 4.3.2
+Read blend: "/workspace/3d/delivery_v2/battlefield_v2.blend"
+
+Blender quit

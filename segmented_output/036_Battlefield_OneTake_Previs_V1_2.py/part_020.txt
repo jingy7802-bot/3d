@@ -1,0 +1,96 @@
+    root.location = base
+    root.rotation_euler = (0.0, 0.0, yaw)
+    root.keyframe_insert(data_path="location", frame=start_frame)
+    root.keyframe_insert(data_path="rotation_euler", frame=start_frame)
+    root.location = (base.x - depth * 0.55, base.y, base.z - depth)
+    root.rotation_euler = (0.10, 0.0, yaw)
+    root.keyframe_insert(data_path="location", frame=duck_frame)
+    root.keyframe_insert(data_path="rotation_euler", frame=duck_frame)
+    root.location = base
+    root.rotation_euler = (0.0, 0.0, yaw)
+    root.keyframe_insert(data_path="location", frame=recover_frame)
+    root.keyframe_insert(data_path="rotation_euler", frame=recover_frame)
+
+    for arm_name, sign in (("left_arm", -1.0), ("right_arm", 1.0)):
+        arm = actor[arm_name]
+        base_rot = tuple(arm.rotation_euler)
+        arm.rotation_euler = base_rot
+        arm.keyframe_insert(data_path="rotation_euler", frame=start_frame)
+        arm.rotation_euler = (base_rot[0] + 0.18, base_rot[1] + sign * 0.18, base_rot[2])
+        arm.keyframe_insert(data_path="rotation_euler", frame=duck_frame)
+        arm.rotation_euler = base_rot
+        arm.keyframe_insert(data_path="rotation_euler", frame=recover_frame)
+
+
+def animate_wading_actor(actor, path):
+    """Slow, weighted water-crossing gait; avoids the dry-land running cycle."""
+    root = actor["root"]
+    for frame, loc, yaw in path:
+        root.location = loc
+        root.rotation_euler.z = yaw
+        root.keyframe_insert(data_path="location", frame=frame)
+        root.keyframe_insert(data_path="rotation_euler", frame=frame)
+    start, end = path[0][0], path[-1][0]
+    arm_factor = 0.10 if actor.get("rifle") else 0.22
+    for frame in range(start, end + 1, 6):
+        phase = (frame - start) * (2.0 * math.pi / 34.0)
+        swing = math.sin(phase) * 0.24
+        actor["left_leg"].rotation_euler.y = swing
+        actor["right_leg"].rotation_euler.y = -swing
+        actor["left_arm"].rotation_euler.y = -swing * arm_factor
+        actor["right_arm"].rotation_euler.y = swing * arm_factor
+        for key in ("left_leg", "right_leg", "left_arm", "right_arm"):
+            actor[key].keyframe_insert(data_path="rotation_euler", frame=frame)
+
+    for obj in (root, actor["left_leg"], actor["right_leg"], actor["left_arm"], actor["right_arm"]):
+        if obj.animation_data and obj.animation_data.action:
+            try:
+                for fc in obj.animation_data.action.fcurves:
+                    for kp in fc.keyframe_points:
+                        kp.interpolation = 'BEZIER'
+                        kp.handle_left_type = 'AUTO_CLAMPED'
+                        kp.handle_right_type = 'AUTO_CLAMPED'
+            except Exception:
+                pass
+
+
+def animate_box_handoff(sender, receiver, box):
+    """Clear hand-to-hand transfer: sender releases only after receiver secures the box."""
+    for arm_name in ("left_arm", "right_arm"):
+        arm = sender[arm_name]
+        for frame, angle in ((538, -0.05), (541, -0.70), (546, -0.78), (550, -0.10), (553, 0.0)):
+            arm.rotation_euler.y = angle
+            arm.keyframe_insert(data_path="rotation_euler", frame=frame)
+        arm = receiver[arm_name]
+        for frame, angle in ((538, 0.0), (541, -0.20), (546, -0.72), (550, -0.72), (553, 0.0)):
+            arm.rotation_euler.y = angle
+            arm.keyframe_insert(data_path="rotation_euler", frame=frame)
+
+    for frame, loc in (
+        (538, (199.0, -4.0, 1.12)),
+        (541, (199.7, -4.0, 1.16)),
+        (546, (201.0, -4.0, 1.14)),
+        (550, (202.0, -4.0, 1.08)),
+        (553, (202.2, -4.0, 1.08)),
+        (560, (205.0, -2.0, 1.10)),
+        (580, (211.0, 0.0, 1.10)),
+    ):
+        box.location = loc
+        box.keyframe_insert(data_path="location", frame=frame)
+
+
+
+def make_falling_branch(name, start_loc, start_frame, end_frame, fall_y=0.9, fall_z=1.4):
+    """A thick low-poly branch breaks loose and falls near the woodland route."""
+    coll = get_collection("BFP_V12_18_BATTLE_FX")
+    branch = cube(name, start_loc, (7.2, 0.24, 0.24), MATS["branch"], coll,
+                  rot=(0.0, 0.0, random.uniform(-0.35, 0.35)))
+    start_rot = branch.rotation_euler.copy()
+    branch.location = start_loc
+    branch.keyframe_insert(data_path="location", frame=start_frame)
+    branch.keyframe_insert(data_path="rotation_euler", frame=start_frame)
+    branch.location = (start_loc[0] + 1.2, start_loc[1] + fall_y, fall_z)
+    branch.rotation_euler = (start_rot.x + 0.25, start_rot.y + 0.95, start_rot.z + 0.35)
+    branch.keyframe_insert(data_path="location", frame=end_frame)
+    branch.keyframe_insert(data_path="rotation_euler", frame=end_frame)
+    return branch

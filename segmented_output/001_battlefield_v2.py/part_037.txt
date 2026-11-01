@@ -1,0 +1,54 @@
+    pinned.rotation_euler.z=math.pi/2;root_offset(pinned,(0,-.65,0))
+    for i in range(3):
+        ob=bpy.data.objects['JP_HOUSE_BLAST_FALL_%02d_ROOT'%i]
+        p=Vector((40+i*1.5,-1+i*3,0))
+        for f,d in [(382+i*2,(0,0,0)),(393+i*2,(2,1,2.5)),(409+i*2,(5,2,-.1))]:
+            ob.location=p+Vector(d);ob.keyframe_insert(data_path='location',frame=f)
+    c=get_collection('BFP_V20_18_BATTLE_FX')
+    for ob in list(bpy.data.objects):
+        if ob.type=='EMPTY' and ob.name.endswith('_ROOT') and ('COVER' in ob.name or 'MID_SHOOTER' in ob.name) and ob.name.startswith('CN_'):
+            ob.rotation_euler.z=math.pi
+        if ob.type=='EMPTY' and ob.name.endswith('_ROOT') and any(x in ob.name for x in ['SHOOTER','COVER_A','COVER_B']):
+            flash=child_ico(ob.name+'_MUZZLE',ob,(1.25,-.22,1.1),(.001,)*3,MATS['blast'],c)
+            for f in range(1,901,18):
+                for df,sc in [(0,.001),(1,.18),(2,.001)]:
+                    flash.scale=(sc*2,sc,sc);flash.keyframe_insert(data_path='scale',frame=f+df)
+    for i in range(8):
+        release=48+i*3
+        plane=bpy.data.objects['JAPANESE_BOMBER_LEFT_NEAR_ROOT' if i%2==0 else 'JAPANESE_BOMBER_RIGHT_NEAR_ROOT']
+        bpy.context.scene.frame_set(release);bpy.context.view_layer.update();p=plane.matrix_world.translation.copy();p.z-=1.1
+        make_aircraft_bomb('V2_AIR_BOMB_%02d'%i,release,p,release+40,(p.x-22,p.y,1.1),start_loc=p)
+        make_small_blast('V2_AIR_IMPACT_%02d'%i,(p.x-22,p.y,1),release+40,radius=2.5)
+    bpy.context.scene.frame_set(1)
+
+def main_v2():
+    for key in ['v2_ground_patched','v2_walkers_grounded','v2_final_assets','v2_air_dodge','v2_crowd_clearance']:
+        bpy.context.scene[key]=False
+    clear_generated_collections();hide_legacy_versions();create_materials()
+    stages=[build_landscape,build_forest,build_tactical_layout,build_ravine,build_village,build_house_blast_smoke,build_river,
+            build_wide_road_and_crowd_markers,build_ground_grass,build_ground_rocks,build_west_pass,
+            build_characters_and_props,build_storyboard_details,build_battlefield_fx,configure_lighting]
+    # Fail fast: never save a partially constructed scene as a successful build.
+    for fun in stages:
+        print('V2 BUILD',fun.__name__,flush=True);fun()
+    extra_events();setup_camera_v2();retime();white_materials();configure_v2()
+    # pack supplied references, without requiring external paths when opening blend
+    ref=OUT.parent/'reference_original'/'Battlefield_OneTake_Previs_V1_2_Package'
+    for p in ref.glob('*.png'):
+        im=bpy.data.images.load(str(p),check_existing=True);im.pack()
+    config_text=bpy.data.texts.get('V2_CONFIG') or bpy.data.texts.new('V2_CONFIG')
+    config_text.clear();config_text.write(json.dumps(CFG,indent=2))
+    script=bpy.data.texts.get('battlefield_v2.py') or bpy.data.texts.new('battlefield_v2.py')
+    script.clear();script.write(Path(__file__).read_text())
+    path=OUT/'battlefield_v2.blend'
+    if path.exists():
+        import shutil,datetime
+        history=OUT/'history';history.mkdir(exist_ok=True)
+        shutil.copy2(path,history/('battlefield_v2_'+datetime.datetime.now().strftime('%Y%m%d_%H%M%S')+'.blend'))
+    bpy.ops.wm.save_as_mainfile(filepath=str(path))
+    print('V2_BUILD_SUCCESS',path,flush=True)
+
+if __name__=='__main__':
+    main_v2()
+    import runpy
+    runpy.run_path(str(OUT/'validate_scene.py'),run_name='__main__')

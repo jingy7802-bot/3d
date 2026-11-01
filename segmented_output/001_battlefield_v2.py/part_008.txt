@@ -1,0 +1,96 @@
+
+    # Rock clusters interrupt the woodland floor and create real reasons to turn.
+    rock_groups = [
+        (-157, -5, 3), (-139, -22, 3), (-124, 1, 4),
+        (-105, 17, 3), (-89, 2, 4), (-70, -12, 3)
+    ]
+    for group_index, (cx, cy, count) in enumerate(rock_groups):
+        for j in range(count):
+            x = cx + random.uniform(-2.2, 2.2)
+            y = cy + random.uniform(-1.8, 1.8)
+            ico(
+                "WOODLAND_BOULDER_%02d_%02d" % (group_index, j),
+                (x, y, random.uniform(0.2, 0.65)),
+                (
+                    random.uniform(1.4, 3.2),
+                    random.uniform(1.2, 2.6),
+                    random.uniform(0.9, 2.0)
+                ),
+                MATS["rock"] if j % 2 else MATS["rock_light"],
+                forest,
+                sub=1,
+                rot=(random.uniform(-0.12, 0.12), random.uniform(-0.12, 0.12), random.uniform(-0.5, 0.5))
+            )
+
+
+def build_tactical_layout():
+    tactical = get_collection("BFP_V20_14_TACTICAL_MARKERS")
+    forest = get_collection("BFP_V20_02_FOREST")
+    ravine = get_collection("BFP_V20_03_RAVINE")
+
+    # Neutral cover forms: these reserve places where later characters can crouch,
+    # observe, fire from cover or move toward the next advance lane.
+    cover_specs = [
+        ("FOREST_COVER_A", (-160, -24), (-164, -27), (-145, -15), forest),
+        ("FOREST_COVER_B", (-137, 18), (-141, 21), (-124, -5), forest),
+        ("FOREST_COVER_C", (-105, 18), (-109, 21), (-93, 12), forest),
+        ("FOREST_COVER_D", (-80, -19), (-84, -22), (-70, -1), forest),
+        ("RAVINE_COVER_E", (-39, -12), (-42, -15), (-25, -1), ravine),
+        ("RAVINE_COVER_F", (-9, 13), (-12, 16), (4, 0), ravine)
+    ]
+
+    for index, (name, cover_xy, soldier_xy, target_xy, owner) in enumerate(cover_specs):
+        cx, cy = cover_xy
+        ico(
+            name + "_ROCK_MASS",
+            (cx, cy, 0.7),
+            (3.0, 2.2, 1.45),
+            MATS["rock"],
+            owner,
+            sub=1
+        )
+        ico(
+            name + "_LOW_EARTH_SHOULDER",
+            (cx - 1.4, cy + 0.7, 0.15),
+            (3.8, 2.7, 0.55),
+            MATS["slope"],
+            owner,
+            sub=1
+        )
+
+        soldier = empty(
+            "FUTURE_SOLDIER_COVER_SLOT_%02d" % index,
+            (soldier_xy[0], soldier_xy[1], 0.25),
+            tactical,
+            display='ARROWS',
+            size=1.4
+        )
+        soldier.rotation_euler.z = 0.0
+
+        start = empty(
+            "FUTURE_ADVANCE_LANE_%02d_START" % index,
+            (soldier_xy[0], soldier_xy[1], 0.1),
+            tactical,
+            display='CIRCLE',
+            size=0.9
+        )
+        end = empty(
+            "FUTURE_ADVANCE_LANE_%02d_END" % index,
+            (target_xy[0], target_xy[1], 0.1),
+            tactical,
+            display='CIRCLE',
+            size=0.9
+        )
+        dx = target_xy[0] - soldier_xy[0]
+        dy = target_xy[1] - soldier_xy[1]
+        direction = empty(
+            "FUTURE_FIRE_OR_ADVANCE_DIRECTION_%02d" % index,
+            (soldier_xy[0], soldier_xy[1], 0.3),
+            tactical,
+            display='ARROWS',
+            size=2.0
+        )
+        direction.rotation_euler.z = math.atan2(dy, dx)
+
+    # A few additional neutral movement anchors describe staggered advance,
+    # without assigning a faction or deciding the final actor count.

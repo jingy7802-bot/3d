@@ -1,0 +1,96 @@
+        if not output_dir:
+            output_dir = os.path.expanduser("~/Desktop")
+        os.makedirs(output_dir, exist_ok=True)
+        blend_path = os.path.join(output_dir, "Battlefield_OneTake_Previs_V1_2.blend")
+        bpy.ops.wm.save_as_mainfile(filepath=blend_path)
+        STATUS["BLEND_SAVE"] = "PASS - " + blend_path
+        log("Saved Blender scene: " + blend_path)
+        write_build_report()
+        bpy.ops.wm.save_as_mainfile(filepath=blend_path)
+    except Exception as exc:
+        STATUS["BLEND_SAVE"] = "FAIL: " + repr(exc)
+        log("BLEND SAVE FAILED: " + repr(exc))
+    log("V1.2 emphasizes a non-linear banked camera choreography, terrain-scale expansion, four-aircraft approach, pigeon glide, staged aviation bombs, forest rescue, doorway blast, broad river crowd, surface casualties and storyboard-aligned frame passages. Inspect BFP_V20_BUILD_REPORT.")
+
+
+# ============================================================
+# V2 implementation. Legacy construction helpers above are retained locally;
+# entrypoint below supersedes V1.2 main(), camera and timing.
+# ============================================================
+import json, csv, sys
+from pathlib import Path
+from mathutils.bvhtree import BVHTree
+from bpy_extras.object_utils import world_to_camera_view
+CFG = {
+    'crowd_clearance_height_m':1.5, 'fps':30, 'camera_radius':0.22, 'safety_margin':0.12,
+    'width':640, 'height':360, 'float_bodies':40, 'bank_runners':20,
+    'seed':20261101, 'render_engine':'BLENDER_WORKBENCH',
+    # old timeline boundaries / new seconds: editable pacing, no 30s cap
+    'time_map':[(1,0),(98,30),(232,59),(332,79),(410,103),
+                (512,133),(564,146),(664,167),(900,190)],
+}
+OUT = Path(get_script_directory())
+
+def time_frame(f):
+    m=CFG['time_map']
+    for (a,ta),(b,tb) in zip(m,m[1:]):
+        if f<=b: return 1+(ta+(f-a)/(b-a)*(tb-ta))*CFG['fps']
+    return 1+m[-1][1]*CFG['fps']+(f-m[-1][0])
+
+def curves(obj):
+    a=getattr(getattr(obj,'animation_data',None),'action',None)
+    if not a: return []
+    try: return list(a.fcurves)
+    except AttributeError:
+        result=[]
+        for layer in a.layers:
+            for strip in layer.strips:
+                for bag in strip.channelbags: result.extend(bag.fcurves)
+        return result
+
+def retime():
+    actions=set()
+    for obj in list(bpy.data.objects)+list(bpy.data.materials)+list(bpy.data.cameras):
+        for fc in curves(obj):
+            if fc.as_pointer() in actions: continue
+            actions.add(fc.as_pointer())
+            for k in fc.keyframe_points:
+                old=k.co.x; delta=time_frame(old)-old
+                k.co.x+=delta; k.handle_left.x+=delta; k.handle_right.x+=delta
+            fc.update()
+    for mk in bpy.context.scene.timeline_markers: mk.frame=round(time_frame(mk.frame))
+
+def root_offset(root, delta):
+    root.location+=Vector(delta)
+    for fc in curves(root):
+        if fc.data_path=='location':
+            for k in fc.keyframe_points:
+                d=delta[fc.array_index]; k.co.y+=d; k.handle_left.y+=d; k.handle_right.y+=d
+
+# The rescue belongs in Li Xingou, separate from the forest firing beat.
+def extra_events():
+    for name in ['CN_FOREST_PINNED_UNDER_TREE_ROOT','CN_FOREST_RESCUER_ROOT',
+                 'FOREST_RESCUE_FALLEN_TREE_TRUNK']:
+        ob=bpy.data.objects.get(name)
+        if ob:
+            root_offset(ob,(73,-12,0))
+            for fc in curves(ob):
+                for k in fc.keyframe_points:
+                    k.co.x+=100; k.handle_left.x+=100; k.handle_right.x+=100
+    # Waders' feet and camera share a real 1.8m-deep bed, not two separate levels.
+    for ob in bpy.data.objects:
+        if ob.type=='MESH' and ('BLOOD_TINT' in ob.name or 'UNIFORM_LIMB' in ob.name):
+            ob.hide_render=True; ob.hide_viewport=True
+        if ob.type=='EMPTY' and not ob.parent and 'ROOT' in ob.name:
+            if ('RIVER' in ob.name or 'SHALLOW_WATER' in ob.name) and 'BODY' not in ob.name and 'FLOAT' not in ob.name and 'CASUALTY' not in ob.name and 'HANDOFF' not in ob.name:
+                if -1.5<ob.location.z<0: root_offset(ob,(0,0,-0.25))
+    random.seed(CFG['seed'])
+    for i in range(CFG['float_bodies']-14):
+        x,y=random.uniform(89,186),random.uniform(-29,29)
+        r=make_casualty('V2_FLOAT_%02d'%i,(x,y,0.12),yaw=random.uniform(-math.pi,math.pi),pose=['prone','supine','side'][i%3])
+        for f in (1,450,900):
+            r.location=(x+(f-1)*.002,y+(f-1)*.001,0.12+.04*math.sin(f*.03+i));r.keyframe_insert(data_path='location',frame=f)
+    for i in range(6):
+        actor=make_actor('V2_WATER_FALL_%02d'%i,(100+i*13,random.uniform(-12,12),-0.98))
+        animate_hit_fall_performance(actor,445+i*9,460+i*9,(-1)**i)
+        make_water_splash('V2_FALL_SPLASH_%02d'%i,(100+i*13,actor['root'].location.y,.38),450+i*9)

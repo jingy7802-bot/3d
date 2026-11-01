@@ -1,0 +1,96 @@
+    animate_wounded_body(float_body_b, 456, 520, dx=0.28, dy=-0.04)
+    river_fall = make_actor("CN_RIVER_CROSSING_HIT_FALL", (130, 2, -0.72), yaw=0.0, faction="cn", rifle=False)
+    animate_hit_fall_performance(river_fall, 488, 502, direction=-1.0)
+
+    # One soldier is hit during the underwater passage and falls into the water.
+    hit_actor = make_actor("CN_RIVER_HIT_AND_FALL", (143, -1.5, -0.72), yaw=0.0,
+                           faction="cn", rifle=True)
+    animate_hit_fall_performance(hit_actor, 500, 514, direction=-1.0)
+    river_react = make_actor("CN_RIVER_CROSSER_DUCK_REACTION", (126, -3, -0.72),
+                             yaw=0.0, faction="cn", rifle=False)
+    animate_head_turn(river_react, 486, 506, angle_z=-0.34)
+    animate_duck_and_recover(river_react, 486, 494, 508, depth=0.12)
+
+    # 5) Riverbank handoff: the receiver takes the box and runs forward.
+    handoff_a = make_actor("CN_BOX_HANDOFF_SENDER", (198, -4, 0), yaw=0.0,
+                           faction="cn", rifle=False)
+    handoff_b = make_actor("CN_BOX_HANDOFF_RECEIVER", (202, -4, 0), yaw=math.pi,
+                           faction="cn", rifle=False)
+    box = cube("RIVERBANK_HANDOFF_BOX", (199.0, -4, 1.12), (0.95, 0.62, 0.62),
+               MATS["box"], get_collection("BFP_V12_17_PROPS"))
+    animate_box_handoff(handoff_a, handoff_b, box)
+
+    animate_actor(handoff_b, [
+        (553, (202, -4, 0), math.pi),
+        (564, (206, -2, 0), 0.1),
+        (580, (211, 0, 0), 0.1),
+    ], run=True)
+    handoff_follow = make_actor("CN_HANDOFF_FOLLOW_RUNNER", (210, 4, 0), yaw=0.0, faction="cn", rifle=True)
+    animate_actor(handoff_follow, [
+        (540, (210, 4, 0), 0.0),
+        (564, (220, 3, 0), 0.0),
+        (592, (230, 2, 0), 0.0),
+    ], run=True)
+    handoff_bg_group = make_actor("CN_HANDOFF_BACKGROUND_RUNNER", (228, -10, 0), yaw=0.0, faction="cn", rifle=True)
+
+    # 6) Old Meng: strong silhouette, explosive charges around the torso, hand shields sunlight.
+    old_meng = make_actor("OLD_MENG", (250, 0, 0), yaw=0.0,
+                          faction="old_meng", rifle=False, grenades=8)
+    old_meng["root"].scale = (1.15, 1.15, 1.15)
+    # He shades his eyes as the camera arrives, then lowers the arm into a firm front hold.
+    old_meng["right_arm"].rotation_euler.y = 0.0
+    old_meng["right_arm"].keyframe_insert(data_path="rotation_euler", frame=588)
+    old_meng["right_arm"].rotation_euler.y = -1.0
+    old_meng["right_arm"].keyframe_insert(data_path="rotation_euler", frame=602)
+    old_meng["right_arm"].rotation_euler.y = -1.0
+    old_meng["right_arm"].keyframe_insert(data_path="rotation_euler", frame=638)
+    old_meng["right_arm"].rotation_euler.y = -0.12
+    old_meng["right_arm"].keyframe_insert(data_path="rotation_euler", frame=650)
+    old_meng["right_arm"].rotation_euler.y = -0.12
+    old_meng["right_arm"].keyframe_insert(data_path="rotation_euler", frame=676)
+    old_meng["left_arm"].rotation_euler.y = 0.16
+    old_meng["left_arm"].keyframe_insert(data_path="rotation_euler", frame=588)
+    old_meng["left_arm"].rotation_euler.y = 0.16
+    old_meng["left_arm"].keyframe_insert(data_path="rotation_euler", frame=676)
+    animate_head_turn(old_meng, 614, 662, angle_z=0.12)
+
+    # Maintain foreground / midground / background around Old Meng.
+    old_meng_fg_left = make_actor("CN_OLD_MENG_FG_LEFT", (246, -6, 0), yaw=0.0, faction="cn", rifle=True)
+    old_meng_fg_right = make_actor("CN_OLD_MENG_FG_RIGHT", (246, 6, 0), yaw=0.0, faction="cn", rifle=True)
+    old_meng_bg_center = make_actor("CN_OLD_MENG_BG_CENTER", (261, 0, 0), yaw=0.0, faction="cn", rifle=True)
+    animate_actor(old_meng_bg_center, [
+        (600, (261, 0, 0), 0.0),
+        (660, (272, 0, 0), 0.0),
+        (720, (284, 0, 0), 0.0),
+    ], run=True)
+
+    # Guard company soldiers pass around him and continue toward the valley.
+    guard_specs = [
+        ((236, -12, 0), (270, -14, 0)),
+        ((242, 12, 0), (276, 14, 0)),
+        ((250, -15, 0), (282, -16, 0)),
+        ((255, 15, 0), (289, 16, 0)),
+    ]
+    for i, (start, end) in enumerate(guard_specs):
+        actor = make_actor("CN_GUARD_COMPANY_%02d" % i, start, yaw=0.0, faction="cn", rifle=True)
+        animate_actor(actor, [
+            (550, start, 0.0),
+            (620, ((start[0] + end[0]) * 0.5, (start[1] + end[1]) * 0.5, 0), 0.0),
+            (700, end, 0.0),
+        ], run=True)
+
+    # 7) Main charge: staggered groups run toward +X; camera retreats through the lanes.
+    charge_positions = [
+        (260, -11), (266, -6), (270, 7), (276, 12),
+        (282, -10), (287, -5), (292, 6), (298, 11),
+        (304, -12), (309, -7), (313, 7), (318, 12),
+        (268, 2), (280, 3), (294, -2), (307, 2),
+        (320, -5), (326, 6), (314, 15), (300, -16),
+    ]
+    for i, (x, y) in enumerate(charge_positions):
+        actor = make_actor("CN_MAIN_CHARGE_%02d" % i, (x, y, 0), yaw=0.0,
+                           faction="cn", rifle=(i % 3 != 0))
+        end_x = x + random.uniform(28, 38)
+        end_y = y + random.uniform(-1.2, 1.2)
+        animate_actor(actor, [
+            (690, (x, y, 0), 0.0),

@@ -1,0 +1,96 @@
+    ref_coll = get_collection("BFP_V20_20_TERRAIN_REFERENCE")
+    base_dir = get_script_directory()
+    candidates = [
+        os.path.join(base_dir, "terrain_reference.png"),
+        os.path.join(base_dir, "image(20261031-062739).png"),
+        os.path.join(os.getcwd(), "terrain_reference.png"),
+    ]
+    img_path = next((p for p in candidates if os.path.exists(p)), None)
+    if not img_path:
+        STATUS["TERRAIN_REFERENCE_IMAGE"] = "SKIP - terrain_reference.png not found beside script"
+        return
+    img = bpy.data.images.load(img_path, check_existing=True)
+    try:
+        img.pack()
+    except Exception:
+        pass
+    mat_ref = bpy.data.materials.new("BFP_V20_TERRAIN_REFERENCE_IMAGE_MATERIAL")
+    mat_ref.use_nodes = True
+    nodes = mat_ref.node_tree.nodes
+    bsdf = nodes.get("Principled BSDF")
+    tex = nodes.new("ShaderNodeTexImage")
+    tex.image = img
+    mat_ref.node_tree.links.new(tex.outputs["Color"], bsdf.inputs["Base Color"])
+    plane_mesh = bpy.data.meshes.new("BFP_V20_TERRAIN_REFERENCE_PLANE_MESH")
+    plane_mesh.from_pydata([(-80, -45, 0), (80, -45, 0), (80, 45, 0), (-80, 45, 0)], [], [(0, 1, 2, 3)])
+    plane_mesh.materials.append(mat_ref)
+    plane = bpy.data.objects.new("TERRAIN_REFERENCE_IMAGE_BOARD_NON_RENDER", plane_mesh)
+    ref_coll.objects.link(plane)
+    plane.location = (950, 0, 20)
+    plane.hide_render = True
+    STATUS["TERRAIN_REFERENCE_IMAGE"] = "PACKED - " + os.path.basename(img_path)
+
+def build_battlefield_fx():
+    fx = get_collection("BFP_V20_18_BATTLE_FX")
+
+    # Animated blast flash: a timing/volume proxy, not a finished explosion simulation.
+    flash = ico("WUTONGGOU_BLAST_FLASH_PROXY", (38, -7, 4.0),
+                (0.1, 0.1, 0.1), MATS["blast"], fx, sub=1)
+    for frame, scale in [
+        (376, (0.001, 0.001, 0.001)),
+        (378, (2.8, 2.8, 2.8)),
+        (380, (5.0, 4.0, 3.4)),
+        (384, (1.0, 1.0, 1.0)),
+        (389, (0.001, 0.001, 0.001)),
+    ]:
+        flash.scale = scale
+        flash.keyframe_insert(data_path="scale", frame=frame)
+
+    # Expand existing smoke placeholders in time with the blast.
+    smoke_coll = get_collection("BFP_V20_12_SMOKE_PLACEHOLDERS")
+    for obj in list(smoke_coll.objects):
+        base = obj.scale.copy()
+        for frame, factor in [
+            (375, 0.001),
+            (378, 0.18),
+            (386, 0.72),
+            (398, 1.0),
+            (410, 1.28),
+        ]:
+            obj.scale = (base.x * factor, base.y * factor, base.z * factor)
+            obj.keyframe_insert(data_path="scale", frame=frame)
+
+    make_small_blast("AIR_BOMB_MAIN_IMPACT", (-181, -8, 0.8), 90, radius=4.8)
+    make_small_blast("AIR_BOMB_SECONDARY_IMPACT_A", (-191, -29, 0.8), 98, radius=3.2)
+    make_small_blast("AIR_BOMB_SECONDARY_IMPACT_B", (-169, 26, 0.8), 104, radius=3.0)
+    make_small_blast("AIR_BOMB_SECONDARY_IMPACT_C", (-151, 38, 0.8), 110, radius=2.8)
+    make_small_blast("FOREST_BLAST_NEAR_JP_LINE", (-166, -8, 1.8), 116, radius=1.7)
+    make_small_blast("FOREST_BLAST_ROCK_COVER", (-133, -7, 1.8), 176, radius=2.1)
+    make_small_blast("FOREST_BLAST_REAR_SLOPE", (-105, 11, 2.2), 226, radius=1.8)
+    make_small_blast("RAVINE_BLAST_FAR_WALL", (-34, 10, 2.0), 302, radius=1.6)
+    make_small_blast("WUTONGGOU_HOUSE_BLAST_EVENT", (38, -7, 3.0), 378, radius=3.6)
+    make_small_blast("VILLAGE_NEAR_GROUND_IMPACT", (28, -1, 1.2), 364, radius=1.9)
+    make_small_blast("RIVERBANK_POST_EXIT_BLAST", (197, 6, 1.0), 536, radius=1.5)
+    make_water_splash("RIVER_CROSSER_SPLASH_NEAR", (130, 2, 0.02), 490)
+    make_water_splash("RIVER_CROSSER_SPLASH_FAR", (143, -1.5, 0.02), 502)
+
+    make_falling_branch("FALLING_BRANCH_A", (-168, -14, 5.0), 118, 132, fall_y=1.4, fall_z=1.2)
+    make_falling_branch("FALLING_BRANCH_B", (-145, 7, 5.4), 154, 170, fall_y=-1.2, fall_z=1.1)
+    make_falling_branch("FALLING_BRANCH_C", (-126, -3, 4.8), 180, 198, fall_y=1.5, fall_z=1.0)
+    make_falling_branch("FALLING_BRANCH_D", (-103, 15, 5.2), 220, 238, fall_y=-1.3, fall_z=1.0)
+    make_falling_branch("FALLING_BRANCH_E", (-82, -10, 4.7), 246, 262, fall_y=1.2, fall_z=1.0)
+
+    # Bullet streaks cross the frame at different depths; they are brief, simple cues.
+    make_bullet_tracer("TRACER_FOREST_JP_A", (-156, -2, 1.5), (-140, -7, 1.0), 118, 124)
+    make_bullet_tracer("TRACER_FOREST_CN_A", (-137, -8, 1.0), (-150, -3, 1.2), 162, 168)
+    make_bullet_tracer("TRACER_FOREST_CN_B", (-130, -12, 1.0), (-120, -6, 1.2), 171, 177)
+    make_bullet_tracer("TRACER_VILLAGE_A", (49, 5, 2.0), (29, -5, 1.7), 360, 367)
+    make_bullet_tracer("TRACER_VILLAGE_B", (17, 7, 1.4), (47, -5, 1.9), 372, 380)
+    make_bullet_tracer("TRACER_RIVER_A", (103, 13, -1.8), (116, -7, -2.0), 472, 479)
+    make_bullet_tracer("TRACER_RIVER_B", (148, -12, -1.6), (162, 7, -1.8), 498, 505)
+    make_bullet_tracer("TRACER_WEST_PASS_A", (265, -17, 1.4), (289, 13, 1.8), 706, 713)
+    make_bullet_tracer("TRACER_WEST_PASS_B", (307, 15, 1.6), (326, -12, 2.0), 754, 761)
+
+    # Simple water impact puffs: low-poly spheres expand and fade in scale.
+    for i, loc in enumerate(((100, 2, -1.6), (119, -2, -1.5), (139, 5, -1.4), (158, -4, -1.5), (176, 4, -1.4))):
+        splash = ico("WATER_BULLET_IMPACT_%02d" % i, loc, (0.08, 0.08, 0.08),

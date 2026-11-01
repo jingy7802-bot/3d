@@ -1,0 +1,96 @@
+    ]
+    bombers = [build_bomber(name, path, 1.0 if "NEAR" in name else 0.88) for name, path in bomber_paths]
+
+    # Four visible bomb trajectories at staggered release / middle / terminal stages.
+    make_aircraft_bomb("AIR_BOMB_MAIN", 50, (-156, -20, 110), 90, (-181, -8, 1.1), start_loc=(-105, -18, 118))
+    make_aircraft_bomb("AIR_BOMB_LEFT_FAR", 55, (-132, -46, 114), 98, (-191, -29, 1.1), start_loc=(-78, -48, 124))
+    make_aircraft_bomb("AIR_BOMB_RIGHT_NEAR", 60, (-146, 17, 111), 104, (-169, 26, 1.1), start_loc=(-92, 20, 121))
+    make_aircraft_bomb("AIR_BOMB_RIGHT_FAR", 66, (-118, 41, 116), 110, (-151, 38, 1.1), start_loc=(-62, 48, 128))
+
+    pigeon = make_pigeon()
+    return bombers, pigeon
+
+
+
+def make_bullet_tracer(name, start, end, start_frame, end_frame):
+    fx = get_collection("BFP_V20_18_BATTLE_FX")
+    direction = Vector(end) - Vector(start)
+    center = (Vector(start) + Vector(end)) * 0.5
+    obj = cube(name, center, (max(1.2, direction.length), 0.035, 0.035), MATS["tracer"], fx)
+    obj.rotation_euler = direction.to_track_quat('X', 'Z').to_euler()
+    obj.location = start
+    obj.keyframe_insert(data_path="location", frame=start_frame)
+    obj.scale = (0.001, 0.001, 0.001)
+    obj.keyframe_insert(data_path="scale", frame=start_frame - 1)
+    obj.scale = (1, 1, 1)
+    obj.keyframe_insert(data_path="scale", frame=start_frame)
+    obj.location = end
+    obj.keyframe_insert(data_path="location", frame=end_frame)
+    obj.scale = (0.001, 0.001, 0.001)
+    obj.keyframe_insert(data_path="scale", frame=end_frame + 1)
+    return obj
+
+
+
+def animate_hit_fall(actor, hit_frame, down_frame, direction=1.0):
+    """Readable non-graphic hit reaction: recoil, loss of balance, then fall."""
+    root = actor["root"]
+    base = root.location.copy()
+    yaw = root.rotation_euler.z
+    root.location = base
+    root.rotation_euler = (0.0, 0.0, yaw)
+    root.keyframe_insert(data_path="location", frame=hit_frame - 3)
+    root.keyframe_insert(data_path="rotation_euler", frame=hit_frame - 3)
+    root.location = (base.x - 0.15, base.y, base.z + 0.12)
+    root.rotation_euler = (0.10, 0.0, yaw)
+    root.keyframe_insert(data_path="location", frame=hit_frame)
+    root.keyframe_insert(data_path="rotation_euler", frame=hit_frame)
+    root.location = (base.x + direction * 0.25, base.y, base.z - 0.30)
+    root.rotation_euler = (0.0, direction * 1.32, yaw)
+    root.keyframe_insert(data_path="location", frame=down_frame)
+    root.keyframe_insert(data_path="rotation_euler", frame=down_frame)
+
+
+def animate_wounded_body(root, start_frame, end_frame, dx=0.35, dy=0.12):
+    """Small restrained movement for a wounded/fallen figure."""
+    base = root.location.copy()
+    yaw = root.rotation_euler.z
+    for frame, loc, rot in [
+        (start_frame, (base.x, base.y, base.z), (0.0, 0.0, yaw)),
+        ((start_frame + end_frame) // 2,
+         (base.x + dx, base.y + dy, base.z + 0.04), (0.0, 0.05, yaw + 0.08)),
+        (end_frame, (base.x + dx * 1.25, base.y + dy * 1.2, base.z), (0.0, 0.02, yaw + 0.12)),
+    ]:
+        root.location = loc
+        root.rotation_euler = rot
+        root.keyframe_insert(data_path="location", frame=frame)
+        root.keyframe_insert(data_path="rotation_euler", frame=frame)
+
+def animate_head_turn(actor, start_frame, end_frame, angle_z=0.45):
+    """Small head turn for close-up readability."""
+    head = actor["head"]
+    head.rotation_euler = (0.0, 0.0, 0.0)
+    head.keyframe_insert(data_path="rotation_euler", frame=start_frame)
+    head.rotation_euler = (0.0, 0.0, angle_z)
+    head.keyframe_insert(data_path="rotation_euler", frame=(start_frame + end_frame) // 2)
+    head.rotation_euler = (0.0, 0.0, 0.0)
+    head.keyframe_insert(data_path="rotation_euler", frame=end_frame)
+
+
+
+def animate_rifle_burst(actor, shot_frames, recover_frame=None, recoil=0.10):
+    """Readable short firing burst: shoulders brace, rifle recoils, then settles."""
+    left = actor["left_arm"]
+    right = actor["right_arm"]
+    left_base = tuple(left.rotation_euler)
+    right_base = tuple(right.rotation_euler)
+    for arm, base, side in ((left, left_base, -1.0), (right, right_base, 1.0)):
+        if shot_frames:
+            arm.rotation_euler = base
+            arm.keyframe_insert(data_path="rotation_euler", frame=max(1, shot_frames[0] - 2))
+        for frame in shot_frames:
+            arm.rotation_euler = (base[0] + 0.05, base[1] + side * 0.08, base[2])
+            arm.keyframe_insert(data_path="rotation_euler", frame=frame)
+            arm.rotation_euler = (base[0], base[1] - side * 0.025, base[2])
+            arm.keyframe_insert(data_path="rotation_euler", frame=frame + 1)
+            arm.rotation_euler = base

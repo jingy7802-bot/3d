@@ -1,0 +1,96 @@
+    for frame, loc, yaw in path:
+        root.location = loc
+        root.rotation_euler.z = yaw
+        root.keyframe_insert(data_path="location", frame=frame)
+        root.keyframe_insert(data_path="rotation_euler", frame=frame)
+
+    if run:
+        start = path[0][0]
+        end = path[-1][0]
+        for frame in range(start, end + 1, 4):
+            phase = (frame - start) * (2.0 * math.pi / 18.0)
+            swing = math.sin(phase) * 0.58
+            actor["left_leg"].rotation_euler.y = swing
+            actor["right_leg"].rotation_euler.y = -swing
+            arm_factor = 0.22 if actor.get("rifle") else 0.78
+            actor["left_arm"].rotation_euler.y = -swing * arm_factor
+            actor["right_arm"].rotation_euler.y = swing * arm_factor
+            for key in ("left_leg", "right_leg", "left_arm", "right_arm"):
+                actor[key].keyframe_insert(data_path="rotation_euler", frame=frame)
+
+    for obj in [root, actor["left_leg"], actor["right_leg"], actor["left_arm"], actor["right_arm"]]:
+        if obj.animation_data and obj.animation_data.action:
+            try:
+                for fc in obj.animation_data.action.fcurves:
+                    for kp in fc.keyframe_points:
+                        kp.interpolation = 'BEZIER'
+                        kp.handle_left_type = 'AUTO_CLAMPED'
+                        kp.handle_right_type = 'AUTO_CLAMPED'
+            except Exception:
+                pass
+
+
+def make_actor(name, loc, yaw=0.0, faction="cn", posture="stand",
+               rifle=False, grenades=0, material_override=None):
+    """
+    Segmented-color white-block actor:
+    sphere head + cuboid torso/arms/legs. No face, cloth texture or rig.
+    Local forward direction is +X.
+    """
+    coll = get_collection("BFP_V20_16_CHARACTERS")
+    root = empty(name + "_ROOT", loc, coll, display='PLAIN_AXES', size=0.55)
+    root.rotation_euler.z = yaw
+
+    if material_override:
+        body_mat = MATS[material_override]
+    elif faction == "jp":
+        body_mat = MATS["jp_soldier"]
+    elif faction == "old_meng":
+        body_mat = MATS["old_meng"]
+    else:
+        body_mat = MATS["cn_soldier"]
+
+    if posture == "crouch":
+        torso_z, head_z, shoulder_z, hip_z = 0.83, 1.30, 1.08, 0.45
+        torso_dims = (0.50, 0.36, 0.62)
+    else:
+        torso_z, head_z, shoulder_z, hip_z = 1.03, 1.62, 1.34, 0.68
+        torso_dims = (0.52, 0.36, 0.76)
+
+    torso = child_cube(name + "_TORSO", root, (0, 0, torso_z), torso_dims, body_mat, coll)
+    head = child_ico(name + "_HEAD", root, (0, 0, head_z), (0.23, 0.22, 0.25), body_mat, coll, sub=1)
+
+    left_arm = empty(name + "_LEFT_ARM_PIVOT", (0, -0.25, shoulder_z), coll, display='PLAIN_AXES', size=0.15)
+    right_arm = empty(name + "_RIGHT_ARM_PIVOT", (0, 0.25, shoulder_z), coll, display='PLAIN_AXES', size=0.15)
+    left_arm.parent = root
+    right_arm.parent = root
+    left_arm.location = (0, -0.25, shoulder_z)
+    right_arm.location = (0, 0.25, shoulder_z)
+
+    child_cube(name + "_LEFT_ARM", left_arm, (0.03, 0, -0.31), (0.25, 0.23, 0.64), body_mat, coll)
+    child_cube(name + "_RIGHT_ARM", right_arm, (0.03, 0, -0.31), (0.25, 0.23, 0.64), body_mat, coll)
+
+    left_leg = empty(name + "_LEFT_LEG_PIVOT", (0, -0.14, hip_z), coll, display='PLAIN_AXES', size=0.13)
+    right_leg = empty(name + "_RIGHT_LEG_PIVOT", (0, 0.14, hip_z), coll, display='PLAIN_AXES', size=0.13)
+    left_leg.parent = root
+    right_leg.parent = root
+    left_leg.location = (0, -0.14, hip_z)
+    right_leg.location = (0, 0.14, hip_z)
+
+    child_cube(name + "_LEFT_LEG", left_leg, (0, 0, -0.33), (0.28, 0.27, 0.68), body_mat, coll)
+    child_cube(name + "_RIGHT_LEG", right_leg, (0, 0, -0.33), (0.28, 0.27, 0.68), body_mat, coll)
+
+    actor = {
+        "root": root,
+        "torso": torso,
+        "head": head,
+        "left_arm": left_arm,
+        "right_arm": right_arm,
+        "left_leg": left_leg,
+        "right_leg": right_leg,
+    }
+
+    if rifle:
+        # Rifle is a small, readable cuboid prop held across the front of the torso.
+        gun = child_cube(name + "_RIFLE", root, (0.62, -0.22, torso_z + 0.05),
+                         (1.12, 0.10, 0.10), MATS["weapon"], coll)

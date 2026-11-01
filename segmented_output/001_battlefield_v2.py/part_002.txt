@@ -1,0 +1,96 @@
+    if coll is None:
+        coll = bpy.data.collections.new(name)
+    if bpy.context.scene.collection.children.get(coll.name) is None:
+        try:
+            bpy.context.scene.collection.children.link(coll)
+        except RuntimeError:
+            pass
+    return coll
+
+
+def clear_generated_collections():
+    """Remove only V1.2-generated collections so every older version remains recoverable."""
+    for name in list(COLLECTIONS):
+        coll = bpy.data.collections.get(name)
+        if coll is None:
+            continue
+        for obj in list(coll.objects):
+            bpy.data.objects.remove(obj, do_unlink=True)
+        try:
+            bpy.data.collections.remove(coll, do_unlink=True)
+        except Exception:
+            try:
+                bpy.data.collections.remove(coll)
+            except Exception:
+                pass
+
+
+def hide_legacy_versions():
+    """Hide older generated versions without deleting their collections or objects."""
+    prefixes = (
+        "BFP_V02_", "BFP_V03_", "BFP_V04_", "BFP_V05_",
+        "BFP_V06_", "BFP_V07_", "BFP_V08_", "BFP_V09_",
+        "BFP_V10_", "BFP_V11_", "BFP_01_", "BFP_02_",
+        "BFP_03_", "BFP_04_", "BFP_05_"
+    )
+    for coll in bpy.data.collections:
+        if coll.name.startswith(prefixes):
+            coll.hide_viewport = True
+            coll.hide_render = True
+
+
+
+def run_stage(name, func):
+    log("START " + name)
+    try:
+        result = func()
+        STATUS[name] = "PASS"
+        log("PASS " + name)
+        return result
+    except Exception as exc:
+        STATUS[name] = "FAIL: " + repr(exc)
+        log("FAIL " + name + " | " + repr(exc))
+        log(traceback.format_exc())
+        return None
+
+
+# ============================================================
+# MATERIALS
+# ============================================================
+
+def mat(name, color, roughness=0.9, alpha=1.0, emission=0.0):
+    material = bpy.data.materials.get(name)
+    if material is None:
+        material = bpy.data.materials.new(name)
+    material.diffuse_color = (color[0], color[1], color[2], alpha)
+    material.use_nodes = True
+    bsdf = material.node_tree.nodes.get("Principled BSDF")
+    if bsdf:
+        bsdf.inputs["Base Color"].default_value = (color[0], color[1], color[2], 1.0)
+        bsdf.inputs["Roughness"].default_value = roughness
+        if "Alpha" in bsdf.inputs:
+            bsdf.inputs["Alpha"].default_value = alpha
+        if emission > 0:
+            if "Emission Color" in bsdf.inputs:
+                bsdf.inputs["Emission Color"].default_value = (color[0], color[1], color[2], 1.0)
+            if "Emission Strength" in bsdf.inputs:
+                bsdf.inputs["Emission Strength"].default_value = emission
+    if alpha < 1:
+        try:
+            material.surface_render_method = 'DITHERED'
+        except Exception:
+            pass
+    return material
+
+
+def create_materials():
+    global MATS
+    MATS = {
+        "ground": mat("BFP20_Land_Green", (0.25, 0.34, 0.22)),
+        "slope": mat("BFP20_Slope_Olive", (0.30, 0.35, 0.23)),
+        "mountain": mat("BFP20_Mountain_Distant", (0.22, 0.29, 0.25)),
+        "rock": mat("BFP20_Rock_Gray", (0.39, 0.41, 0.40)),
+        "rock_light": mat("BFP20_Rock_Light", (0.52, 0.51, 0.47)),
+        "trunk": mat("BFP20_Tree_Trunk", (0.24, 0.17, 0.11)),
+        "leaf": mat("BFP20_Tree_Canopy", (0.10, 0.24, 0.12)),
+        "leaf_light": mat("BFP20_Tree_Canopy_Light", (0.19, 0.34, 0.16)),

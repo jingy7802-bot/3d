@@ -1,0 +1,54 @@
+V2 BUILD build_landscape
+[BFP V2] Terrain mesh created: 10611 vertices / 10400 faces, expanded mountain basin.
+V2 BUILD build_forest
+V2 BUILD build_tactical_layout
+V2 BUILD build_ravine
+V2 BUILD build_village
+V2 BUILD build_house_blast_smoke
+V2 BUILD build_river
+V2 BUILD build_wide_road_and_crowd_markers
+V2 BUILD build_ground_grass
+V2 BUILD build_ground_rocks
+V2 BUILD build_west_pass
+V2 BUILD build_characters_and_props
+V2 BUILD build_storyboard_details
+[BFP V2] Storyboard details added: rescue, doorway pair, wooden-shaft grenade, encirclement, broad river crowd, surface casualties and natural frame gates.
+V2 BUILD build_battlefield_fx
+V2 BUILD configure_lighting
+Info: Saved "battlefield_v2.blend"
+V2_BUILD_SUCCESS /workspace/3d/delivery_v2/battlefield_v2.blend
+COLLIDERS 1488 1818
+PATH 1 adjusted 0
+PATH 301 adjusted 0
+PATH 601 adjusted 0
+PATH 901 adjusted 0
+PATH 1201 adjusted 30
+PATH 1501 adjusted 30
+PATH 1801 adjusted 36
+PATH 2101 adjusted 37
+PATH 2401 adjusted 37
+PATH 2701 adjusted 38
+PATH 3001 adjusted 41
+PATH 3301 adjusted 43
+PATH 3601 adjusted 43
+PATH 3901 adjusted 48
+PATH 4201 adjusted 52
+PATH 4501 adjusted 52
+PATH 4801 adjusted 136
+PATH 5101 adjusted 210
+PATH 5401 adjusted 210
+PATH 5701 adjusted 210
+VERIFY 600 hits 0
+VERIFY 1200 hits 0
+VERIFY 1800 hits 0
+VERIFY 2400 hits 0
+VERIFY 3000 hits 0
+VERIFY 3600 hits 0
+VERIFY 4200 hits 0
+VERIFY 4800 hits 0
+VERIFY 5400 hits 0
+Info: Saved "battlefield_v2.blend"
+VALIDATION_DONE 0
+Blender 4.3.2
+
+Blender quit

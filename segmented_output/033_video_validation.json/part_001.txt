@@ -1,0 +1,30 @@
+{
+  "frame_sequence_complete": true,
+  "png_headers_verified": 5701,
+  "all_frames_dimensions": [
+    480,
+    270
+  ],
+  "video_stream": {
+    "codec_name": "h264",
+    "width": 480,
+    "height": 270,
+    "avg_frame_rate": "30/1",
+    "duration": "190.033333",
+    "nb_read_frames": "5701"
+  },
+  "full_video_decode": "PASS: ffmpeg -v error -i video -f null -",
+  "render_engine": "BLENDER_WORKBENCH",
+  "runtime": "4.3.2",
+  "audio": "none; OS burned-in subtitles",
+  "updated_camera_render_ranges": [
+    [
+      480,
+      570
+    ],
+    [
+      4970,
+      5250
+    ]
+  ]
+}

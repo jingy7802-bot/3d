@@ -1,0 +1,96 @@
+        display='CIRCLE',
+        size=2.0
+    )
+
+
+def build_house_blast_smoke():
+    smoke_coll = get_collection("BFP_V20_12_SMOKE_PLACEHOLDERS")
+
+    # Static low-poly smoke masses only: visual volume placeholders, not a simulation.
+    smoke_specs = [
+        ((31, -7, 4.8), (5.5, 6.5, 4.0), "smoke"),
+        ((36, -7, 5.5), (7.0, 7.5, 5.2), "smoke"),
+        ((42, -6, 5.8), (7.5, 7.0, 5.8), "smoke"),
+        ((47, -4, 4.8), (5.5, 6.0, 4.2), "smoke"),
+        ((35, -3, 3.2), (6.0, 5.0, 2.5), "dust"),
+        ((42, -10, 3.0), (6.0, 4.5, 2.2), "dust"),
+        ((49, -2, 3.2), (4.5, 4.0, 2.2), "dust"),
+    ]
+    for i, (loc, scale, material_key) in enumerate(smoke_specs):
+        ico(
+            "WUTONGGOU_BLAST_SMOKE_MASS_%02d" % i,
+            loc,
+            scale,
+            MATS[material_key],
+            smoke_coll,
+            sub=2
+        )
+
+    # A low drifting dust bank stretches across the camera's exit from the house.
+    ico(
+        "WUTONGGOU_BLAST_DUST_EXIT_BANK",
+        (49, -4, 1.8),
+        (8.0, 7.0, 1.7),
+        MATS["dust"],
+        smoke_coll,
+        sub=2
+    )
+
+
+# ============================================================
+# CURVED RIVER / RIVERBANK
+# ============================================================
+
+def build_river():
+    river = get_collection("BFP_V20_05_RIVER")
+    centerline = [
+        (72, -4), (88, 0), (104, 8), (122, 12),
+        (140, 6), (158, -8), (176, -2), (196, 8)
+    ]
+    # Broad shallow crossing: 72m water width, with a wider submerged riverbed.
+    ribbon("HUANGCAOGUAN_BROAD_RIVER_SURFACE", centerline, 36.0, 0.38, MATS["water"], river)
+    ribbon("HUANGCAOGUAN_BROAD_RIVERBED", centerline, 40.0, -4.15, MATS["riverbed"], river)
+
+    # Irregular gravel bars break the water surface and create shallow crossing lanes.
+    for i, (x, y, sx, sy) in enumerate([
+        (96, -18, 8.0, 3.2), (116, 23, 9.5, 3.4),
+        (139, -24, 7.5, 3.0), (160, 18, 10.0, 3.6),
+        (181, -18, 8.0, 3.0)
+    ]):
+        ico("RIVER_GRAVEL_BAR_%02d" % i, (x, y, 0.08), (sx, sy, 0.38),
+            MATS["road_edge"], river, sub=1)
+
+    # Broken rock banks follow the meandering river, with uneven spacing and scale.
+    for i, (x, y) in enumerate(centerline):
+        for side in (-1, 1):
+            yy = y + side * random.uniform(37.0, 45.0)
+            ico("RIVERBANK_BOULDER_%02d_%s" % (i, side),
+                (x + random.uniform(-3.0, 3.0), yy, random.uniform(0.0, 1.0)),
+                (random.uniform(2.5, 5.2), random.uniform(1.7, 3.4), random.uniform(0.8, 2.0)),
+                MATS["rock"], river, sub=1)
+
+    for i, (x, y, sx, sy) in enumerate([
+        (96, 3, 5.5, 3.2), (119, -2, 6.2, 3.5),
+        (145, 3, 5.8, 3.0), (168, -1, 5.0, 3.2)
+    ]):
+        ico("RIVER_BLOOD_TINT_PATCH_%02d" % i, (x, y, 0.405),
+            (sx, sy, 0.045), MATS["blood_water"], river, sub=1)
+
+    submerged = [
+        (87, 1, -2.7), (101, 16, -2.7), (126, -22, -2.7),
+        (151, 17, -2.6), (173, -16, -2.5), (188, 24, -2.7)
+    ]
+    for i, (x, y, z) in enumerate(submerged):
+        ico("UNDERWATER_ROCK_OBSTACLE_%02d" % i, (x, y, z),
+            (2.5, 2.0, 1.2), MATS["rock"], river, sub=1)
+
+    # Fallen branches and timber at the river edge give the camera a reason to dodge.
+    beam_between("RIVERBANK_FALLEN_LOG_A", (112, -39, 0.4), (122, -33, 0.4), 0.32, MATS["trunk"], river)
+    beam_between("RIVERBANK_FALLEN_LOG_B", (165, 37, 0.25), (178, 32, 0.25), 0.28, MATS["trunk"], river)
+
+
+
+def build_wide_road_and_crowd_markers():
+    road_coll = get_collection("BFP_V20_07_WIDE_ROAD")
+    markers = get_collection("BFP_V20_08_FUTURE_MARKERS")
+

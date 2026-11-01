@@ -1,0 +1,96 @@
+    animate_rifle_burst(jp_close_a, [114, 119, 123], recover_frame=130, recoil=0.08)
+    animate_rifle_burst(jp_close_b, [116, 121, 125], recover_frame=132, recoil=0.08)
+    jp_fall = make_actor("JP_CLOSE_HIT_AND_FALL", (-148, -1, 0), yaw=0.0, faction="jp", rifle=True)
+    animate_hit_fall_performance(jp_fall, 136, 145, direction=1.0)
+    animate_head_turn(jp_close_b, 136, 150, angle_z=-0.42)
+    animate_duck_and_recover(jp_close_b, 138, 142, 154, depth=0.13)
+
+    cn_cover_close = make_actor("CN_ROCK_COVER_CLOSE_SHOOTER", (-137, -8, 0),
+                                yaw=0.0, faction="cn", posture="crouch", rifle=True)
+    cn_cover_second = make_actor("CN_ROCK_COVER_SECOND_SHOOTER", (-130, -12, 0),
+                                 yaw=0.0, faction="cn", posture="crouch", rifle=True)
+    for actor in (cn_cover_close, cn_cover_second):
+        actor["left_arm"].rotation_euler.y = -0.72
+        actor["right_arm"].rotation_euler.y = -0.72
+    animate_rifle_burst(cn_cover_close, [162, 167, 172], recover_frame=180, recoil=0.07)
+    animate_rifle_burst(cn_cover_second, [169, 174], recover_frame=181, recoil=0.07)
+    cn_fall = make_actor("CN_ROCK_COVER_HIT_AND_FALL", (-124, -5, 0),
+                         yaw=0.0, faction="cn", rifle=True)
+    animate_hit_fall_performance(cn_fall, 184, 197, direction=-1.0)
+    animate_head_turn(cn_cover_second, 184, 200, angle_z=0.38)
+    animate_duck_and_recover(cn_cover_second, 184, 188, 202, depth=0.14)
+
+    # Maintain people in foreground, midground and background during the forest section.
+    forest_fg_runner = make_actor("CN_FOREST_FG_RUNNER", (-161, -11, 0), yaw=0.0, faction="cn", rifle=True)
+    animate_actor(forest_fg_runner, [
+        (110, (-161, -11, 0), 0.0),
+        (150, (-156, -10, 0), 0.0),
+        (205, (-151, -9, 0), 0.0),
+    ], run=True)
+    forest_mid_shooter = make_actor("CN_FOREST_MID_SHOOTER", (-141, 4, 0), yaw=0.0, faction="cn", posture="crouch", rifle=True)
+    animate_rifle_burst(forest_mid_shooter, [150, 156], recover_frame=164, recoil=0.06)
+    forest_bg_jp = make_actor("JP_FOREST_BACKGROUND_ADVANCE", (-121, 18, 0), yaw=0.0, faction="jp", rifle=True)
+    animate_actor(forest_bg_jp, [
+        (130, (-121, 18, 0), 0.0),
+        (190, (-116, 17, 0), 0.0),
+        (250, (-110, 16, 0), 0.0),
+    ], run=True)
+    animate_head_turn(jp_close_a, 118, 136, angle_z=0.18)
+
+    wounded_forest = make_casualty("CN_WOUNDED_FOREST_CRAWL_A", (-115, -2, -0.25),
+                                   yaw=0.2, faction="cn", pose="side")
+    animate_wounded_body(wounded_forest, 205, 248, dx=0.55, dy=0.18)
+
+    extra_forest_casualties = [
+        ((-171, -17, -0.25), 0.2, "side", "cn"),
+        ((-163, 12, -0.25), -0.6, "prone", "cn"),
+        ((-153, -19, -0.25), 1.1, "supine", "jp"),
+        ((-145, 13, -0.25), -1.0, "side", "cn"),
+        ((-137, 23, -0.25), 0.5, "prone", "jp"),
+        ((-127, 17, -0.25), -0.8, "supine", "cn"),
+        ((-119, -19, -0.25), 1.3, "side", "cn"),
+        ((-103, 25, -0.25), -0.3, "prone", "jp"),
+        ((-96, -17, -0.25), 0.8, "side", "cn"),
+        ((-86, 23, -0.25), -1.1, "supine", "cn"),
+    ]
+    for i, (loc, yaw, pose, faction) in enumerate(extra_forest_casualties):
+        make_casualty("FOREST_EXTRA_CASUALTY_%02d" % i, loc, yaw=yaw,
+                      faction=faction, pose=pose)
+
+    make_non_graphic_limb_debris("FOREST_UNIFORM_LIMB_DEBRIS_A", (-142, -2, 0.12),
+                                 (0.72, 0.18, 0.18), (0.1, 0.2, 0.6))
+    make_non_graphic_limb_debris("FOREST_UNIFORM_LIMB_DEBRIS_B", (-112, 7, 0.12),
+                                 (0.62, 0.18, 0.18), (-0.1, 0.3, -0.8))
+
+    for i, spec in enumerate([
+        ((-160, -24, -0.25), -0.25, "prone"),
+        ((-132, 28, -0.25), 0.65, "side"),
+        ((-108, -25, -0.25), -0.9, "supine"),
+        ((-79, 27, -0.25), 1.4, "prone"),
+    ]):
+        loc, yaw, pose = spec
+        make_casualty("CN_FOREST_CASUALTY_%02d" % i, loc, yaw=yaw, faction="cn", pose=pose)
+
+    # 2) Li Xingou ravine: retreating survivors and scattered fallen soldiers.
+    ravine_survivors = [
+        ("CN_RAVINE_RUNNER_01", (-45, -7, 0), (-38, -7, 0)),
+        ("CN_RAVINE_RUNNER_02", (-41, 7, 0), (-34, 8, 0)),
+        ("CN_RAVINE_RUNNER_03", (-32, -12, 0), (-26, -11, 0)),
+    ]
+    for name, start, end in ravine_survivors:
+        actor = make_actor(name, start, yaw=0.0, faction="cn", rifle=True)
+        animate_actor(actor, [
+            (215, start, 0.0),
+            (245, ((start[0] + end[0]) * 0.5, (start[1] + end[1]) * 0.5, 0), 0.0),
+            (275, end, 0.0),
+        ], run=True)
+        if name == "CN_RAVINE_RUNNER_02":
+            animate_head_turn(actor, 242, 268, angle_z=-0.36)
+
+    for i, (loc, yaw, pose, faction) in enumerate([
+        ((-49, -4, -0.25), 0.3, "prone", "cn"),
+        ((-34, 11, -0.25), -0.8, "side", "cn"),
+        ((-20, -8, -0.25), 1.2, "supine", "cn"),
+        ((-4, 7, -0.25), -0.4, "prone", "jp"),
+        ((-13, 16, -0.25), 2.0, "side", "cn"),
+    ]):

@@ -1,0 +1,96 @@
+    for i, (x, y) in enumerate(((-153, -8), (-128, -12), (-106, 4), (-84, 12), (-54, 2))):
+        marker = empty(
+            "FUTURE_STAGGERED_ADVANCE_POINT_%02d" % i,
+            (x, y, 0.1),
+            tactical,
+            display='ARROWS',
+            size=1.1
+        )
+        marker.rotation_euler.z = 0.0
+
+
+# ============================================================
+# RAVINE: CLOSE ROCK WALLS AND LOW FLIGHT
+# ============================================================
+
+def build_ravine():
+    ravine = get_collection("BFP_V20_03_RAVINE")
+
+    for side in (-1, 1):
+        for i, x in enumerate((-52, -38, -24, -10, 4)):
+            y = side * random.uniform(13.5, 17.0)
+            ico(
+                "LIXINGOU_CLOSE_RAVINE_WALL_%s_%02d" % (side, i),
+                (x, y, random.uniform(5.5, 8.0)),
+                (random.uniform(9, 13), random.uniform(5, 8), random.uniform(9, 14)),
+                MATS["rock"] if i % 2 else MATS["rock_light"],
+                ravine,
+                sub=1
+            )
+
+    # Scattered boulders define a winding passage through the ravine floor.
+    boulders = [
+        (-49, -7, 1.0), (-38, 8, 1.2), (-27, -6, 1.0),
+        (-17, 7, 1.1), (-7, -8, 1.0), (2, 5, 1.1)
+    ]
+    for i, (x, y, z) in enumerate(boulders):
+        ico(
+            "RAVINE_FLOOR_BOULDER_%02d" % i,
+            (x, y, z),
+            (random.uniform(1.5, 2.8), random.uniform(1.2, 2.1), random.uniform(1.0, 1.8)),
+            MATS["rock"],
+            ravine,
+            sub=1
+        )
+
+
+# ============================================================
+# WUTONGGOU RUINS + EXPLOSION FUTURE MARKER
+# ============================================================
+
+def build_village():
+    village = get_collection("BFP_V20_04_VILLAGE")
+
+    # Surrounding damaged houses; the central house is rebuilt as a breached shell
+    # so the camera can pass through its open corridor rather than clipping a solid box.
+    houses = [
+        (17, -17), (25, 16), (49, 15),
+        (58, -16), (7, 13), (42, 27)
+    ]
+
+    for i, (x, y) in enumerate(houses):
+        w = random.uniform(5.0, 7.5)
+        d = random.uniform(4.0, 6.0)
+        h = random.uniform(2.5, 4.0)
+
+        cube(
+            "WUTONGGOU_BROKEN_HOUSE_%02d" % i,
+            (x, y, h * 0.5 - 0.8),
+            (w, d, h),
+            MATS["ruin"],
+            village,
+            rot=(0, 0, random.uniform(-0.2, 0.2))
+        )
+        cube(
+            "WUTONGGOU_COLLAPSED_ROOF_%02d" % i,
+            (x + random.uniform(-0.6, 0.6), y, h + 0.2),
+            (w + 0.8, d + 0.6, 0.25),
+            MATS["roof"],
+            village,
+            rot=(random.uniform(-0.2, 0.2), random.uniform(-0.5, 0.5), random.uniform(-0.2, 0.2))
+        )
+        for j in range(3):
+            cube(
+                "WUTONGGOU_RUBBLE_%02d_%02d" % (i, j),
+                (x + random.uniform(-4, 4), y + random.uniform(-3, 3), -0.5),
+                (random.uniform(0.8, 2.0), random.uniform(0.5, 1.5), random.uniform(0.4, 1.0)),
+                MATS["rock"],
+                village,
+                rot=(random.uniform(-0.4, 0.4), random.uniform(-0.4, 0.4), random.uniform(-0.5, 0.5))
+            )
+
+    # Breached house corridor: camera travels along +X through an open central lane.
+    # Two broken side walls and partial roof fragments create a readable "inside" pass.
+    cube(
+        "WUTONGGOU_BREACHED_HOUSE_LEFT_WALL",
+        (37, -13.2, 1.5),

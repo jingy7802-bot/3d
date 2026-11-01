@@ -1,0 +1,42 @@
+V2 BUILD build_landscape
+[BFP V2] Terrain mesh created: 10611 vertices / 10400 faces, expanded mountain basin.
+V2 BUILD build_forest
+V2 BUILD build_tactical_layout
+V2 BUILD build_ravine
+V2 BUILD build_village
+V2 BUILD build_house_blast_smoke
+V2 BUILD build_river
+V2 BUILD build_wide_road_and_crowd_markers
+V2 BUILD build_ground_grass
+V2 BUILD build_ground_rocks
+V2 BUILD build_west_pass
+V2 BUILD build_characters_and_props
+V2 BUILD build_storyboard_details
+[BFP V2] Storyboard details added: rescue, doorway pair, wooden-shaft grenade, encirclement, broad river crowd, surface casualties and natural frame gates.
+V2 BUILD build_battlefield_fx
+V2 BUILD configure_lighting
+Info: Saved "battlefield_v2.blend"
+V2_BUILD_SUCCESS /tmp/previs_repeat/battlefield_v2.blend
+V2 BUILD build_landscape
+[BFP V2] Terrain mesh created: 10611 vertices / 10400 faces, expanded mountain basin.
+V2 BUILD build_forest
+V2 BUILD build_tactical_layout
+V2 BUILD build_ravine
+V2 BUILD build_village
+V2 BUILD build_house_blast_smoke
+V2 BUILD build_river
+V2 BUILD build_wide_road_and_crowd_markers
+V2 BUILD build_ground_grass
+V2 BUILD build_ground_rocks
+V2 BUILD build_west_pass
+V2 BUILD build_characters_and_props
+V2 BUILD build_storyboard_details
+[BFP V2] Storyboard details added: rescue, doorway pair, wooden-shaft grenade, encirclement, broad river crowd, surface casualties and natural frame gates.
+V2 BUILD build_battlefield_fx
+V2 BUILD configure_lighting
+Info: Saved "battlefield_v2.blend"
+V2_BUILD_SUCCESS /tmp/previs_repeat/battlefield_v2.blend
+REPEATABILITY_PASS [{'objects': 4632, 'generated_objects': 4629, 'collections': 18}, {'objects': 4632, 'generated_objects': 4629, 'collections': 18}]
+Blender 4.3.2
+
+Blender quit

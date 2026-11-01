@@ -1,0 +1,6 @@
+Info: Saved "battlefield_v2.blend"
+FINAL_AUDIT {'fps_30': True, 'frame_end': 5701, 'single_camera': 'BFP_V20_ACTIVE_CAMERA', 'pigeon_exists': True, 'meng_exists': True, 'carrier_exists': True, 'wounded_exists': True, 'box_exists': True, 'surface_float_count': 40, 'major_wader_count': 60, 'bank_runner_count': 20, 'aircraft_count': 4, 'bomb_count': 12, 'orbit_start_degrees': 180.0, 'orbit_end_degrees': 0.010819191455602823, 'orbit_angular_travel_degrees': 179.9891808085444, 'runtime': '4.3.2', 'blender_5_2_verified': False} ADDITIONAL_COLLISIONS []
+Blender 4.3.2
+Read blend: "/workspace/3d/delivery_v2/battlefield_v2.blend"
+
+Blender quit

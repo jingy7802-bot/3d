@@ -1,0 +1,96 @@
+    (458, (126, -8, -2.20), (133, 5, -1.00), "SUDDEN BRAKE / WATER BULLET IMPACT", 40),
+    (466, (124, 12, -2.10), (131, 22, -1.00), "BACKWARD RECOIL / HARD SIDE DODGE", 48),
+    (476, (136, 24, -1.80), (145, 26, -0.60), "CUT BETWEEN FLOATING CASUALTIES", 26),
+    (488, (151, 18, -1.20), (160, 8, -0.10), "FORWARD ACCELERATION / RISE", -18),
+    (500, (167, 2, -0.20), (176, -8, 0.70), "BREAK WATER SURFACE", -22),
+    (512, (184, -10, 0.80), (194, -7, 1.20), "OUT OF RIVER / BANK TOWARD HANDOFF", 0),
+
+    # HANDOFF / OLD MENG: low approach, one 180-degree orbit, front hold
+    (524, (196, -12, 0.35), (201, -4, 1.10), "BOX HANDOFF ENTERS FRAME", -10),
+    (536, (203, -5, 0.30), (203, -4, 1.10), "PASS BETWEEN SENDER AND RECEIVER", 0),
+    (548, (213, 6, 0.35), (218, 0, 1.00), "FOLLOW RECEIVER / LOW GROUND SWEEP", 12),
+    (564, (228, 12, 0.40), (239, 0, 1.30), "TURN INTO OLD MENG OPENING", 16),
+    (582, (240, 0, 0.30), (250, 0, 2.00), "OLD MENG APPEARS AHEAD", 0),
+    (594, (246.5, 0.0, 0.24), (250, 0, 2.12), "ORBIT START / REAR LOW ANGLE", 0),
+    (608, (247.5, 2.5, 0.24), (250, 0, 2.14), "180 ORBIT / LEFT REAR QUARTER", 4),
+    (622, (250.0, 3.5, 0.25), (250, 0, 2.16), "ORBIT SIDE PROFILE", 6),
+    (636, (252.5, 2.5, 0.25), (250, 0, 2.18), "ORBIT FRONT THREE-QUARTER", 4),
+    (650, (253.5, 0.0, 0.26), (250, 0, 2.20), "FRONT LOW HERO / FULL FACE", 0),
+    (664, (253.5, 0.0, 0.28), (250, 0, 2.20), "HERO HOLD / BREATH AND LOOK", 0),
+
+    # PULL BACK / THROUGH HUMAN FRAME / VALLEY ARCH / HIGH AERIAL REVEAL
+    (680, (262, -1, 0.90), (254, 0, 1.80), "DIRECT PULL BACK FROM OLD MENG", -4),
+    (700, (278, -12, 1.80), (270, -1, 1.20), "WEAVE THROUGH FIRST CHARGE LANE", -24),
+    (720, (296, -24, 3.20), (286, -2, 1.20), "BANK LEFT THROUGH CROWD GAP", -34),
+    (742, (315, -18, 6.00), (304, -1, 1.50), "PASS UNDER NATURAL VALLEY FRAME", 28),
+    (762, (338, 8, 12.00), (326, 0, 1.50), "CLEAR ROCK ARCH / CLIMB", -18),
+    (790, (360, 22, 24.00), (340, 0, 4.00), "SWEEP RIGHT ABOVE VALLEY", -30),
+    (830, (400, 0, 55.00), (300, 0, 0.00), "HIGH AERIAL LIFT", -8),
+    (870, (450, 0, 100.00), (220, 0, 0.00), "WIDE REVEAL OF COMPLETE BATTLEFIELD", 0),
+    (900, (510, 0, 145.00), (140, 0, 0.00), "FINAL HIGH AERIAL / TERRAIN SCALE", 0),
+]
+
+CAMERA_FOCAL_KEYS = [
+    (1, 24), (12, 26), (22, 30), (32, 34), (42, 38), (52, 40), (60, 42), (70, 36), (80, 28), (90, 24), (98, 26),
+    (108, 38), (116, 42), (124, 42), (132, 38), (140, 40), (148, 42), (156, 40), (164, 38), (172, 36),
+    (180, 34), (188, 34), (196, 36), (204, 38), (212, 38), (220, 34), (232, 30),
+    (244, 30), (254, 34), (264, 38), (274, 36), (286, 36), (298, 34), (310, 30), (322, 30), (332, 32),
+    (340, 34), (350, 38), (360, 42), (370, 46), (378, 40), (388, 32), (398, 30), (410, 28),
+    (420, 30), (430, 38), (440, 42), (450, 44), (458, 44), (466, 40), (476, 42), (488, 36), (500, 30), (512, 28),
+    (524, 34), (536, 44), (548, 38), (564, 28), (582, 30), (594, 48), (608, 58), (622, 62), (636, 65),
+    (650, 68), (664, 65), (680, 40), (700, 32), (720, 28), (742, 26), (762, 24), (790, 24), (830, 24), (870, 24), (900, 24),
+]
+
+
+def build_camera():
+    camera_coll = get_collection("BFP_V12_09_CAMERA")
+    cam_data = bpy.data.cameras.new("BFP_V12_ACTIVE_CAMERA_DATA")
+    cam = bpy.data.objects.new("BFP_V12_ACTIVE_CAMERA", cam_data)
+    camera_coll.objects.link(cam)
+    cam.parent = None
+    cam.rotation_mode = 'QUATERNION'
+    cam_data.lens = 24
+    cam_data.clip_start = 0.05
+    cam_data.clip_end = 2600
+    cam_data.display_size = 5.0
+    cam.show_in_front = True
+    cam.show_name = True
+    cam["CAMERA_BANKING_ENABLED"] = True
+    cam["CAMERA_CHOREOGRAPHY_VERSION"] = "V1.2"
+
+    focus = empty(
+        "BFP_V12_CAMERA_LOOK_TARGET",
+        (0, 0, 0),
+        camera_coll,
+        display='SPHERE',
+        size=0.8
+    )
+
+    previous_camera_q = None
+    for frame, position, target, note, bank_deg in CAMERA_KEYS:
+        cam.location = position
+        cam.keyframe_insert(data_path="location", frame=frame)
+
+        direction = Vector(target) - Vector(position)
+        if direction.length < 0.001:
+            direction = Vector((1, 0, 0))
+
+        # Explicit bank is part of the camera choreography: it peaks at turns and frame passages,
+        # then returns toward level at readable story beats.
+        base_q = direction.to_track_quat('-Z', 'Y')
+        local_bank = Quaternion((0.0, 0.0, 1.0), math.radians(bank_deg))
+        camera_q = base_q @ local_bank
+        if previous_camera_q is not None and camera_q.dot(previous_camera_q) < 0.0:
+            camera_q = Quaternion((-camera_q.w, -camera_q.x, -camera_q.y, -camera_q.z))
+        cam.rotation_quaternion = camera_q
+        cam.keyframe_insert(data_path="rotation_quaternion", frame=frame)
+        previous_camera_q = camera_q.copy()
+
+        focus.location = target
+        focus.keyframe_insert(data_path="location", frame=frame)
+
+    for frame, lens_mm in CAMERA_FOCAL_KEYS:
+        cam_data.lens = lens_mm
+        cam_data.keyframe_insert(data_path="lens", frame=frame)
+
+    try:

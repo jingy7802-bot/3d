@@ -1,0 +1,96 @@
+EGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).
+Failed to create /home/agent/.cache/mesa_shader_cache for shader cache (Read-only file system)---disabling.
+Failed to create /home/agent/.cache/mesa_shader_cache_db for shader cache (Read-only file system)---disabling.
+EGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).
+Blender 4.3.2
+Read blend: "/workspace/3d/delivery_v2/battlefield_v2.blend"
+Saved: '/workspace/3d/delivery_v2/checkpoints/00001.png'
+Time: 00:04.60 (Saving: 00:00.02)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/00196.png'
+Time: 00:01.13 (Saving: 00:00.02)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/00400.png'
+Time: 00:00.63 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/00700.png'
+Time: 00:00.79 (Saving: 00:00.02)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/00880.png'
+Time: 00:01.67 (Saving: 00:00.02)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/01050.png'
+Time: 00:01.00 (Saving: 00:00.02)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/01220.png'
+Time: 00:00.75 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/01440.png'
+Time: 00:00.75 (Saving: 00:00.02)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/01600.png'
+Time: 00:00.72 (Saving: 00:00.02)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/01771.png'
+Time: 00:01.06 (Saving: 00:00.02)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/01950.png'
+Time: 00:00.89 (Saving: 00:00.02)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/02150.png'
+Time: 00:00.59 (Saving: 00:00.02)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/02290.png'
+Time: 00:00.69 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/02520.png'
+Time: 00:00.99 (Saving: 00:00.02)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/02630.png'
+Time: 00:00.97 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/02720.png'
+Time: 00:00.79 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/02800.png'
+Time: 00:00.68 (Saving: 00:00.02)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/02930.png'
+Time: 00:00.59 (Saving: 00:00.02)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/03091.png'
+Time: 00:01.00 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/03280.png'
+Time: 00:00.96 (Saving: 00:00.02)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/03450.png'
+Time: 00:00.66 (Saving: 00:00.02)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/03660.png'
+Time: 00:00.76 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/03900.png'
+Time: 00:00.82 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/04050.png'
+Time: 00:00.77 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/04230.png'
+Time: 00:00.73 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/04381.png'
+Time: 00:00.69 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/04650.png'
+Time: 00:00.63 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/04770.png'
+Time: 00:00.64 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/04890.png'
+Time: 00:01.11 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/checkpoints/05011.png'
+Time: 00:01.23 (Saving: 00:00.01)
+

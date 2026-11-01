@@ -1,0 +1,96 @@
+    left_leg.location = (0, -0.14, hip_z)
+    right_leg.location = (0, 0.14, hip_z)
+
+    child_cube(name + "_LEFT_LEG", left_leg, (0, 0, -0.33), (0.28, 0.27, 0.68), body_mat, coll)
+    child_cube(name + "_RIGHT_LEG", right_leg, (0, 0, -0.33), (0.28, 0.27, 0.68), body_mat, coll)
+
+    actor = {
+        "root": root,
+        "torso": torso,
+        "head": head,
+        "left_arm": left_arm,
+        "right_arm": right_arm,
+        "left_leg": left_leg,
+        "right_leg": right_leg,
+    }
+
+    if rifle:
+        # Rifle is a small, readable cuboid prop held across the front of the torso.
+        gun = child_cube(name + "_RIFLE", root, (0.62, -0.22, torso_z + 0.05),
+                         (1.12, 0.10, 0.10), MATS["weapon"], coll)
+        child_cube(name + "_RIFLE_STOCK", root, (0.08, -0.22, torso_z + 0.05),
+                   (0.34, 0.15, 0.14), MATS["weapon"], coll)
+        actor["rifle"] = gun
+
+    if grenades:
+        for i in range(grenades):
+            angle = (2.0 * math.pi * i) / float(grenades)
+            gx = math.cos(angle) * 0.28
+            gy = math.sin(angle) * 0.23
+            child_cylinder(
+                name + "_CHARGE_%02d" % i,
+                root,
+                (gx, gy, torso_z + 0.02),
+                0.085, 0.25,
+                MATS["grenade"], coll,
+                rot=(0.12, 0.0, angle)
+            )
+
+    return actor
+
+
+def make_casualty(name, loc, yaw=0.0, faction="cn", pose="prone", submerged=False, charred=False):
+    """Non-graphic white-block casualty; varied orientation and limb placement."""
+    coll = get_collection("BFP_V12_16_CHARACTERS")
+    root = empty(name + "_ROOT", loc, coll, display='PLAIN_AXES', size=0.35)
+    root.rotation_euler.z = yaw
+
+    if charred:
+        body_mat = MATS["casualty_charred"]
+    else:
+        body_mat = MATS["casualty_jp"] if faction == "jp" else MATS["casualty_cn"]
+    if pose == "side":
+        body_rot = (0.85, 0.0, 0.0)
+        head_loc = (-0.62, 0.10, 0.35)
+        arm_a_loc, arm_b_loc = (-0.05, -0.34, 0.30), (0.16, 0.34, 0.24)
+        leg_a_rot, leg_b_rot = (0.0, 0.0, -0.28), (0.0, 0.0, 0.32)
+    elif pose == "supine":
+        body_rot = (math.pi, 0.0, 0.0)
+        head_loc = (-0.68, 0.0, 0.36)
+        arm_a_loc, arm_b_loc = (-0.05, -0.48, 0.28), (0.16, 0.48, 0.28)
+        leg_a_rot, leg_b_rot = (0.0, 0.0, -0.18), (0.0, 0.0, 0.24)
+    else:
+        body_rot = (0.0, 0.0, 0.0)
+        head_loc = (-0.70, -0.04, 0.30)
+        arm_a_loc, arm_b_loc = (-0.05, -0.38, 0.27), (0.16, 0.37, 0.26)
+        leg_a_rot, leg_b_rot = (0.0, 0.0, random.uniform(-0.25, 0.25)), (0.0, 0.0, random.uniform(-0.25, 0.25))
+
+    child_cube(name + "_BODY", root, (0.0, 0.0, 0.28),
+               (1.15, 0.36, 0.28), body_mat, coll, rot=body_rot)
+    child_ico(name + "_HEAD", root, head_loc, (0.22, 0.20, 0.21), body_mat, coll, sub=1)
+
+    # Arms and legs deliberately differ in angle to avoid repeated mannequin poses.
+    child_cube(name + "_ARM_A", root, arm_a_loc,
+               (0.62, 0.18, 0.17), body_mat, coll,
+               rot=(0.0, 0.0, random.uniform(-0.55, 0.55)))
+    child_cube(name + "_ARM_B", root, arm_b_loc,
+               (0.56, 0.18, 0.17), body_mat, coll,
+               rot=(0.0, 0.0, random.uniform(-0.55, 0.55)))
+    child_cube(name + "_LEG_A", root, (0.72, -0.13, 0.22),
+               (0.72, 0.22, 0.20), body_mat, coll, rot=leg_a_rot)
+    child_cube(name + "_LEG_B", root, (0.76, 0.14, 0.22),
+               (0.68, 0.22, 0.20), body_mat, coll, rot=leg_b_rot)
+
+    if submerged:
+        root.location.z = loc[2]
+    return root
+
+
+def make_pigeon():
+    """Simple readable pigeon silhouette, with a left-foreground glide and wing beats."""
+    props = get_collection("BFP_V12_17_PROPS")
+    root = empty("OPENING_PIGEON_ROOT", (-232, -16, 116), props, display='PLAIN_AXES', size=0.55)
+    child_ico("OPENING_PIGEON_BODY", root, (0, 0, 0), (0.88, 0.25, 0.25), MATS["bird"], props, sub=2)
+    child_ico("OPENING_PIGEON_HEAD", root, (0.72, 0, 0.12), (0.28, 0.22, 0.22), MATS["bird"], props, sub=2)
+    child_cube("OPENING_PIGEON_BEAK", root, (1.02, 0, 0.11), (0.22, 0.10, 0.10), MATS["roof"], props)
+    child_ico("OPENING_PIGEON_TAIL", root, (-0.82, 0, 0.02), (0.40, 0.22, 0.08), MATS["bird"], props, sub=1)

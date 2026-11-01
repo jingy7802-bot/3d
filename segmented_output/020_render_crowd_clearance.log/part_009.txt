@@ -1,0 +1,82 @@
+Time: 00:00.38 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5225.png'
+Time: 00:00.38 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5226.png'
+Time: 00:00.38 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5227.png'
+Time: 00:00.38 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5228.png'
+Time: 00:00.41 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5229.png'
+Time: 00:00.39 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5230.png'
+Time: 00:00.35 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5231.png'
+Time: 00:00.37 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5232.png'
+Time: 00:00.40 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5233.png'
+Time: 00:00.38 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5234.png'
+Time: 00:00.38 (Saving: 00:00.02)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5235.png'
+Time: 00:00.38 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5236.png'
+Time: 00:00.37 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5237.png'
+Time: 00:00.37 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5238.png'
+Time: 00:00.38 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5239.png'
+Time: 00:00.36 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5240.png'
+Time: 00:00.35 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5241.png'
+Time: 00:00.36 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5242.png'
+Time: 00:00.35 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5243.png'
+Time: 00:00.35 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5244.png'
+Time: 00:00.36 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5245.png'
+Time: 00:00.36 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5246.png'
+Time: 00:00.36 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5247.png'
+Time: 00:00.35 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5248.png'
+Time: 00:00.37 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5249.png'
+Time: 00:00.35 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5250.png'
+Time: 00:00.36 (Saving: 00:00.01)
+
+
+Blender quit

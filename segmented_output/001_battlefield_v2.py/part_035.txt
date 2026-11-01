@@ -1,0 +1,96 @@
+    for i in range(CFG['bank_runners']):
+        x,y=random.uniform(193,228),random.choice([-1,1])*random.uniform(5,22)
+        actor=make_actor('V2_BANK_RUN_%02d'%i,(x,y,0),rifle=i%3==0)
+        animate_actor(actor,[(1,(x-55,y,-1.5),0),(510,(x,y,0),0),(900,(x+75,y,0),0)])
+    # Extend locomotion across Master Timeline (not tied to the observation window).
+    for ob in list(bpy.data.objects):
+        if ob.type=='EMPTY' and ob.name.endswith('_ROOT') and any(x in ob.name for x in ['MAIN_CHARGE','GUARD_COMPANY','VALLEY_EXIT_RUNNER','FOREST_RUNNER','RAVINE_RUNNER']):
+            for fc in curves(ob):
+                if fc.data_path=='location' and len(fc.keyframe_points)>1:
+                    ks=fc.keyframe_points; a,b=ks[0],ks[-1]; v=(b.co.y-a.co.y)/(b.co.x-a.co.x)
+                    fc.keyframe_points.insert(1,a.co.y+(1-a.co.x)*v)
+                    fc.keyframe_points.insert(900,b.co.y+(900-b.co.x)*v)
+    # Independent body breathing for Meng.
+    torso=bpy.data.objects['OLD_MENG_TORSO']
+    for f in range(1,901,15):
+        torso.scale=(.52,.36,.76*(1+.015*math.sin(f*.1)));torso.keyframe_insert(data_path='scale',frame=f)
+    # Doorway grenade components follow the carrier's transform without jumping.
+    for n in ['WUTONGGOU_OLD_WOODEN_SHAFT_GRENADE','WUTONGGOU_WOODEN_GRENADE_METAL_CAP']:
+        ob=bpy.data.objects[n]; parent=bpy.data.objects['WUTONGGOU_WOUNDED_MAN_ON_BACK_ROOT']
+        bpy.context.view_layer.update(); world=ob.matrix_world.copy();ob.parent=parent;ob.matrix_world=world
+    # Receiver emerges from river before reaching handoff; carried box bound to receiver after grip.
+    r=bpy.data.objects['CN_BOX_HANDOFF_RECEIVER_ROOT']
+    for f,p,yaw in [(500,(193,-4,-1.5),0),(524,(200,-4,-.4),math.pi),(538,(202,-4,0),math.pi),
+                    (553,(202,-4,0),math.pi),(570,(208,-13,0),-.9),(600,(225,-30,0),-.9),(900,(300,-55,0),-.9)]:
+        r.location=p;r.rotation_euler.z=yaw;r.keyframe_insert(data_path='location',frame=f);r.keyframe_insert(data_path='rotation_euler',frame=f)
+    box=bpy.data.objects['RIVERBANK_HANDOFF_BOX']
+    box.animation_data_clear()
+    for f,p in [(1,(198.7,-4,1.1)),(538,(198.7,-4,1.1)),(546,(201.1,-4,1.1)),(553,(201.4,-4,1.1))]:
+        box.location=p;box.keyframe_insert(data_path='location',frame=f)
+    con=box.constraints.new('CHILD_OF');con.target=r
+    bpy.context.scene.frame_set(553);bpy.context.view_layer.update();con.inverse_matrix=r.matrix_world.inverted()
+    for f,v in [(1,0),(552,0),(553,1)]:con.influence=v;con.keyframe_insert(data_path='influence',frame=f)
+    for fc in curves(box):
+        if 'influence' in fc.data_path:
+            for k in fc.keyframe_points:k.interpolation='CONSTANT'
+
+# Purposeful observation points; all entries refer to the legacy event clock,
+# then camera and actors are retimed together to a 190s master clock.
+V2_KEYS=[
+(1,(-285,-34,165),(-240,-20,118),'Sky',0),
+(12,(-246,-20,124),(-225,-16,115),'Pigeon',0),
+(22,(-232,-13,118),(-222,-16,115),'Pigeon glide',0),
+(32,(-210,-18,116),(-150,-21,113),'Aircraft approach',0),
+(42,(-181,-27,111),(-148,-22,113),'Bomber close',-4),
+(52,(-163,-26,107),(-158,-22,111),'Under wing release',-5),
+(60,(-167,-19,100),(-166,-22,108),'Belly and bombs',0),
+(70,(-175,-14,73),(-181,-8,30),'Descent',4),
+(80,(-185,-12,34),(-181,-8,2),'Bomb descent',3),
+(90,(-184,-14,8),(-181,-8,1),'Impact',0),
+(98,(-174,-10,2.2),(-158,-3,1),'Forest entry',0),
+(108,(-163,-7,1.7),(-157,-3,1.1),'JP firing',0),
+(124,(-156,-6,1.6),(-151,2,1),'JP reaction',-3),
+(145,(-146,-4,1.5),(-148,-1,.8),'Hit and fall',0),
+(156,(-141,-12,1.5),(-137,-8,1),'CN cover',3),
+(176,(-132,-16,1.4),(-130,-12,1),'Return fire',0),
+(197,(-122,-9,1.4),(-124,-5,.6),'CN casualty',-3),
+(212,(-104,-2,1.5),(-92,7,1),'Branch dodge',4),
+(232,(-81,5,1.7),(-57,10,1),'Ravine reveal',0),
+(254,(-54,4,1.5),(-45,-4,.3),'Losses',-3),
+(274,(-43,-5,1.5),(-35,0,.7),'Pinned soldier',0),
+(288,(-40,-6,1.4),(-38,-2,1),'Rescuer bends',0),
+(302,(-34,-6,1.5),(-36,-1,1),'Tree lift',0),
+(314,(-30,-3,1.5),(-34,0,1),'Rescue continues',3),
+(332,(20,2,2.2),(48,-2,1),'Village approach',0),
+(350,(53,-5,1.6),(44,-2,1),'JP rear approach',0),
+(360,(43,-10,1.6),(35,-7,1.5),'Doorway pair',0),
+(370,(39,-10,1.65),(35.5,-7,1.6),'Ring pull readable medium',0),
+(378,(43,-9,2),(36,-7,2),'House blast',5),
+(388,(49,-9,2.8),(40,-7,3),'Blast reaction',8),
+(398,(60,-6,2.5),(72,-4,.5),'Smoke exit',3),
+(410,(70,-9,2.2),(101,0,.8),'River opens',0),
+(420,(82,-8,.1),(94,-4,.1),'Water entry',-4),
+(430,(97,-7,-.4),(108,-4,-.3),'Waders legs',-5),
+(440,(112,-6,-.4),(120,4,-.3),'Assisted crossing',0),
+(450,(124,-6,-.4),(121,6,-.6),'Underwater bodies',3),
+(458,(130,-4,-.4),(140,-1,-.3),'Brake',0),
+(462,(129.5,-4,-.4),(140,-1,-.3),'Inertial recoil',0),
+(466,(129,-7,-.4),(143,-1,-.4),'Side dodge',6),
+(476,(140,-8,-.35),(145,-3,-.2),'Float clearance',3),
+(488,(155,-6,-.3),(165,0,.2),'Rise',0),
+(500,(176,-8,.7),(194,-4,1),'Surface',0),
+(512,(189,-10,1),(200,-4,1),'Bank emergence',0),
+(524,(196,-11,1.25),(200,-4,1),'Transfer approach',0),
+(538,(198,-9,1.3),(200,-4,1),'Sender reaches',0),
+(550,(200,-9,1.3),(201,-4,1),'Receiver secures',0),
+(558,(203,-8,1.2),(209,-12,1),'Run screen right',0),
+(564,(225,3,.7),(250,0,1.3),'Meng approach',0),
+(582,(240,0,.65),(250,0,1.2),'Meng back',0),
+(594,(246,0,.6),(250,0,1.1),'Orbit start',0),
+(608,(247.17,2.83,.6),(250,0,1.1),'Rear quarter',2),
+(622,(250,4,.6),(250,0,1.1),'Side',3),
+(636,(252.83,2.83,.6),(250,0,1.1),'Front quarter',2),
+(650,(254,0,.6),(250,0,1.1),'Hero front',0),
+(664,(255,0,.7),(250,0,1.15),'Pull back begins',0),
+(680,(263,0,1.4),(250,0,1.2),'Charge',0),
+(700,(280,0,2.8),(250,0,1.2),'Charge layers',-3),

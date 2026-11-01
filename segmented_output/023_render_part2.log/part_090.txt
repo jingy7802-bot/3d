@@ -1,0 +1,16 @@
+Time: 00:00.26 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5698.png'
+Time: 00:00.25 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5699.png'
+Time: 00:00.26 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5700.png'
+Time: 00:00.24 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_5701.png'
+Time: 00:00.25 (Saving: 00:00.01)
+
+
+Blender quit

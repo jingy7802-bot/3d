@@ -1,0 +1,96 @@
+Time: 00:00.15 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1952.png'
+Time: 00:00.18 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1953.png'
+Time: 00:00.18 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1954.png'
+Time: 00:00.19 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1955.png'
+Time: 00:00.19 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1956.png'
+Time: 00:00.17 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1957.png'
+Time: 00:00.19 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1958.png'
+Time: 00:00.17 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1959.png'
+Time: 00:00.18 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1960.png'
+Time: 00:00.21 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1961.png'
+Time: 00:00.21 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1962.png'
+Time: 00:00.19 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1963.png'
+Time: 00:00.19 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1964.png'
+Time: 00:00.23 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1965.png'
+Time: 00:00.20 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1966.png'
+Time: 00:00.23 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1967.png'
+Time: 00:00.22 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1968.png'
+Time: 00:00.19 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1969.png'
+Time: 00:00.20 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1970.png'
+Time: 00:00.19 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1971.png'
+Time: 00:00.20 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1972.png'
+Time: 00:00.20 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1973.png'
+Time: 00:00.19 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1974.png'
+Time: 00:00.22 (Saving: 00:00.02)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1975.png'
+Time: 00:00.24 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1976.png'
+Time: 00:00.20 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1977.png'
+Time: 00:00.19 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1978.png'
+Time: 00:00.21 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1979.png'
+Time: 00:00.24 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1980.png'
+Time: 00:00.20 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1981.png'
+Time: 00:00.21 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1982.png'
+Time: 00:00.19 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_1983.png'

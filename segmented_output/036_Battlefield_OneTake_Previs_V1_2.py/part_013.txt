@@ -1,0 +1,96 @@
+    def add_blade(base, height, width, lean_x, lean_y, material_index):
+        base = Vector(base)
+        mid = base + Vector((lean_x * 0.55, lean_y * 0.55, height * 0.62))
+        tip = base + Vector((lean_x, lean_y, height))
+        direction = Vector((lean_x, lean_y, 0))
+        if direction.length < 0.001:
+            direction = Vector((1, 0, 0))
+        direction.normalize()
+        side = Vector((-direction.y, direction.x, 0)) * width
+
+        start = len(verts)
+        verts.extend([
+            tuple(base - side),
+            tuple(base + side),
+            tuple(mid - side * 0.55),
+            tuple(mid + side * 0.55),
+            tuple(tip),
+        ])
+        faces.extend([
+            (start + 0, start + 1, start + 3, start + 2),
+            (start + 2, start + 3, start + 4),
+        ])
+        face_materials.extend([material_index, material_index])
+
+    random.seed(SEED + 55)
+
+    # Main road margins: fine, silky sedge-like blades lean in the same general wind direction.
+    for i in range(210):
+        x = random.uniform(205, 302)
+        side = random.choice((-1, 1))
+        y = side * random.uniform(7.5, 28.0)
+        base_z = -0.43
+        blade_count = random.randint(3, 5)
+        for j in range(blade_count):
+            angle = random.uniform(-0.75, 0.75)
+            lean_x = random.uniform(0.20, 0.55)
+            lean_y = side * random.uniform(0.03, 0.22) + math.sin(angle) * 0.12
+            height = random.uniform(0.38, 0.92)
+            width = random.uniform(0.025, 0.055)
+            add_blade(
+                (x + random.uniform(-0.45, 0.45), y + random.uniform(-0.35, 0.35), base_z),
+                height, width, lean_x, lean_y,
+                0 if random.random() < 0.72 else 1
+            )
+
+    # A few taller, nearer foreground tufts provide parallax in the ground-level wide-angle push,
+    # but are offset from the exact centerline to avoid blocking the subject.
+    for i in range(54):
+        x = random.uniform(224, 280)
+        side = random.choice((-1, 1))
+        y = side * random.uniform(3.0, 8.5)
+        for j in range(random.randint(3, 4)):
+            add_blade(
+                (x + random.uniform(-0.25, 0.25), y + random.uniform(-0.25, 0.25), -0.43),
+                random.uniform(0.32, 0.72),
+                random.uniform(0.025, 0.055),
+                random.uniform(0.25, 0.5),
+                side * random.uniform(0.05, 0.18),
+                0 if random.random() < 0.7 else 1
+            )
+
+    mesh = bpy.data.meshes.new("BFP_V12_GROUND_GRASS_MESH")
+    mesh.from_pydata(verts, [], faces)
+    mesh.materials.append(MATS["grass"])
+    mesh.materials.append(MATS["grass_light"])
+    mesh.update()
+
+    obj = bpy.data.objects.new("BFP_V12_LOW_FINE_DRY_GRASS", mesh)
+    grass_coll.objects.link(obj)
+
+    for poly, mat_index in zip(mesh.polygons, face_materials):
+        poly.material_index = mat_index
+
+
+# ============================================================
+# WEST PASS: HUGE VALLEY AND NATURAL FRAME
+# ============================================================
+
+def build_ground_rocks():
+    rocks = get_collection("BFP_V12_15_GROUND_ROCKS")
+
+    # Small, low-profile stones sit close to the camera's ground-level path.
+    # They are kept outside the exact camera centerline, so they read as foreground
+    # parallax and ground texture rather than hard obstacles.
+    rock_specs = [
+        (226, -3.7, (1.25, 0.85, 0.32)),
+        (233, 4.0, (1.55, 0.95, 0.38)),
+        (241, -4.4, (1.45, 0.9, 0.34)),
+        (249, 3.6, (1.2, 0.8, 0.28)),
+        (258, -4.0, (1.65, 1.0, 0.4)),
+        (267, 4.5, (1.35, 0.9, 0.32)),
+        (276, -3.8, (1.4, 0.85, 0.3)),
+        (286, 4.2, (1.5, 0.95, 0.36)),
+    ]
+    for i, (x, y, scale) in enumerate(rock_specs):
+        ico(

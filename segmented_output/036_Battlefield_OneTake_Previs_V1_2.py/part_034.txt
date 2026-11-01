@@ -1,0 +1,36 @@
+
+    cam = bpy.data.objects.get("BFP_V12_ACTIVE_CAMERA")
+    if cam:
+        samples = []
+        for frame in (1, 22, 32, 52, 70, 90, 108, 124, 148, 172, 188, 204, 220, 244, 254, 274, 298, 322, 350, 370, 378, 388, 410, 430, 458, 466, 488, 512, 536, 582, 608, 622, 650, 664, 700, 742, 790, 830, 870, 900):
+            bpy.context.scene.frame_set(frame)
+            bpy.context.view_layer.update()
+            p = cam.matrix_world.translation
+            samples.append((round(p.x, 2), round(p.y, 2), round(p.z, 2)))
+        STATUS["CAMERA_MOVEMENT_CHECK"] = "PASS" if len(set(samples)) > 1 else "FAIL"
+        log("Camera position samples: " + repr(samples))
+    else:
+        STATUS["CAMERA_MOVEMENT_CHECK"] = "FAIL - camera missing"
+
+    bpy.context.scene.frame_set(FRAME_START)
+    bpy.context.view_layer.update()
+    write_build_report()
+    log("FINISHED. Open BFP_V12_BUILD_REPORT if anything failed.")
+    try:
+        output_dir = get_script_directory()
+        if not output_dir:
+            output_dir = os.path.expanduser("~/Desktop")
+        os.makedirs(output_dir, exist_ok=True)
+        blend_path = os.path.join(output_dir, "Battlefield_OneTake_Previs_V1_2.blend")
+        bpy.ops.wm.save_as_mainfile(filepath=blend_path)
+        STATUS["BLEND_SAVE"] = "PASS - " + blend_path
+        log("Saved Blender scene: " + blend_path)
+        write_build_report()
+        bpy.ops.wm.save_as_mainfile(filepath=blend_path)
+    except Exception as exc:
+        STATUS["BLEND_SAVE"] = "FAIL: " + repr(exc)
+        log("BLEND SAVE FAILED: " + repr(exc))
+    log("V1.2 emphasizes a non-linear banked camera choreography, terrain-scale expansion, four-aircraft approach, pigeon glide, staged aviation bombs, forest rescue, doorway blast, broad river crowd, surface casualties and storyboard-aligned frame passages. Inspect BFP_V12_BUILD_REPORT.")
+
+
+main()

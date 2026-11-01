@@ -1,0 +1,96 @@
+    # Wide, open dirt road begins immediately after the river exit.
+    # Camera and future charging groups travel along +X.
+    road_centerline = [
+        (190, 6), (208, 4), (230, 2), (252, 0),
+        (278, -1), (305, 0), (335, 1), (355, 2)
+    ]
+    ribbon(
+        "WIDE_OPEN_CHARGE_ROAD",
+        road_centerline,
+        29.0,
+        -0.36,
+        MATS["road"],
+        road_coll
+    )
+
+    # Low edge markers define the width without cluttering the central lane.
+    for i, x in enumerate((210, 238, 266, 294, 322, 345)):
+        for side in (-1, 1):
+            ico(
+                "WIDE_ROAD_EDGE_ROCK_%02d_%s" % (i, side),
+                (x, side * 30.5, -0.15),
+                (random.uniform(1.2, 2.2), random.uniform(0.8, 1.4), random.uniform(0.5, 0.9)),
+                MATS["road_edge"],
+                road_coll,
+                sub=1
+            )
+
+    # Future actor anchors only. Empty objects do not render as characters.
+    # These reserve lanes for groups continuously advancing toward +X.
+    for lane_index, y in enumerate((-17, -9, 9, 17)):
+        for j, x in enumerate((210, 226, 242, 258, 274, 290, 306)):
+            marker = empty(
+                "FUTURE_CHARGING_GROUP_LANE_%02d_POINT_%02d" % (lane_index, j),
+                (x, y, 0.0),
+                markers,
+                display='ARROWS',
+                size=1.25
+            )
+            marker.rotation_euler.z = 0.0
+
+    empty(
+        "FUTURE_OLD_MENG_POSITION",
+        (250, 0, 0),
+        markers,
+        display='CIRCLE',
+        size=3.0
+    )
+    empty(
+        "FUTURE_CHARGE_DIRECTION_POSITIVE_X",
+        (270, 0, 0),
+        markers,
+        display='ARROWS',
+        size=3.0
+    )
+    empty(
+        "FUTURE_BOX_HANDOFF_RIVERBANK",
+        (202, -4, 0),
+        markers,
+        display='CUBE',
+        size=2.0
+    )
+
+
+# ============================================================
+# WEST PASS: HUGE VALLEY AND NATURAL FRAME
+# ============================================================
+
+def build_ground_grass():
+    grass_coll = get_collection("BFP_V20_13_GROUND_GRASS")
+
+    # Build many thin, slightly curved blades into a small number of meshes.
+    # Tufts stay mostly along the road edges so the low camera lane remains clear.
+    verts = []
+    faces = []
+    face_materials = []
+
+    def add_blade(base, height, width, lean_x, lean_y, material_index):
+        base = Vector(base)
+        mid = base + Vector((lean_x * 0.55, lean_y * 0.55, height * 0.62))
+        tip = base + Vector((lean_x, lean_y, height))
+        direction = Vector((lean_x, lean_y, 0))
+        if direction.length < 0.001:
+            direction = Vector((1, 0, 0))
+        direction.normalize()
+        side = Vector((-direction.y, direction.x, 0)) * width
+
+        start = len(verts)
+        verts.extend([
+            tuple(base - side),
+            tuple(base + side),
+            tuple(mid - side * 0.55),
+            tuple(mid + side * 0.55),
+            tuple(tip),
+        ])
+        faces.extend([
+            (start + 0, start + 1, start + 3, start + 2),

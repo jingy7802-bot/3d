@@ -1,0 +1,96 @@
+                bsdf.inputs["Emission Strength"].default_value = emission
+    if alpha < 1:
+        try:
+            material.surface_render_method = 'DITHERED'
+        except Exception:
+            pass
+    return material
+
+
+def create_materials():
+    global MATS
+    MATS = {
+        "ground": mat("BFP12_Land_Green", (0.25, 0.34, 0.22)),
+        "slope": mat("BFP12_Slope_Olive", (0.30, 0.35, 0.23)),
+        "mountain": mat("BFP12_Mountain_Distant", (0.22, 0.29, 0.25)),
+        "rock": mat("BFP12_Rock_Gray", (0.39, 0.41, 0.40)),
+        "rock_light": mat("BFP12_Rock_Light", (0.52, 0.51, 0.47)),
+        "trunk": mat("BFP12_Tree_Trunk", (0.24, 0.17, 0.11)),
+        "leaf": mat("BFP12_Tree_Canopy", (0.10, 0.24, 0.12)),
+        "leaf_light": mat("BFP12_Tree_Canopy_Light", (0.19, 0.34, 0.16)),
+        "branch": mat("BFP12_Branch", (0.20, 0.15, 0.10)),
+        "water": mat("BFP12_River_Water", (0.10, 0.38, 0.53), alpha=0.48),
+        "riverbed": mat("BFP12_River_Bed", (0.23, 0.28, 0.26)),
+        "road": mat("BFP12_Wide_Dirt_Road", (0.43, 0.39, 0.29)),
+        "road_edge": mat("BFP12_Road_Edge", (0.31, 0.32, 0.27)),
+        "smoke": mat("BFP12_Blast_Smoke", (0.48, 0.49, 0.48), alpha=0.48),
+        "dust": mat("BFP12_Blast_Dust", (0.55, 0.49, 0.39), alpha=0.58),
+        "grass": mat("BFP12_Dry_Grass", (0.55, 0.48, 0.29)),
+        "grass_light": mat("BFP12_Dry_Grass_Light", (0.68, 0.59, 0.38)),
+        "ruin": mat("BFP12_Ruin_Wall", (0.47, 0.39, 0.28)),
+        "roof": mat("BFP12_Ruin_Roof", (0.28, 0.27, 0.23)),
+        "path": mat("BFP12_Camera_Path_Yellow", (1.0, 0.68, 0.06), emission=0.8),
+        "marker": mat("BFP12_Future_Marker_Orange", (1.0, 0.25, 0.04), emission=0.8),
+        "cloud": mat("BFP12_Cloud_Gray", (0.63, 0.67, 0.69)),
+        "cn_soldier": mat("BFP12_Chinese_Soldier_Block", (0.30, 0.36, 0.42)),
+        "jp_soldier": mat("BFP12_Japanese_Soldier_Block", (0.52, 0.43, 0.28)),
+        "old_meng": mat("BFP12_Old_Meng_Block", (0.17, 0.20, 0.23)),
+        "casualty_cn": mat("BFP12_Chinese_Casualty_Block", (0.22, 0.27, 0.31)),
+        "casualty_jp": mat("BFP12_Japanese_Casualty_Block", (0.38, 0.32, 0.23)),
+        "casualty_charred": mat("BFP12_Charred_Casualty_Block", (0.12, 0.13, 0.13)),
+        "blood_water": mat("BFP12_River_Blood_Tint", (0.25, 0.055, 0.045), alpha=0.42),
+        "weapon": mat("BFP12_Weapon_Block", (0.10, 0.12, 0.14)),
+        "grenade": mat("BFP12_Grenade_Charge_Block", (0.72, 0.22, 0.08)),
+        "box": mat("BFP12_Handoff_Box_Block", (0.46, 0.31, 0.17)),
+        "aircraft": mat("BFP12_Japanese_Bomber_Block", (0.31, 0.37, 0.31)),
+        "bird": mat("BFP12_Pigeon_Block", (0.62, 0.64, 0.62)),
+        "tracer": mat("BFP12_Bullet_Tracer", (1.0, 0.70, 0.20), emission=1.8),
+        "blast": mat("BFP12_Blast_Flash", (1.0, 0.30, 0.04), emission=2.5),
+    }
+
+
+# ============================================================
+# GEOMETRY HELPERS
+# ============================================================
+
+def move_obj(obj, coll):
+    for old in list(obj.users_collection):
+        old.objects.unlink(obj)
+    coll.objects.link(obj)
+    return obj
+
+
+def cube(name, loc, dims, material, coll, rot=(0, 0, 0)):
+    bpy.ops.mesh.primitive_cube_add(size=1.0, location=loc)
+    obj = bpy.context.object
+    obj.name = name
+    obj.dimensions = dims
+    obj.rotation_euler = rot
+    if material:
+        obj.data.materials.append(material)
+    return move_obj(obj, coll)
+
+
+def ico(name, loc, scale, material, coll, sub=1, rot=(0, 0, 0)):
+    bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=sub, radius=1.0, location=loc)
+    obj = bpy.context.object
+    obj.name = name
+    obj.scale = scale
+    obj.rotation_euler = rot
+    if material:
+        obj.data.materials.append(material)
+    return move_obj(obj, coll)
+
+
+def cylinder(name, loc, radius, depth, material, coll, vertices=7, rot=(0, 0, 0)):
+    bpy.ops.mesh.primitive_cylinder_add(
+        vertices=vertices, radius=radius, depth=depth, location=loc
+    )
+    obj = bpy.context.object
+    obj.name = name
+    obj.rotation_euler = rot
+    if material:
+        obj.data.materials.append(material)
+    return move_obj(obj, coll)
+
+

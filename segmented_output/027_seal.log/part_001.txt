@@ -1,0 +1,6 @@
+Info: Saved "battlefield_v2.blend"
+SEALED_PROJECT
+Blender 4.3.2
+Read blend: "/workspace/3d/delivery_v2/battlefield_v2.blend"
+
+Blender quit

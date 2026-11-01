@@ -1,0 +1,96 @@
+        for area in window.screen.areas:
+            if area.type != 'VIEW_3D':
+                continue
+            space = area.spaces.active
+            try:
+                space.region_3d.view_perspective = 'CAMERA'
+                space.region_3d.view_camera_zoom = 20
+            except Exception:
+                pass
+
+            window_region = next((r for r in area.regions if r.type == 'WINDOW'), None)
+            if window_region:
+                try:
+                    with bpy.context.temp_override(window=window, area=area, region=window_region):
+                        bpy.ops.view3d.view_camera()
+                    changed += 1
+                except Exception as exc:
+                    log("view_camera operator warning: " + repr(exc))
+
+    log("Camera viewport areas switched: %d" % changed)
+
+
+def configure_scene():
+    scene = bpy.context.scene
+    scene.frame_start = FRAME_START
+    scene.frame_end = FRAME_END
+    scene.render.fps = FPS
+    scene.render.resolution_x = 1280
+    scene.render.resolution_y = 720
+    scene.render.resolution_percentage = 100
+
+    try:
+        scene.render.engine = 'BLENDER_EEVEE_NEXT'
+    except Exception:
+        pass
+    try:
+        scene.view_settings.view_transform = 'AgX'
+    except Exception:
+        pass
+
+    for marker in list(scene.timeline_markers):
+        scene.timeline_markers.remove(marker)
+
+    marker_list = [
+        (1, "01 高空大地貌建立"), (22, "02 鸽子左前景后方跟随"),
+        (32, "03 四机迎面接近"), (52, "04 穿越编队 / 航空炸弹释放"),
+        (70, "05 机腹近景后俯冲"), (90, "06 主炸弹落地 / 穿烟入林"),
+        (108, "07 森林日军近景射击"), (140, "08 左右折返进入中方掩体"),
+        (188, "09 森林救援与倒木动作"), (204, "10 穿越树木框架"),
+        (244, "11 李行沟下切"), (274, "12 沟底反向转弯"),
+        (322, "13 转向梧桐沟"), (350, "14 日军背后跟拍逼近破屋"),
+        (370, "15 门口背人 / 木杆光荣弹拉环"), (378, "16 破屋爆炸"),
+        (388, "17 倾斜穿越爆炸碎片框架"), (420, "18 斜向入河"),
+        (458, "19 水下急停"), (466, "20 后退惯性 / 侧向闪避"),
+        (500, "21 出水"), (536, "22 箱子交接"),
+        (582, "23 低机位接近老孟"), (650, "24 老孟正面英雄仰拍"),
+        (680, "25 直接后拉穿过冲锋队伍"), (742, "26 穿越山谷天然岩石框架"),
+        (830, "27 高空升起"), (900, "28 完整战场高空全景"),
+    ]
+    for frame, name in marker_list:
+        scene.timeline_markers.new(name, frame=frame)
+
+    performance_markers = [
+        (22, "表演峰值｜鸽子近景滑翔"), (52, "动作峰值｜四机穿越与炸弹释放"),
+        (90, "动作峰值｜航空炸弹落地"), (118, "表演峰值｜日军近距离射击"),
+        (148, "表演峰值｜中方掩体反击"), (188, "表演峰值｜倒木下救援"),
+        (204, "空间动作｜穿越森林树木框架"), (254, "空间动作｜岩壁窄口转弯"),
+        (370, "表演峰值｜门口背人拉木杆光荣弹"), (378, "动作峰值｜房屋爆炸冲击"),
+        (466, "动作峰值｜水下后退与侧闪"), (488, "动作峰值｜穿越浮尸和渡河人群"),
+        (536, "表演峰值｜箱子交接"), (650, "表演峰值｜老孟低角度英雄呈现"),
+        (742, "空间动作｜穿越山谷岩石框架"), (900, "高空全景｜完整战场"),
+    ]
+    for frame, name in performance_markers:
+        scene.timeline_markers.new(name, frame=frame)
+
+    scene.frame_set(FRAME_START)
+    bpy.context.view_layer.update()
+
+
+def write_build_report():
+    text_name = "BFP_V20_BUILD_REPORT"
+    txt = bpy.data.texts.get(text_name)
+    if txt is None:
+        txt = bpy.data.texts.new(text_name)
+    else:
+        txt.clear()
+
+    lines = [
+        "Battlefield One-Take Previs V1.2",
+        "Blender: " + bpy.app.version_string,
+        "Scope: 30-second battlefield previs with continuous human presence, close-up staged action, layered foreground/midground/background blocking and editable camera",
+        "Actors: near/mid/far human presence in every major beat; explicit firing, hit recoil, fall, duck/recover, water wading, assisted crossing, hand-to-hand box transfer and Old Meng hero gesture.",
+        "Props: four approaching Japanese bombers in a loose two-per-side formation, four staged non-powered aviation bombs, pigeon, rifles, wooden-shaft grenade, handoff box and Old Meng charge markers.",
+        "Camera: 3D non-linear choreography with left/right S-curves, hard turns, vertical dives, underwater recoil, one Old Meng 180-degree orbit, deliberate banking/roll and multiple physical frame passages.",
+        "Camera is not locked: actor positions, event timing, camera path, aim and lens remain editable after playback.",
+        "Forest: dense irregular woodland, close S-curve route, tree-frame passage, battle casualties, pinned soldier and animated rescue/lift beneath a fallen trunk.",

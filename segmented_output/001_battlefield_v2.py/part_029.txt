@@ -1,0 +1,96 @@
+                     MATS["rock_light"], fx, sub=1)
+        frame = 438 + i * 16
+        for f, scale in [
+            (frame, (0.02, 0.02, 0.02)),
+            (frame + 2, (0.85, 0.45, 0.35)),
+            (frame + 7, (0.15, 0.15, 0.15)),
+        ]:
+            splash.scale = scale
+            splash.keyframe_insert(data_path="scale", frame=f)
+
+
+# ============================================================
+# CAMERA WAYPOINTS
+# 30 seconds / 900 frames. Main direction is +X.
+# Performance beats receive short camera holds; transition passages remain fast.
+# Small Y offsets create purposeful weaving; camera roll is never applied.
+# ============================================================
+
+CAMERA_KEYS = [
+    # HIGH AIR / PIGEON / FOUR-BOMBER MEETING
+    (1,   (-285, -34, 150), (-240, -20, 118), "HIGH AERIAL ESTABLISH / TERRAIN SCALE", -4),
+    (12,  (-265, -26, 140), (-232, -16, 118), "DESCEND BEHIND PIGEON", -10),
+    (22,  (-245, -18, 126), (-221, -12, 114), "PIGEON LEFT FOREGROUND / REAR POV", -18),
+    (32,  (-226, -12, 118), (-196, -4, 110), "FOUR AIRCRAFT APPROACH", -8),
+    (42,  (-207, -8, 112), (-174, 2, 108), "AIRCRAFT FORMATION CLOSES", 12),
+    (52,  (-190, -2, 105), (-158, 8, 100), "PASS BETWEEN AIRCRAFT / BOMBS RELEASE", 22),
+    (60,  (-182, 8, 96), (-172, 0, 78), "UNDERWING CLOSE PASS / BOMB FREEFALL", 28),
+    (70,  (-181, 14, 75), (-178, 3, 40), "CAMERA PITCHES DOWN / PLANES LEAVE FRAME", 36),
+    (80,  (-183, 8, 38), (-180, -4, 15), "STEEP DIVE TOWARD IMPACT ZONE", 22),
+    (90,  (-180, -4, 10), (-174, -8, 1), "MAIN BOMB IMPACT / ENTER SMOKE", 0),
+    (98,  (-176, -8, 2), (-170, -6, 1), "LOW ENTRY INTO FOREST", -5),
+
+    # FOREST: LEFT HOOK -> RIGHT CUT -> ARCH THREAD -> LOW DODGE
+    (108, (-166, -8, 1.60), (-160, -3, 1.05), "JAPANESE CLOSE SHOOTER", -10),
+    (116, (-160, -18, 1.45), (-153, -24, 1.00), "HARD LEFT AROUND TREE TRUNK", -28),
+    (124, (-151, -28, 1.40), (-145, -20, 1.00), "CUT BACK RIGHT THROUGH TREE GAP", -38),
+    (132, (-143, -18, 1.25), (-136, -8, 0.95), "PASS MUZZLE / FIRE LINE", -22),
+    (140, (-137, 0, 1.20), (-131, 10, 0.90), "SLIDE TOWARD CHINESE COVER", 22),
+    (148, (-132, 18, 1.20), (-126, 24, 0.90), "RIGHT BANK / RETURN FIRE", 38),
+    (156, (-126, 26, 1.15), (-120, 28, 0.90), "CUT THROUGH ROCK-COVER LANE", 32),
+    (164, (-120, 18, 1.20), (-115, 8, 0.90), "SWEEP LEFT PAST FIRING POSITION", 18),
+    (172, (-116, 0, 1.20), (-110, -10, 0.90), "LOW S-CURVE INTO TREE DENSITY", -26),
+    (180, (-111, -18, 1.10), (-106, -25, 0.90), "PASS WOUNDED SOLDIER / ROCK EDGE", -36),
+    (188, (-106, -26, 1.05), (-102, -12, 0.90), "ROLL INTO RESCUE BEAT", -45),
+    (196, (-102, -8, 1.25), (-108, 12, 1.10), "LOOK ACROSS TO TREE RESCUE", 12),
+    (204, (-98, 8, 1.35), (-93, 4, 1.00), "THREAD UNDER FOREST TREE ARCH", 30),
+    (212, (-94, 2, 1.35), (-90, -1, 1.00), "BANK THROUGH ARCH EXIT", 22),
+    (220, (-90, -4, 1.45), (-85, -10, 1.00), "DODGE LOW BRANCH / TURN OUT", -24),
+    (232, (-81, 5, 1.40), (-75, 12, 0.90), "FOREST EXIT / RAVINE REVEAL", 0),
+
+    # LI XINGOU: DESCEND INTO ROCK CORRIDOR / S-TURN / TURN TOWARD HOUSE
+    (244, (-72, 10, 1.20), (-65, 18, 0.60), "DROP INTO RAVINE", 26),
+    (254, (-60, 24, 1.10), (-53, 16, 0.60), "PASS BETWEEN ROCK WALLS", 42),
+    (264, (-50, 12, 0.95), (-44, 0, 0.50), "SWEEP LEFT AROUND BOULDER", 24),
+    (274, (-42, -10, 0.90), (-35, -18, 0.50), "REVERSE TURN ALONG GULLY FLOOR", -34),
+    (286, (-31, -22, 0.90), (-23, -18, 0.50), "LOW PASS / SCATTERED CASUALTIES", -40),
+    (298, (-21, -12, 1.10), (-14, -2, 0.50), "ROTATE RIGHT THROUGH ROCK GAP", -18),
+    (310, (-12, 12, 1.30), (-4, 18, 0.70), "CLIMB SLIGHTLY / LEAVE GULLY", 24),
+    (322, (0, 20, 1.40), (12, 12, 1.00), "LONG DIAGONAL TURN TO VILLAGE", 28),
+    (332, (17, 14, 1.50), (29, 5, 1.00), "SWEEP BEHIND JAPANESE LINE", 34),
+
+    # WUTONGGOU: FOLLOW JAPANESE FROM BEHIND / HOUSE DOORWAY FRAME / BLAST DODGE
+    (340, (40, 14, 1.60), (50, 2, 1.20), "BEHIND JAPANESE PERIMETER", 22),
+    (350, (55, 4, 1.45), (45, -4, 1.10), "FOLLOW APPROACH / REVEAL DOORWAY", -12),
+    (360, (49, -4, 1.40), (39, -7, 1.20), "SLIDE TO REAR-OBLIQUE HOUSE AXIS", 8),
+    (370, (43, -8, 1.45), (36, -7, 1.40), "WOMAN AND WOUNDED MAN AT DOOR", 18),
+    (378, (40, -14, 2.00), (38, -7, 3.00), "WOODEN-SHAFT GRENADE / HOUSE BLAST", 38),
+    (388, (42, -22, 3.20), (50, -14, 4.50), "DODGE BLAST / PASS THROUGH DEBRIS FRAME", 48),
+    (398, (53, -22, 2.00), (64, -13, 0.80), "EXIT SMOKE WITH BANKED TURN", 26),
+    (410, (68, -11, 1.30), (80, -4, 0.20), "RIVER VALLEY OPENS AHEAD", 0),
+
+    # BROAD RIVER: DIAGONAL ENTRY / BRAKE / RECOIL / SIDE DODGE / WEAVE THROUGH PEOPLE
+    (420, (78, -10, 0.20), (90, -15, -1.50), "DIVE TOWARD BROAD RIVER", -22),
+    (430, (92, -18, -2.00), (100, -25, -1.00), "UNDERWATER ENTRY BETWEEN WADERS", -32),
+    (440, (106, -28, -2.10), (115, -30, -0.90), "SWEEP UNDER CROWD / FLOATING BODY", -38),
+    (450, (120, -22, -2.20), (129, -10, -0.90), "ROLL THROUGH UNDERWATER GAP", 26),
+    (458, (126, -8, -2.20), (133, 5, -1.00), "SUDDEN BRAKE / WATER BULLET IMPACT", 40),
+    (466, (124, 12, -2.10), (131, 22, -1.00), "BACKWARD RECOIL / HARD SIDE DODGE", 48),
+    (476, (136, 24, -1.80), (145, 26, -0.60), "CUT BETWEEN FLOATING CASUALTIES", 26),
+    (488, (151, 18, -1.20), (160, 8, -0.10), "FORWARD ACCELERATION / RISE", -18),
+    (500, (167, 2, -0.20), (176, -8, 0.70), "BREAK WATER SURFACE", -22),
+    (512, (184, -10, 0.80), (194, -7, 1.20), "OUT OF RIVER / BANK TOWARD HANDOFF", 0),
+
+    # HANDOFF / OLD MENG: low approach, one 180-degree orbit, front hold
+    (524, (196, -12, 0.35), (201, -4, 1.10), "BOX HANDOFF ENTERS FRAME", -10),
+    (536, (203, -5, 0.30), (203, -4, 1.10), "PASS BETWEEN SENDER AND RECEIVER", 0),
+    (548, (213, 6, 0.35), (218, 0, 1.00), "FOLLOW RECEIVER / LOW GROUND SWEEP", 12),
+    (564, (228, 12, 0.40), (239, 0, 1.30), "TURN INTO OLD MENG OPENING", 16),
+    (582, (240, 0, 0.30), (250, 0, 2.00), "OLD MENG APPEARS AHEAD", 0),
+    (594, (246.5, 0.0, 0.24), (250, 0, 2.12), "ORBIT START / REAR LOW ANGLE", 0),
+    (608, (247.5, 2.5, 0.24), (250, 0, 2.14), "180 ORBIT / LEFT REAR QUARTER", 4),
+    (622, (250.0, 3.5, 0.25), (250, 0, 2.16), "ORBIT SIDE PROFILE", 6),
+    (636, (252.5, 2.5, 0.25), (250, 0, 2.18), "ORBIT FRONT THREE-QUARTER", 4),
+    (650, (253.5, 0.0, 0.26), (250, 0, 2.20), "FRONT LOW HERO / FULL FACE", 0),
+    (664, (253.5, 0.0, 0.28), (250, 0, 2.20), "HERO HOLD / BREATH AND LOOK", 0),
+

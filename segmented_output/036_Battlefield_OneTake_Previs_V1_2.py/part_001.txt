@@ -1,0 +1,96 @@
+# -*- coding: utf-8 -*-
+"""
+Battlefield One-Take Previs V1.2
+Blender 5.2.x | Large terrain + genuine environment weaving camera path
+
+Scope:
+- Expanded continuous Yimeng-style terrain mesh, packed terrain-reference board
+- Large battlefield map with a wide road after the river
+- Forest is rebuilt as irregular dense woodland, with tree clusters, boulders, fallen trunks and uneven ground
+- Forest camera path bends around both trees and rocks, with natural vertical undulation
+- Tactical cover positions and advance/fire-lane anchors are reserved for later character blocking
+- Underwater camera makes a sudden stop, backward inertia recoil, lateral dodge, then accelerates forward
+- Low ground-level wide-angle push toward Old Meng, with near-lens grass and ground rocks, then 180-degree orbit and front pause
+- Fast pull-back through a huge mountain-valley frame, then aerial reveal
+- Low, fine, wind-leaning grass tufts support the ground-level foreground
+- Continuous 30-second / 900-frame camera move
+- Segmented-color white-block characters, forest rescue, doorway pair, wooden-shaft grenade, four aircraft, aviation bombs, pigeon and handoff prop
+- Actor-informed camera path: camera aims toward people and story events, then adjusts its route to pass through the battle space
+- Animated troop movement at readable human speeds; camera transitions stay fast between close action beats
+- Water casualties/runners, Japanese approach, box handoff and Old Meng blocking
+- Simple timed blast/smoke and bullet-tracer placeholders; no detailed physics simulation
+
+Important:
+- The active Camera object is animated directly in world space.
+- Camera keys are revised after actor blocking; focus targets follow the relevant person or event, with short readable action beats.
+- The camera performs a non-linear choreographed route through actor lanes, turns, banks, dives and physical frame passages.
+- Camera roll/banking is explicitly keyed at turns, dives and frame passages.
+- The script explicitly invokes Blender's active-camera viewport operator.
+- The 3D camera path and bank markers are visible in the viewport as a yellow curve and direction markers.
+- Re-running this script removes only BFP_V12_* generated collections; all older versions are preserved and hidden.
+"""
+
+import bpy
+import math
+import random
+import traceback
+import os
+from mathutils import Vector, Quaternion
+
+# ============================================================
+# CONFIG
+# ============================================================
+
+VERSION = "V1.2"
+FPS = 30
+FRAME_START = 1
+FRAME_END = 900
+SEED = 20261030
+random.seed(SEED)
+
+COLLECTIONS = [
+    "BFP_V12_01_LAND",
+    "BFP_V12_02_FOREST",
+    "BFP_V12_03_RAVINE",
+    "BFP_V12_04_VILLAGE",
+    "BFP_V12_05_RIVER",
+    "BFP_V12_06_WEST_PASS",
+    "BFP_V12_07_WIDE_ROAD",
+    "BFP_V12_08_FUTURE_MARKERS",
+    "BFP_V12_09_CAMERA",
+    "BFP_V12_10_PATH_DEBUG",
+    "BFP_V12_11_LIGHTS",
+    "BFP_V12_12_SMOKE_PLACEHOLDERS",
+    "BFP_V12_13_GROUND_GRASS",
+    "BFP_V12_14_TACTICAL_MARKERS",
+    "BFP_V12_15_GROUND_ROCKS",
+    "BFP_V12_16_CHARACTERS",
+    "BFP_V12_17_PROPS",
+    "BFP_V12_18_BATTLE_FX",
+    "BFP_V12_19_STORYBOARD_ACTIONS",
+    "BFP_V12_20_TERRAIN_REFERENCE",
+]
+
+REPORT = []
+STATUS = {}
+MATS = {}
+
+
+# ============================================================
+# REPORT / COLLECTION MANAGEMENT
+# ============================================================
+
+def log(msg):
+    REPORT.append(str(msg))
+    print("[BFP V1.2]", msg)
+
+
+def get_script_directory():
+    """Resolve the folder containing this script, including Blender Text Editor execution."""
+    candidates = []
+    try:
+        candidates.append(os.path.dirname(os.path.abspath(__file__)))
+    except Exception:
+        pass
+    try:
+        for text_block in bpy.data.texts:

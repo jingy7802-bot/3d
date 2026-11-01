@@ -1,0 +1,96 @@
+            (770, (x + (end_x - x) * 0.52, y + (end_y - y) * 0.52, 0), 0.0),
+            (850, (end_x, end_y, 0), 0.0),
+        ], run=True)
+
+    extra_charge_positions = [
+        (263, -18), (271, 18), (279, -19), (286, 19),
+        (295, -18), (303, 18), (312, -17), (321, 18),
+        (274, 0), (289, 0), (305, 0), (318, -2)
+    ]
+    for i, (x, y) in enumerate(extra_charge_positions):
+        actor = make_actor("CN_MAIN_CHARGE_EXTRA_%02d" % i, (x, y, 0),
+                           yaw=0.0, faction="cn", rifle=(i % 2 == 0))
+        end_x = x + random.uniform(20, 27)
+        end_y = y + random.uniform(-0.8, 0.8)
+        animate_actor(actor, [
+            (700, (x, y, 0), 0.0),
+            (790, (x + (end_x - x) * 0.5, y + (end_y - y) * 0.5, 0), 0.0),
+            (880, (end_x, end_y, 0), 0.0),
+        ], run=True)
+
+    # Additional non-graphic fallen soldiers sit off the charge lanes and at the valley margins.
+    for i, (loc, yaw, faction, pose) in enumerate([
+        ((236, -19, -0.25), 0.4, "cn", "side"),
+        ((248, 20, -0.25), -0.7, "cn", "prone"),
+        ((286, 21, -0.25), 1.1, "jp", "supine"),
+        ((315, -20, -0.25), -1.3, "cn", "side"),
+    ]):
+        make_casualty("WEST_PASS_CASUALTY_%02d" % i, loc, yaw=yaw, faction=faction, pose=pose)
+
+    # A small number of runners continue beyond the camera's final pull-back.
+    for i, (x, y) in enumerate(((333, -10), (338, 11), (346, -4))):
+        actor = make_actor("CN_VALLEY_EXIT_RUNNER_%02d" % i, (x, y, 0), yaw=0.0,
+                           faction="cn", rifle=True)
+        animate_actor(actor, [
+            (760, (x, y, 0), 0.0),
+            (850, (x + 18, y + random.uniform(-1.0, 1.0), 0), 0.0),
+        ], run=True)
+
+    make_aircraft()
+
+
+
+def build_storyboard_details():
+    """Missing storyboard-critical blocking: forest rescue, house doorway pair, river crowd and frame gates."""
+    action_coll = get_collection("BFP_V12_19_STORYBOARD_ACTIONS")
+    chars = get_collection("BFP_V12_16_CHARACTERS")
+    props = get_collection("BFP_V12_17_PROPS")
+    random.seed(SEED + 1212)
+
+    # FOREST: soldier pinned beneath a fallen tree; comrade arrives, braces and lifts.
+    pinned = make_casualty("CN_FOREST_PINNED_UNDER_TREE", (-108, 12, -0.18),
+                           yaw=0.18, faction="cn", pose="side")
+    rescuer = make_actor("CN_FOREST_RESCUER", (-114, 9, 0), yaw=0.0,
+                         faction="cn", posture="crouch", rifle=False)
+    animate_actor(rescuer, [
+        (174, (-118, 8, 0), 0.0),
+        (188, (-113, 9, 0), 0.0),
+        (198, (-111, 10, 0), 0.0),
+        (220, (-109, 10, 0), 0.0),
+    ], run=False)
+    for frame, angle in [(174, -0.15), (188, -0.55), (198, -1.0), (208, -1.12), (220, -0.8)]:
+        rescuer["left_arm"].rotation_euler.y = angle
+        rescuer["right_arm"].rotation_euler.y = angle * 0.92
+        rescuer["left_arm"].keyframe_insert(data_path="rotation_euler", frame=frame)
+        rescuer["right_arm"].keyframe_insert(data_path="rotation_euler", frame=frame)
+    trunk = beam_between("FOREST_RESCUE_FALLEN_TREE_TRUNK", (-115, 12, 0.82), (-99, 12, 0.82),
+                         0.68, MATS["trunk"], action_coll)
+    for frame, loc, rot in [
+        (174, (-107, 12, 0.82), (0.0, math.pi / 2.0, 0.0)),
+        (190, (-107, 12, 0.84), (0.0, math.pi / 2.0, 0.0)),
+        (202, (-107, 12, 1.10), (0.0, math.pi / 2.0 - 0.06, 0.0)),
+        (214, (-107, 12, 2.05), (0.0, math.pi / 2.0 - 0.12, 0.0)),
+        (226, (-107, 12, 2.05), (0.0, math.pi / 2.0 - 0.12, 0.0)),
+    ]:
+        trunk.location = loc
+        trunk.rotation_euler = rot
+        trunk.keyframe_insert(data_path="location", frame=frame)
+        trunk.keyframe_insert(data_path="rotation_euler", frame=frame)
+    animate_wounded_body(pinned, 214, 234, dx=0.65, dy=-0.15)
+
+    # A natural tree arch is a physical frame the camera threads after the rescue beat.
+    beam_between("FOREST_ARCH_LEFT_TRUNK", (-91, -8, 2.8), (-91, -8, 0.0), 0.62, MATS["trunk"], action_coll)
+    beam_between("FOREST_ARCH_RIGHT_TRUNK", (-91, 8, 2.8), (-91, 8, 0.0), 0.62, MATS["trunk"], action_coll)
+    beam_between("FOREST_ARCH_CROSS_TRUNK", (-91, -8, 5.5), (-91, 8, 5.5), 0.58, MATS["trunk"], action_coll)
+    beam_between("FOREST_ARCH_BRANCH_DIAGONAL", (-91, 5, 5.2), (-96, 10, 3.9), 0.24, MATS["branch"], action_coll)
+
+    # WUTONGGOU: woman already at the doorway carrying a wounded man; old wooden-shaft explosive.
+    woman = make_actor("WUTONGGOU_WOMAN_CARRYING_WOUNDED_MAN", (35.0, -7.0, 0.0),
+                       yaw=0.0, faction="cn", rifle=False)
+    animate_actor(woman, [(340, (34.2, -7.0, 0.0), 0.0),
+                          (354, (35.0, -7.0, 0.0), 0.0),
+                          (376, (35.0, -7.0, 0.0), 0.0)], run=False)
+
+    wounded = make_actor("WUTONGGOU_WOUNDED_MAN_ON_BACK", (35.0, -7.0, 0.0),
+                         yaw=0.0, faction="cn", rifle=False)
+    wounded["root"].parent = woman["root"]

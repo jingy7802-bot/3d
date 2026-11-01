@@ -1,0 +1,96 @@
+    # There are no paired tree gates and no continuous tree-lined road.
+    cluster_centers = [
+        (-171, -25), (-157, 9), (-143, -25), (-130, 18),
+        (-113, -22), (-98, 22), (-83, -20), (-68, 15),
+        (-136, 0), (-101, -4), (-76, 29)
+    ]
+    tree_positions = []
+    for cluster_index, center in enumerate(cluster_centers):
+        target_count = random.randint(9, 14)
+        accepted = 0
+        attempts = 0
+        while accepted < target_count and attempts < target_count * 12:
+            attempts += 1
+            x = random.gauss(center[0], random.uniform(4.0, 7.0))
+            y = random.gauss(center[1], random.uniform(3.5, 6.5))
+            if x < -192 or x > -51 or y < -39 or y > 39:
+                continue
+            if route_clearance(x, y) < random.uniform(1.8, 2.7):
+                continue
+            if any(math.hypot(x - ox, y - oy) < 2.4 for ox, oy in tree_positions):
+                continue
+            tree_positions.append((x, y))
+            accepted += 1
+
+    # A few close trunks sit at the edges of the flight path to force readable passes.
+    close_tree_positions = [
+        (-166, -17), (-150, -21), (-136, -7), (-124, 2),
+        (-113, 11), (-101, 4), (-88, 16), (-78, 2), (-67, -11)
+    ]
+    for x, y in close_tree_positions:
+        if route_clearance(x, y) > 2.1 and all(
+            math.hypot(x - ox, y - oy) > 2.2 for ox, oy in tree_positions
+        ):
+            tree_positions.append((x, y))
+
+    for index, (x, y) in enumerate(tree_positions):
+        create_tree(index, x, y)
+
+    # More distant trees merge the separate clusters into a continuous woodland mass.
+    for i in range(42):
+        x = random.uniform(-198, -48)
+        y = random.choice((-1, 1)) * random.uniform(34, 62)
+        create_tree(500 + i, x, y, random.uniform(8.0, 15.0))
+
+    # Uneven forest floor: low earth shoulders and shallow dips.
+    ground_forms = [
+        (-160, -3, (10, 7, 0.8)),
+        (-139, 10, (8, 6, 0.65)),
+        (-112, -7, (9, 6, 0.9)),
+        (-91, 16, (10, 7, 0.75)),
+        (-72, -12, (8, 6, 0.7))
+    ]
+    for i, (x, y, scale) in enumerate(ground_forms):
+        ico(
+            "WOODLAND_UNEVEN_GROUND_%02d" % i,
+            (x, y, -0.35),
+            scale,
+            MATS["slope"],
+            forest,
+            sub=1
+        )
+
+    # Shrubs, roots and fallen trunks break up the gaps between trees and rocks.
+    for i in range(64):
+        x = random.uniform(-187, -55)
+        y = random.uniform(-32, 32)
+        if route_clearance(x, y) < 1.8:
+            continue
+        ico(
+            "WOODLAND_UNDERBRUSH_%03d" % i,
+            (x, y, 0.25),
+            (
+                random.uniform(0.8, 1.8),
+                random.uniform(0.7, 1.5),
+                random.uniform(0.45, 1.0)
+            ),
+            MATS["leaf"] if i % 3 else MATS["leaf_light"],
+            forest,
+            sub=1
+        )
+
+    fallen_logs = [
+        ((-158, -28, 0.25), (-149, -24, 0.25)),
+        ((-132, 18, 0.25), (-124, 14, 0.25)),
+        ((-108, -25, 0.2), (-100, -20, 0.2)),
+        ((-87, 23, 0.25), (-79, 19, 0.25)),
+        ((-68, -22, 0.2), (-60, -17, 0.2))
+    ]
+    for i, (a, b) in enumerate(fallen_logs):
+        beam_between(
+            "WOODLAND_FALLEN_TRUNK_%02d" % i,
+            a, b,
+            random.uniform(0.24, 0.38),
+            MATS["trunk"],
+            forest
+        )

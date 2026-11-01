@@ -1,0 +1,96 @@
+
+    left_wing = empty("OPENING_PIGEON_LEFT_WING_PIVOT", (0, -0.16, 0.10), props, display='PLAIN_AXES', size=0.12)
+    left_wing.parent = root
+    left_wing.location = (0, -0.16, 0.10)
+    child_cube("OPENING_PIGEON_LEFT_WING", left_wing, (0.05, -0.74, 0.0), (0.95, 1.55, 0.10), MATS["bird"], props, rot=(0.0, 0.0, -0.08))
+
+    right_wing = empty("OPENING_PIGEON_RIGHT_WING_PIVOT", (0, 0.16, 0.10), props, display='PLAIN_AXES', size=0.12)
+    right_wing.parent = root
+    right_wing.location = (0, 0.16, 0.10)
+    child_cube("OPENING_PIGEON_RIGHT_WING", right_wing, (0.05, 0.74, 0.0), (0.95, 1.55, 0.10), MATS["bird"], props, rot=(0.0, 0.0, 0.08))
+
+    bird_path = [
+        (1, (-232, -16, 116), 0.02),
+        (18, (-224, -16, 115), 0.00),
+        (32, (-214, -19, 112), -0.05),
+        (46, (-202, -27, 108), -0.16),
+        (58, (-190, -38, 103), -0.28),
+        (70, (-177, -52, 98), -0.36),
+    ]
+    for frame, loc, yaw in bird_path:
+        root.location = loc
+        root.rotation_euler = (0.0, 0.0, yaw)
+        root.keyframe_insert(data_path="location", frame=frame)
+        root.keyframe_insert(data_path="rotation_euler", frame=frame)
+
+    for frame, flap in [
+        (1, 0.05), (7, -0.35), (13, 0.18), (19, 0.42), (25, -0.08),
+        (31, -0.42), (37, 0.08), (43, 0.36), (49, -0.12), (55, -0.30),
+        (61, 0.12), (67, 0.25), (73, 0.0)
+    ]:
+        left_wing.rotation_euler.x = flap
+        right_wing.rotation_euler.x = -flap
+        left_wing.keyframe_insert(data_path="rotation_euler", frame=frame)
+        right_wing.keyframe_insert(data_path="rotation_euler", frame=frame)
+    return root
+
+
+def make_aircraft_bomb(name, release_frame, release_loc, impact_frame, impact_loc, start_loc=None):
+    """A non-powered aviation bomb: attached-position proxy, release, freefall and impact."""
+    props = get_collection("BFP_V12_17_PROPS")
+    root = empty(name + "_ROOT", release_loc, props, display='PLAIN_AXES', size=0.35)
+    child_cylinder(name + "_BODY", root, (0, 0, 0), 0.20, 1.85, MATS["weapon"], props)
+    child_ico(name + "_NOSE", root, (0, 0, -1.02), (0.19, 0.19, 0.30), MATS["weapon"], props, sub=1)
+    for idx, rot in enumerate(((0, 0, 0), (0, 0, math.pi / 2), (math.pi / 2, 0, 0), (0, math.pi / 2, 0))):
+        child_cube(name + "_TAIL_FIN_%02d" % idx, root, (0, 0, 0.72), (0.58, 0.07, 0.34), MATS["aircraft"], props, rot=rot)
+
+    mid1 = (
+        release_loc[0] + (impact_loc[0] - release_loc[0]) * 0.30,
+        release_loc[1] + (impact_loc[1] - release_loc[1]) * 0.30,
+        release_loc[2] - (release_loc[2] - impact_loc[2]) * 0.28,
+    )
+    mid2 = (
+        release_loc[0] + (impact_loc[0] - release_loc[0]) * 0.72,
+        release_loc[1] + (impact_loc[1] - release_loc[1]) * 0.72,
+        release_loc[2] - (release_loc[2] - impact_loc[2]) * 0.76,
+    )
+    if start_loc is None:
+        start_loc = release_loc
+    for frame, loc, pitch in [
+        (1, start_loc, 0.12),
+        (max(1, release_frame - 2), release_loc, 0.12),
+        (release_frame, release_loc, 0.12),
+        (release_frame + 8, mid1, 0.20),
+        (release_frame + (impact_frame - release_frame) * 0.70, mid2, 0.28),
+        (impact_frame, impact_loc, 0.34),
+    ]:
+        root.location = loc
+        root.rotation_euler = (0.0, pitch, 0.0)
+        root.keyframe_insert(data_path="location", frame=int(frame))
+        root.keyframe_insert(data_path="rotation_euler", frame=int(frame))
+    return root
+
+
+def make_aircraft():
+    props = get_collection("BFP_V12_17_PROPS")
+    body = MATS["aircraft"]
+
+    def build_bomber(name, path, scale=1.0):
+        root = empty(name + "_ROOT", path[0][1], props, display='PLAIN_AXES', size=2.0)
+        root.scale = (scale, scale, scale)
+        child_cube(name + "_FUSELAGE", root, (0, 0, 0), (7.4, 0.82, 0.82), body, props)
+        child_cube(name + "_MAIN_WING", root, (-0.15, 0, -0.02), (1.85, 14.0, 0.24), body, props)
+        child_cube(name + "_TAIL_WING", root, (-2.85, 0, 0.02), (1.35, 4.8, 0.20), body, props)
+        child_cube(name + "_TAIL_FIN", root, (-2.95, 0, 0.55), (1.2, 0.22, 1.10), body, props)
+        child_cube(name + "_COCKPIT", root, (1.45, 0, 0.50), (1.25, 0.50, 0.32), MATS["rock_light"], props)
+        for side in (-1, 1):
+            child_cube(name + "_ENGINE_%s" % side, root, (0.05, side * 3.0, -0.30), (1.45, 0.82, 0.70), body, props)
+            child_cylinder(name + "_PROPELLER_HUB_%s" % side, root, (1.0, side * 3.0, -0.30), 0.12, 0.35, MATS["weapon"], props, rot=(0.0, math.pi / 2.0, 0.0))
+            child_cube(name + "_PROP_BLADE_A_%s" % side, root, (1.22, side * 3.0, -0.30), (0.08, 0.18, 1.40), MATS["weapon"], props)
+            child_cube(name + "_PROP_BLADE_B_%s" % side, root, (1.22, side * 3.0, -0.30), (0.08, 1.40, 0.18), MATS["weapon"], props)
+        for frame, loc, rot in path:
+            root.location = loc
+            root.rotation_euler = rot
+            root.keyframe_insert(data_path="location", frame=frame)
+            root.keyframe_insert(data_path="rotation_euler", frame=frame)
+        return root

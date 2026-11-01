@@ -1,0 +1,96 @@
+        "branch": mat("BFP20_Branch", (0.20, 0.15, 0.10)),
+        "water": mat("BFP20_River_Water", (0.10, 0.38, 0.53), alpha=0.48),
+        "riverbed": mat("BFP20_River_Bed", (0.23, 0.28, 0.26)),
+        "road": mat("BFP20_Wide_Dirt_Road", (0.43, 0.39, 0.29)),
+        "road_edge": mat("BFP20_Road_Edge", (0.31, 0.32, 0.27)),
+        "smoke": mat("BFP20_Blast_Smoke", (0.48, 0.49, 0.48), alpha=0.48),
+        "dust": mat("BFP20_Blast_Dust", (0.55, 0.49, 0.39), alpha=0.58),
+        "grass": mat("BFP20_Dry_Grass", (0.55, 0.48, 0.29)),
+        "grass_light": mat("BFP20_Dry_Grass_Light", (0.68, 0.59, 0.38)),
+        "ruin": mat("BFP20_Ruin_Wall", (0.47, 0.39, 0.28)),
+        "roof": mat("BFP20_Ruin_Roof", (0.28, 0.27, 0.23)),
+        "path": mat("BFP20_Camera_Path_Yellow", (1.0, 0.68, 0.06), emission=0.8),
+        "marker": mat("BFP20_Future_Marker_Orange", (1.0, 0.25, 0.04), emission=0.8),
+        "cloud": mat("BFP20_Cloud_Gray", (0.63, 0.67, 0.69)),
+        "cn_soldier": mat("BFP20_Chinese_Soldier_Block", (0.30, 0.36, 0.42)),
+        "jp_soldier": mat("BFP20_Japanese_Soldier_Block", (0.52, 0.43, 0.28)),
+        "old_meng": mat("BFP20_Old_Meng_Block", (0.17, 0.20, 0.23)),
+        "casualty_cn": mat("BFP20_Chinese_Casualty_Block", (0.22, 0.27, 0.31)),
+        "casualty_jp": mat("BFP20_Japanese_Casualty_Block", (0.38, 0.32, 0.23)),
+        "casualty_charred": mat("BFP20_Charred_Casualty_Block", (0.12, 0.13, 0.13)),
+        "blood_water": mat("BFP20_River_Blood_Tint", (0.25, 0.055, 0.045), alpha=0.42),
+        "weapon": mat("BFP20_Weapon_Block", (0.10, 0.12, 0.14)),
+        "grenade": mat("BFP20_Grenade_Charge_Block", (0.72, 0.22, 0.08)),
+        "box": mat("BFP20_Handoff_Box_Block", (0.46, 0.31, 0.17)),
+        "aircraft": mat("BFP20_Japanese_Bomber_Block", (0.31, 0.37, 0.31)),
+        "bird": mat("BFP20_Pigeon_Block", (0.62, 0.64, 0.62)),
+        "tracer": mat("BFP20_Bullet_Tracer", (1.0, 0.70, 0.20), emission=1.8),
+        "blast": mat("BFP20_Blast_Flash", (1.0, 0.30, 0.04), emission=2.5),
+    }
+
+
+# ============================================================
+# GEOMETRY HELPERS
+# ============================================================
+
+def move_obj(obj, coll):
+    for old in list(obj.users_collection):
+        old.objects.unlink(obj)
+    coll.objects.link(obj)
+    return obj
+
+
+def cube(name, loc, dims, material, coll, rot=(0, 0, 0)):
+    bpy.ops.mesh.primitive_cube_add(size=1.0, location=loc)
+    obj = bpy.context.object
+    obj.name = name
+    obj.dimensions = dims
+    obj.rotation_euler = rot
+    if material:
+        obj.data.materials.append(material)
+    return move_obj(obj, coll)
+
+
+def ico(name, loc, scale, material, coll, sub=1, rot=(0, 0, 0)):
+    bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=sub, radius=1.0, location=loc)
+    obj = bpy.context.object
+    obj.name = name
+    obj.scale = scale
+    obj.rotation_euler = rot
+    if material:
+        obj.data.materials.append(material)
+    return move_obj(obj, coll)
+
+
+def cylinder(name, loc, radius, depth, material, coll, vertices=7, rot=(0, 0, 0)):
+    bpy.ops.mesh.primitive_cylinder_add(
+        vertices=vertices, radius=radius, depth=depth, location=loc
+    )
+    obj = bpy.context.object
+    obj.name = name
+    obj.rotation_euler = rot
+    if material:
+        obj.data.materials.append(material)
+    return move_obj(obj, coll)
+
+
+def beam_between(name, a, b, radius, material, coll):
+    a = Vector(a)
+    b = Vector(b)
+    delta = b - a
+    obj = cylinder(
+        name,
+        (a + b) * 0.5,
+        radius,
+        delta.length,
+        material,
+        coll,
+        vertices=6
+    )
+    obj.rotation_euler = delta.to_track_quat('Z', 'Y').to_euler()
+    return obj
+
+
+def empty(name, loc, coll, display='SPHERE', size=1.0):
+    obj = bpy.data.objects.new(name, None)
+    coll.objects.link(obj)

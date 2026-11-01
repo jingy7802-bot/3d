@@ -1,0 +1,96 @@
+            (event_frame, (0.02, 0.02, 0.02), 0.0),
+            (event_frame + 8, (radius * 0.9, radius * 0.75, radius * 0.7), 0.4),
+            (event_frame + 24, (radius * 1.35, radius * 1.15, radius * 1.25), 1.8),
+        ]:
+            puff.scale = scale
+            puff.location = (loc[0] + offset[0], loc[1] + offset[1], loc[2] + offset[2] + dz)
+            puff.keyframe_insert(data_path="scale", frame=frame)
+            puff.keyframe_insert(data_path="location", frame=frame)
+
+
+def make_water_splash(name, loc, event_frame):
+    """Simple surface splash cue when a soldier falls into the river."""
+    coll = get_collection("BFP_V20_18_BATTLE_FX")
+    splash = ico(name, loc, (0.08, 0.08, 0.08), MATS["rock_light"], coll, sub=1)
+    for frame, scale in (
+        (event_frame - 1, (0.001, 0.001, 0.001)),
+        (event_frame + 1, (0.85, 0.55, 0.18)),
+        (event_frame + 4, (0.32, 0.24, 0.10)),
+        (event_frame + 8, (0.001, 0.001, 0.001)),
+    ):
+        splash.scale = scale
+        splash.keyframe_insert(data_path="scale", frame=frame)
+    return splash
+
+
+def make_non_graphic_limb_debris(name, loc, dims, rot):
+    """Muted uniform-colored block silhouettes only; no exposed tissue or gore."""
+    coll = get_collection("BFP_V20_16_CHARACTERS")
+    return cube(name, loc, dims, MATS["casualty_charred"], coll, rot=rot)
+
+
+def build_characters_and_props():
+    random.seed(SEED + 707)
+
+    # 1) Forest: Chinese soldiers use rock/wood cover, move through the gaps;
+    # scattered casualties remain non-graphic and irregular.
+    forest_run_a = make_actor("CN_FOREST_RUNNER_A", (-165, -4, 0), yaw=0.0, faction="cn", rifle=True)
+    animate_actor(forest_run_a, [
+        (108, (-165, -4, 0), 0.10),
+        (170, (-158, -2, 0), 0.18),
+        (245, (-151, 1, 0), 0.08),
+    ], run=True)
+
+    forest_run_b = make_actor("CN_FOREST_RUNNER_B", (-151, 18, 0), yaw=0.0, faction="cn", rifle=True)
+    animate_actor(forest_run_b, [
+        (118, (-151, 18, 0), 0.0),
+        (180, (-145, 17, 0), -0.10),
+        (248, (-138, 15, 0), 0.0),
+    ], run=True)
+
+    forest_cover_a = make_actor("CN_FOREST_COVER_A", (-139, 18, 0), yaw=0.0,
+                                faction="cn", posture="crouch", rifle=True)
+    forest_cover_a["left_arm"].rotation_euler.y = -0.9
+    forest_cover_a["right_arm"].rotation_euler.y = -0.9
+
+    forest_cover_b = make_actor("CN_FOREST_COVER_B", (-92, -18, 0), yaw=0.0,
+                                faction="cn", posture="crouch", rifle=True)
+
+    jp_forest = make_actor("JP_FOREST_ADVANCE_A", (-92, 8, 0), yaw=0.0,
+                           faction="jp", rifle=True)
+    animate_actor(jp_forest, [
+        (180, (-92, 8, 0), 0.0),
+        (220, (-88, 7, 0), 0.0),
+        (260, (-84, 6, 0), 0.0),
+    ], run=True)
+
+    jp_close_a = make_actor("JP_CLOSE_REAR_SHOOTER_A", (-157, -3, 0), yaw=0.0, faction="jp", rifle=True)
+    jp_close_b = make_actor("JP_CLOSE_REAR_SHOOTER_B", (-151, 2, 0), yaw=0.0, faction="jp", rifle=True)
+    for shooter in (jp_close_a, jp_close_b):
+        for arm_key in ("left_arm", "right_arm"):
+            shooter[arm_key].rotation_euler.y = -0.68
+            shooter[arm_key].keyframe_insert(data_path="rotation_euler", frame=112)
+            shooter[arm_key].rotation_euler.y = -0.76
+            shooter[arm_key].keyframe_insert(data_path="rotation_euler", frame=120)
+            shooter[arm_key].rotation_euler.y = -0.68
+            shooter[arm_key].keyframe_insert(data_path="rotation_euler", frame=126)
+    animate_rifle_burst(jp_close_a, [114, 119, 123], recover_frame=130, recoil=0.08)
+    animate_rifle_burst(jp_close_b, [116, 121, 125], recover_frame=132, recoil=0.08)
+    jp_fall = make_actor("JP_CLOSE_HIT_AND_FALL", (-148, -1, 0), yaw=0.0, faction="jp", rifle=True)
+    animate_hit_fall_performance(jp_fall, 136, 145, direction=1.0)
+    animate_head_turn(jp_close_b, 136, 150, angle_z=-0.42)
+    animate_duck_and_recover(jp_close_b, 138, 142, 154, depth=0.13)
+
+    cn_cover_close = make_actor("CN_ROCK_COVER_CLOSE_SHOOTER", (-137, -8, 0),
+                                yaw=0.0, faction="cn", posture="crouch", rifle=True)
+    cn_cover_second = make_actor("CN_ROCK_COVER_SECOND_SHOOTER", (-130, -12, 0),
+                                 yaw=0.0, faction="cn", posture="crouch", rifle=True)
+    for actor in (cn_cover_close, cn_cover_second):
+        actor["left_arm"].rotation_euler.y = -0.72
+        actor["right_arm"].rotation_euler.y = -0.72
+    animate_rifle_burst(cn_cover_close, [162, 167, 172], recover_frame=180, recoil=0.07)
+    animate_rifle_burst(cn_cover_second, [169, 174], recover_frame=181, recoil=0.07)
+    cn_fall = make_actor("CN_ROCK_COVER_HIT_AND_FALL", (-124, -5, 0),
+                         yaw=0.0, faction="cn", rifle=True)
+    animate_hit_fall_performance(cn_fall, 184, 197, direction=-1.0)
+    animate_head_turn(cn_cover_second, 184, 200, angle_z=0.38)

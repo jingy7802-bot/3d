@@ -1,0 +1,96 @@
+            "LOW_CAMERA_FOREGROUND_STONE_%02d" % i,
+            (x, y, -0.16),
+            scale,
+            MATS["rock"] if i % 2 else MATS["rock_light"],
+            rocks,
+            sub=1,
+            rot=(random.uniform(-0.08, 0.08), random.uniform(-0.08, 0.08), random.uniform(-0.5, 0.5))
+        )
+
+    # A few very flat gravel clusters add ground texture without blocking the lens.
+    for i in range(24):
+        x = random.uniform(215, 300)
+        y = random.choice((-1, 1)) * random.uniform(2.5, 6.0)
+        ico(
+            "LOW_CAMERA_GRAVEL_%02d" % i,
+            (x, y, -0.28),
+            (random.uniform(0.25, 0.75), random.uniform(0.2, 0.55), random.uniform(0.08, 0.18)),
+            MATS["rock"],
+            rocks,
+            sub=1
+        )
+
+
+# ============================================================
+# WEST PASS: HUGE VALLEY AND NATURAL FRAME
+# ============================================================
+
+def build_west_pass():
+    pass_coll = get_collection("BFP_V12_06_WEST_PASS")
+    markers = get_collection("BFP_V12_08_FUTURE_MARKERS")
+
+    # Huge valley walls: wide opening, very tall sides, clear central road.
+    for side in (-1, 1):
+        for i, x in enumerate((298, 316, 334, 352)):
+            y = side * random.uniform(43, 52)
+            ico(
+                "WEST_VALLEY_MASSIVE_SIDE_WALL_%s_%02d" % (side, i),
+                (x, y, random.uniform(24, 34)),
+                (random.uniform(22, 29), random.uniform(17, 23), random.uniform(30, 43)),
+                MATS["rock"] if i % 2 else MATS["rock_light"],
+                pass_coll,
+                sub=2
+            )
+
+    # High rock crown creates a natural frame above the valley opening.
+    # It remains far above the low camera path and does not form a cramped tunnel.
+    ico(
+        "WEST_VALLEY_HIGH_FRAME_CROWN",
+        (322, 0, 66),
+        (30, 58, 13),
+        MATS["rock"],
+        pass_coll,
+        sub=2
+    )
+
+    # Distant ridges behind the pass give the opening depth.
+    ico(
+        "WEST_VALLEY_BACK_LEFT_RIDGE",
+        (360, -70, 38),
+        (38, 28, 43),
+        MATS["mountain"],
+        pass_coll,
+        sub=2
+    )
+    ico(
+        "WEST_VALLEY_BACK_RIGHT_RIDGE",
+        (365, 70, 40),
+        (40, 30, 45),
+        MATS["mountain"],
+        pass_coll,
+        sub=2
+    )
+
+    empty(
+        "FUTURE_VALLEY_FRAME_CENTER",
+        (322, 0, 2),
+        markers,
+        display='CIRCLE',
+        size=5.0
+    )
+
+
+
+# ============================================================
+# WHITE-BLOCK ACTORS / PROPS / BATTLEFIELD INTERACTIONS
+# ============================================================
+
+def child_cube(name, parent, local_loc, dims, material, coll, rot=(0, 0, 0)):
+    obj = cube(name, local_loc, dims, material, coll, rot=rot)
+    obj.parent = parent
+    obj.location = local_loc
+    obj.rotation_euler = rot
+    return obj
+
+
+def child_ico(name, parent, local_loc, scale, material, coll, sub=1):

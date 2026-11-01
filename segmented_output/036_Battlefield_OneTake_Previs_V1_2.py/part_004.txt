@@ -1,0 +1,96 @@
+def beam_between(name, a, b, radius, material, coll):
+    a = Vector(a)
+    b = Vector(b)
+    delta = b - a
+    obj = cylinder(
+        name,
+        (a + b) * 0.5,
+        radius,
+        delta.length,
+        material,
+        coll,
+        vertices=6
+    )
+    obj.rotation_euler = delta.to_track_quat('Z', 'Y').to_euler()
+    return obj
+
+
+def empty(name, loc, coll, display='SPHERE', size=1.0):
+    obj = bpy.data.objects.new(name, None)
+    coll.objects.link(obj)
+    obj.location = loc
+    obj.empty_display_type = display
+    obj.empty_display_size = size
+    return obj
+
+
+def ribbon(name, points, half_width, z, material, coll):
+    verts, faces = [], []
+    pts = [Vector((p[0], p[1], z)) for p in points]
+    for i, p in enumerate(pts):
+        prev_p = pts[max(0, i - 1)]
+        next_p = pts[min(len(pts) - 1, i + 1)]
+        tangent = Vector((next_p.x - prev_p.x, next_p.y - prev_p.y, 0))
+        if tangent.length < 0.001:
+            tangent = Vector((1, 0, 0))
+        tangent.normalize()
+        side = Vector((-tangent.y, tangent.x, 0))
+        left = p + side * half_width
+        right = p - side * half_width
+        verts.extend([(left.x, left.y, left.z), (right.x, right.y, right.z)])
+    for i in range(len(pts) - 1):
+        j = i * 2
+        faces.append((j, j + 1, j + 3, j + 2))
+    mesh = bpy.data.meshes.new(name + "_Mesh")
+    mesh.from_pydata(verts, [], faces)
+    mesh.materials.append(material)
+    mesh.update()
+    obj = bpy.data.objects.new(name, mesh)
+    coll.objects.link(obj)
+    return obj
+
+
+# ============================================================
+# LANDSCAPE: OPEN SKY, DISTANT HORIZON, LOW/MID RELIEF
+# ============================================================
+
+def build_landscape():
+    """Large continuous mountain terrain based on the supplied Yimeng-style aerial reference."""
+    land = get_collection("BFP_V12_01_LAND")
+
+    xmin, xmax = -420.0, 620.0
+    ymin, ymax = -320.0, 320.0
+    nx, ny = 131, 81
+
+    # Main low corridor follows the complete story route; surrounding ridges rise on both sides.
+    story_line = [
+        (-285, -30), (-220, -12), (-178, -8), (-145, -6), (-108, 0),
+        (-70, 6), (-35, 0), (0, 2), (38, -7), (78, -2), (118, 5),
+        (158, -5), (198, 5), (250, 0), (320, 0), (410, 0), (500, 0)
+    ]
+    river_line = [
+        (72, -4), (88, 0), (104, 8), (122, 12), (140, 6),
+        (158, -8), (176, -2), (196, 8)
+    ]
+
+    def seg_distance(px, py, a, b):
+        ax, ay = a; bx, by = b
+        dx, dy = bx - ax, by - ay
+        den = dx * dx + dy * dy
+        if den < 1e-8:
+            return math.hypot(px - ax, py - ay)
+        t = max(0.0, min(1.0, ((px - ax) * dx + (py - ay) * dy) / den))
+        return math.hypot(px - (ax + t * dx), py - (ay + t * dy))
+
+    def line_distance(px, py, pts):
+        return min(seg_distance(px, py, pts[i], pts[i + 1]) for i in range(len(pts) - 1))
+
+    # Elliptical mountain masses: center x/y, horizontal radii, height, rotation.
+    peaks = [
+        (-310, -165, 105, 72, 56, -0.28),
+        (-260, 145, 112, 78, 48, 0.22),
+        (-165, -170, 95, 70, 52, 0.42),
+        (-80, 155, 118, 78, 56, -0.34),
+        (45, -165, 110, 72, 50, 0.30),
+        (165, 165, 120, 82, 58, -0.24),
+        (285, -160, 120, 84, 60, 0.26),

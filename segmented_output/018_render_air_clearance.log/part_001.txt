@@ -1,0 +1,96 @@
+RENDER_BATCHED 2286 FRAMES 480 570
+EGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).
+EGL Error (0x3009): EGL_BAD_MATCH: Arguments are inconsistent (for example, a valid context requires buffers not supplied by a valid surface).
+Blender 4.3.2
+Read blend: "/workspace/3d/delivery_v2/battlefield_v2.blend"
+Saved: '/workspace/3d/delivery_v2/frames/frame_0480.png'
+Time: 00:00.44 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0481.png'
+Time: 00:00.10 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0482.png'
+Time: 00:00.10 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0483.png'
+Time: 00:00.10 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0484.png'
+Time: 00:00.10 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0485.png'
+Time: 00:00.10 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0486.png'
+Time: 00:00.14 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0487.png'
+Time: 00:00.10 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0488.png'
+Time: 00:00.10 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0489.png'
+Time: 00:00.10 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0490.png'
+Time: 00:00.10 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0491.png'
+Time: 00:00.10 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0492.png'
+Time: 00:00.10 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0493.png'
+Time: 00:00.09 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0494.png'
+Time: 00:00.09 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0495.png'
+Time: 00:00.09 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0496.png'
+Time: 00:00.11 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0497.png'
+Time: 00:00.09 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0498.png'
+Time: 00:00.09 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0499.png'
+Time: 00:00.11 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0500.png'
+Time: 00:00.12 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0501.png'
+Time: 00:00.11 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0502.png'
+Time: 00:00.10 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0503.png'
+Time: 00:00.11 (Saving: 00:00.02)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0504.png'
+Time: 00:00.12 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0505.png'
+Time: 00:00.12 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0506.png'
+Time: 00:00.10 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0507.png'
+Time: 00:00.09 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0508.png'
+Time: 00:00.10 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0509.png'
+Time: 00:00.09 (Saving: 00:00.01)
+
+Saved: '/workspace/3d/delivery_v2/frames/frame_0510.png'

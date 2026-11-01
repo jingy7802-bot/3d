@@ -1,0 +1,96 @@
+            h += 17.0 * math.exp(-((ridge_a / 26.0) ** 2))
+            h += 13.0 * math.exp(-((ridge_b / 34.0) ** 2))
+
+            # Subtle low-frequency terrain breakup.
+            h += 1.6 * math.sin(x * 0.027 + y * 0.012) * math.cos(y * 0.021 - x * 0.008)
+            h += 0.7 * math.sin(x * 0.061 + y * 0.044)
+
+            # Keep the story corridor open and walkable while the surrounding mountains remain tall.
+            d_story = line_distance(x, y, story_line)
+            flatten = math.exp(-((d_story / 27.0) ** 2))
+            h = h * (1.0 - 0.88 * flatten) + 0.32 * (0.88 * flatten)
+
+            # A broad depressed river valley sits inside the terrain; the water and riverbed are separate meshes.
+            d_river = line_distance(x, y, river_line)
+            river_cut = 5.8 * math.exp(-((d_river / 47.0) ** 2))
+            h -= river_cut
+            h = max(-4.0, h)
+            verts.append((x, y, h))
+
+    faces = []
+    for j in range(ny - 1):
+        for i in range(nx - 1):
+            a = j * nx + i
+            b = a + 1
+            c = a + nx + 1
+            d = a + nx
+            faces.append((a, b, c, d))
+
+    mesh = bpy.data.meshes.new("BFP_V20_CONTINUOUS_MOUNTAIN_TERRAIN_MESH")
+    mesh.from_pydata(verts, [], faces)
+    mesh.materials.append(MATS["ground"])
+    mesh.materials.append(MATS["slope"])
+    mesh.materials.append(MATS["mountain"])
+    mesh.update()
+    terrain = bpy.data.objects.new("BATTLEFIELD_CONTINUOUS_MOUNTAIN_TERRAIN", mesh)
+    land.objects.link(terrain)
+
+    for poly in mesh.polygons:
+        z = sum(mesh.vertices[v].co.z for v in poly.vertices) / len(poly.vertices)
+        if z > 27.0:
+            poly.material_index = 2
+        elif z > 9.0:
+            poly.material_index = 1
+        else:
+            poly.material_index = 0
+        poly.use_smooth = True
+
+    # Exposed rock spines echo the broken, steep-sided ridges in the supplied terrain reference.
+    spine_specs = [
+        ((-235, 92, 22), (38, 18, 25), (0.08, -0.18, 0.32)),
+        ((-82, -92, 24), (44, 20, 30), (-0.08, 0.16, -0.24)),
+        ((72, 92, 28), (43, 19, 34), (0.04, -0.22, 0.18)),
+        ((205, -100, 27), (48, 22, 35), (0.12, 0.18, -0.32)),
+        ((350, 96, 32), (52, 23, 42), (-0.12, 0.2, 0.28)),
+        ((470, -95, 26), (46, 21, 34), (0.08, -0.15, -0.18)),
+    ]
+    for i, (loc, scale, rot) in enumerate(spine_specs):
+        ico("CONTINUOUS_ROCK_SPINE_%02d" % i, loc, scale, MATS["rock"], land, sub=2, rot=rot)
+
+    # Distant mountain silhouettes extend the environment beyond the immediate action corridor.
+    for i, (x, y, z, sx, sy, sz) in enumerate([
+        (-360, -245, 48, 90, 52, 48), (-260, 240, 55, 82, 48, 50),
+        (-70, -250, 58, 95, 56, 58), (110, 250, 65, 96, 54, 62),
+        (310, -250, 62, 100, 58, 60), (500, 235, 72, 112, 60, 70),
+    ]):
+        ico("DISTANT_MOUNTAIN_MASS_%02d" % i, (x, y, z), (sx, sy, sz),
+            MATS["mountain"], land, sub=2)
+
+    # Clouds remain high above the terrain and do not reduce the newly expanded airspace.
+    for i in range(34):
+        x = random.uniform(-330, -120)
+        y = random.uniform(-150, 150)
+        z = random.uniform(115, 165)
+        ico("HIGH_CLOUD_%03d" % i, (x, y, z),
+            (random.uniform(10, 23), random.uniform(8, 18), random.uniform(3, 8)),
+            MATS["cloud"], land, sub=1)
+
+    log("Terrain mesh created: %d vertices / %d faces, expanded mountain basin." % (len(verts), len(faces)))
+
+
+# ============================================================
+# FOREST: TREE GATES, LOW BRANCHES, CLOSE PASSES
+# ============================================================
+
+FOREST_ROUTE = [
+    (-166, -8, 1.6), (-160, -18, 1.45), (-151, -28, 1.4),
+    (-143, -18, 1.25), (-137, 0, 1.2), (-132, 18, 1.2),
+    (-126, 26, 1.15), (-120, 18, 1.2), (-116, 0, 1.2),
+    (-111, -18, 1.1), (-106, -26, 1.05), (-102, -8, 1.25),
+    (-98, 8, 1.35), (-94, 2, 1.35), (-90, -4, 1.45), (-81, 5, 1.4)
+]
+
+
+def build_forest():
+    forest = get_collection("BFP_V20_02_FOREST")
+    random.seed(SEED + 61)

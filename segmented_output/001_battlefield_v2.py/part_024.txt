@@ -1,0 +1,96 @@
+        ((101, -10, -3.48), 0.4, "side", "jp"),
+        ((116, 10, -3.50), -0.9, "prone", "cn"),
+        ((132, -10, -3.48), 1.4, "supine", "cn"),
+        ((148, 9, -3.50), -0.2, "side", "jp"),
+        ((164, -9, -3.48), 0.9, "prone", "cn"),
+        ((178, 10, -3.50), -1.2, "supine", "cn"),
+    ]):
+        body = make_casualty("RIVER_EXTRA_BODY_%02d" % i, loc, yaw=yaw,
+                             faction=faction, pose=pose, submerged=True)
+        if i in (1, 4):
+            animate_wounded_body(body, 438 + i * 3, 492 + i * 2, dx=0.24, dy=0.16)
+
+    river_support = make_actor("RIVER_SUPPORTING_SOLDIER", (116, 4, -0.72),
+                               yaw=0.0, faction="cn", posture="crouch", rifle=False)
+    river_injured = make_actor("RIVER_INJURED_SOLDIER", (118, 5, -0.85),
+                               yaw=0.0, faction="cn", posture="crouch", rifle=False)
+    river_support["right_arm"].rotation_euler.y = -1.0
+    river_support["left_arm"].rotation_euler.y = -0.55
+    river_injured["left_arm"].rotation_euler.y = -0.9
+    animate_actor(river_support, [
+        (440, (116, 4, -0.72), 0.0),
+        (470, (118, 4.5, -0.72), 0.0),
+        (500, (120, 5, -0.72), 0.0),
+    ], run=False)
+    animate_actor(river_injured, [
+        (440, (118, 5, -0.85), 0.0),
+        (470, (119, 5.5, -0.85), 0.0),
+        (500, (121, 6, -0.85), 0.0),
+    ], run=False)
+    animate_head_turn(river_support, 440, 500, angle_z=0.20)
+    animate_head_turn(river_injured, 440, 500, angle_z=-0.24)
+    for frame, support_right, support_left, injured_left in (
+        (440, -0.65, -0.40, -0.65),
+        (452, -1.00, -0.68, -0.90),
+        (470, -0.92, -0.60, -0.82),
+        (488, -0.78, -0.52, -0.70),
+        (500, -0.65, -0.40, -0.65),
+    ):
+        river_support["right_arm"].rotation_euler.y = support_right
+        river_support["right_arm"].keyframe_insert(data_path="rotation_euler", frame=frame)
+        river_support["left_arm"].rotation_euler.y = support_left
+        river_support["left_arm"].keyframe_insert(data_path="rotation_euler", frame=frame)
+        river_injured["left_arm"].rotation_euler.y = injured_left
+        river_injured["left_arm"].keyframe_insert(data_path="rotation_euler", frame=frame)
+
+    for i, (start, end) in enumerate([
+        ((104, -8, -0.72), (112, -8, -0.72)),
+        ((126, 12, -0.72), (137, 12, -0.72)),
+        ((145, -12, -0.72), (156, -12, -0.72)),
+        ((168, 6, -0.72), (179, 6, -0.72)),
+    ]):
+        actor = make_actor("RIVER_EXTRA_RUNNER_%02d" % i, start, yaw=0.0,
+                           faction="cn", rifle=False)
+        animate_wading_actor(actor, [
+            (430, start, 0.0),
+            (465, ((start[0] + end[0]) * 0.5, (start[1] + end[1]) * 0.5, start[2]), 0.0),
+            (500, end, 0.0),
+        ])
+
+    # Keep foreground, midground and background human activity during the river section.
+    river_fg_cross_1 = make_actor("CN_RIVER_FG_CROSS_1", (88, 1, -0.72), yaw=0.0, faction="cn", rifle=False)
+    river_fg_cross_2 = make_actor("CN_RIVER_FG_CROSS_2", (99, -4, -0.72), yaw=0.0, faction="cn", rifle=False)
+    river_mid_cross = make_actor("CN_RIVER_MID_CROSS", (124, 8, -0.72), yaw=0.0, faction="cn", rifle=True)
+    river_bg_cross = make_actor("CN_RIVER_BG_CROSS", (160, -8, -0.72), yaw=0.0, faction="cn", rifle=False)
+    for actor, path in [
+        (river_fg_cross_1, [(420, (88, 1, -0.72), 0.0), (458, (96, 1, -0.72), 0.0), (500, (103, 1, -0.72), 0.0)]),
+        (river_fg_cross_2, [(432, (99, -4, -0.72), 0.0), (470, (108, -4, -0.72), 0.0), (508, (117, -4, -0.72), 0.0)]),
+        (river_mid_cross, [(430, (124, 8, -0.72), 0.0), (472, (133, 8, -0.72), 0.0), (514, (142, 8, -0.72), 0.0)]),
+        (river_bg_cross, [(440, (160, -8, -0.72), 0.0), (486, (168, -8, -0.72), 0.0), (528, (176, -8, -0.72), 0.0)]),
+    ]:
+        animate_wading_actor(actor, path)
+
+    # Surface-floating and falling bodies for clearer readable river action.
+    float_body_a = make_casualty("RIVER_SURFACE_FLOAT_A", (110, 1, 0.05), yaw=0.4, faction="cn", pose="supine")
+    float_body_b = make_casualty("RIVER_SURFACE_FLOAT_B", (145, -3, 0.02), yaw=-0.9, faction="jp", pose="side")
+    animate_wounded_body(float_body_a, 438, 500, dx=0.35, dy=0.02)
+    animate_wounded_body(float_body_b, 456, 520, dx=0.28, dy=-0.04)
+    river_fall = make_actor("CN_RIVER_CROSSING_HIT_FALL", (130, 2, -0.72), yaw=0.0, faction="cn", rifle=False)
+    animate_hit_fall_performance(river_fall, 488, 502, direction=-1.0)
+
+    # One soldier is hit during the underwater passage and falls into the water.
+    hit_actor = make_actor("CN_RIVER_HIT_AND_FALL", (143, -1.5, -0.72), yaw=0.0,
+                           faction="cn", rifle=True)
+    animate_hit_fall_performance(hit_actor, 500, 514, direction=-1.0)
+    river_react = make_actor("CN_RIVER_CROSSER_DUCK_REACTION", (126, -3, -0.72),
+                             yaw=0.0, faction="cn", rifle=False)
+    animate_head_turn(river_react, 486, 506, angle_z=-0.34)
+    animate_duck_and_recover(river_react, 486, 494, 508, depth=0.12)
+
+    # 5) Riverbank handoff: the receiver takes the box and runs forward.
+    handoff_a = make_actor("CN_BOX_HANDOFF_SENDER", (198, -4, 0), yaw=0.0,
+                           faction="cn", rifle=False)
+    handoff_b = make_actor("CN_BOX_HANDOFF_RECEIVER", (202, -4, 0), yaw=math.pi,
+                           faction="cn", rifle=False)
+    box = cube("RIVERBANK_HANDOFF_BOX", (199.0, -4, 1.12), (0.95, 0.62, 0.62),
+               MATS["box"], get_collection("BFP_V20_17_PROPS"))

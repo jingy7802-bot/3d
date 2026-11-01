@@ -1,0 +1,96 @@
+(720,(302,0,5),(250,0,1.2),'Valley frame',0),
+(742,(322,0,10),(250,0,1.4),'Pass entrance',3),
+(762,(345,0,18),(260,0,2),'Inside valley',0),
+(790,(370,5,35),(280,0,2),'Lift',0),
+(830,(412,3,65),(260,0,2),'Wide',0),
+(870,(460,0,105),(210,0,0),'Battlefield',0),
+(900,(510,0,150),(140,0,0),'Final',0)]
+
+def white_materials():
+    for k,m in MATS.items():
+        if k in ['path','marker']:continue
+        gray={'ground':.52,'leaf':.62,'leaf_light':.7,'trunk':.45,'cn_soldier':.82,'jp_soldier':.58,'old_meng':.9,'weapon':.25,'grenade':.3,'water':.45,'smoke':.72,'dust':.66}.get(k,.68)
+        color=(gray,gray,gray,1)
+        if k=='water':color=(.35,.48,.53,.24)
+        if k in ['smoke','dust']:color=(gray,gray,gray,.28)
+        m.diffuse_color=color
+        bs=m.node_tree.nodes.get('Principled BSDF')
+        if bs:bs.inputs['Base Color'].default_value=color;bs.inputs['Alpha'].default_value=color[3]
+
+
+def setup_camera_v2():
+    global CAMERA_KEYS, CAMERA_FOCAL_KEYS
+    CAMERA_KEYS=V2_KEYS
+    CAMERA_FOCAL_KEYS=[(k[0],24 if k[0]<98 else 32 if k[0]<594 else 28 if k[0]<680 else 24) for k in V2_KEYS]
+    build_camera();bpy.context.scene.camera.data.dof.use_dof=False
+    bpy.context.scene.camera.data.clip_start=.06
+    bpy.context.scene.camera.data.clip_end=2500
+
+
+def configure_v2():
+    s=bpy.context.scene;s.frame_start=1;s.frame_end=round(time_frame(900));s.render.fps=30
+    s.render.resolution_x=CFG['width'];s.render.resolution_y=CFG['height'];s.render.resolution_percentage=100
+    s.render.engine=CFG['render_engine']
+    sh=s.display.shading;sh.light='STUDIO';sh.studiolight_rotate_z=.4;sh.color_type='MATERIAL'
+    sh.show_shadows=True;sh.show_cavity=True;sh.cavity_type='BOTH';sh.show_specular_highlight=True
+    sh.background_type='WORLD';s.world.color=(.13,.13,.13);s.display.render_aa='FXAA'
+    s.view_settings.view_transform='Standard'
+    for c in bpy.data.collections:
+        if any(x in c.name for x in ['MARKER','PATH_DEBUG','TACTICAL']):c.hide_render=True
+    for ob in bpy.data.objects:
+        if 'CAMERA_PATH' in ob.name or 'DIRECTION_MARKER' in ob.name:ob.hide_render=True
+    s['requirement_baseline']='User V1.0; implementation V2.0; original V1.2 preserved'
+    s['target_blender']='5.2.x (not validated)';s['validated_blender']=bpy.app.version_string
+    s['camera_safety_radius_m']=CFG['camera_radius'];s['camera_margin_m']=CFG['safety_margin']
+    s['master_timeline_seconds']=CFG['time_map'][-1][1]
+    for f,n in [(98,'02 Forest'),(232,'03 Li Xingou'),(332,'04 House'),(410,'05 River'),(512,'06A Handoff'),(564,'06B Meng'),(664,'07 Valley')]:
+        s.timeline_markers.new(n,frame=round(time_frame(f)))
+    s.frame_set(1)
+
+
+# Shared immutable mesh data: crowd parts reuse one unit primitive per material.
+import bmesh
+_MESH_CACHE={}
+def unit_mesh(kind,material,sub=1,vertices=7):
+    key=(kind,material.name if material else None,sub,vertices)
+    cached=_MESH_CACHE.get(key)
+    if cached and cached.name in bpy.data.meshes:return cached
+    bm=bmesh.new()
+    if kind=='cube':bmesh.ops.create_cube(bm,size=1)
+    elif kind=='ico':bmesh.ops.create_icosphere(bm,subdivisions=sub,radius=1)
+    else:bmesh.ops.create_cone(bm,cap_ends=True,cap_tris=False,segments=vertices,radius1=1,radius2=1,depth=1)
+    mesh=bpy.data.meshes.new('V2_SHARED_'+kind);bm.to_mesh(mesh);bm.free()
+    if material:mesh.materials.append(material)
+    _MESH_CACHE[key]=mesh;return mesh
+
+def cube(name,loc,dims,material,coll,rot=(0,0,0)):
+    ob=bpy.data.objects.new(name,unit_mesh('cube',material));coll.objects.link(ob)
+    ob.location=loc;ob.scale=dims;ob.rotation_euler=rot;return ob
+
+def ico(name,loc,scale,material,coll,sub=1,rot=(0,0,0)):
+    ob=bpy.data.objects.new(name,unit_mesh('ico',material,sub=sub));coll.objects.link(ob)
+    ob.location=loc;ob.scale=scale;ob.rotation_euler=rot;return ob
+
+def cylinder(name,loc,radius,depth,material,coll,vertices=7,rot=(0,0,0)):
+    ob=bpy.data.objects.new(name,unit_mesh('cylinder',material,vertices=vertices));coll.objects.link(ob)
+    ob.location=loc;ob.scale=(radius,radius,depth);ob.rotation_euler=rot;return ob
+
+_base_make_actor=make_actor
+def make_actor(name,loc,yaw=0.,faction='cn',posture='stand',rifle=False,grenades=0,material_override=None):
+    actor=_base_make_actor(name,loc,yaw,faction,posture,rifle,grenades,material_override)
+    c=get_collection('BFP_V20_16_CHARACTERS');head=actor['head'];root=actor['root']
+    hz=head.location.z
+    if faction=='jp':
+        child_ico(name+'_HELMET',root,(0,0,hz+.10),(.27,.27,.19),MATS['jp_soldier'],c)
+    elif faction!='old_meng':
+        child_cube(name+'_CAP',root,(0,0,hz+.19),(.38,.42,.10),MATS['cn_soldier'],c)
+    if faction=='old_meng':
+        child_cube(name+'_BELT',root,(0,0,.95),(.56,.40,.09),MATS['weapon'],c)
+        child_ico(name+'_NOSE',head,(.90,0,0),(.22,.18,.22),MATS['old_meng'],c)
+        for side in [-1,1]:child_ico(name+'_EYE_'+str(side),head,(.83,side*.44,.25),(.09,.08,.08),MATS['weapon'],c)
+    return actor
+
+_old_extra_events=extra_events
+def extra_events():
+    _old_extra_events()
+    pinned=bpy.data.objects['CN_FOREST_PINNED_UNDER_TREE_ROOT']

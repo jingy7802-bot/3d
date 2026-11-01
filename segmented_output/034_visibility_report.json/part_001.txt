@@ -1,0 +1,92 @@
+[
+  {
+    "beat": "Pigeon",
+    "frame": 196,
+    "object": "OPENING_PIGEON_BODY",
+    "bbox_projected_height": 0.10302713513374329,
+    "in_frustum": true,
+    "first_occluder": "OPENING_PIGEON_BODY",
+    "manual_acceptance": "PENDING"
+  },
+  {
+    "beat": "Aircraft",
+    "frame": 474,
+    "object": "JAPANESE_BOMBER_LEFT_NEAR_FUSELAGE",
+    "bbox_projected_height": 0.7686708569526672,
+    "in_frustum": true,
+    "first_occluder": "JAPANESE_BOMBER_LEFT_NEAR_FUSELAGE",
+    "manual_acceptance": "PENDING"
+  },
+  {
+    "beat": "JP fire",
+    "frame": 1031,
+    "object": "JP_CLOSE_REAR_SHOOTER_A_TORSO",
+    "bbox_projected_height": 0.4857509024441242,
+    "in_frustum": true,
+    "first_occluder": "WOODLAND_BOULDER_00_01",
+    "manual_acceptance": "PENDING"
+  },
+  {
+    "beat": "CN fire",
+    "frame": 1381,
+    "object": "CN_ROCK_COVER_SECOND_SHOOTER_TORSO",
+    "bbox_projected_height": 0.2018110156059265,
+    "in_frustum": true,
+    "first_occluder": "CN_ROCK_COVER_SECOND_SHOOTER_TORSO",
+    "manual_acceptance": "PENDING"
+  },
+  {
+    "beat": "Rescue",
+    "frame": 2191,
+    "object": "CN_FOREST_RESCUER_TORSO",
+    "bbox_projected_height": 0.21441978216171265,
+    "in_frustum": true,
+    "first_occluder": "CN_FOREST_RESCUER_LEFT_ARM",
+    "manual_acceptance": "PENDING"
+  },
+  {
+    "beat": "Doorway",
+    "frame": 2722,
+    "object": "WUTONGGOU_WOMAN_CARRYING_WOUNDED_MAN_TORSO",
+    "bbox_projected_height": 0.2658226937055588,
+    "in_frustum": true,
+    "first_occluder": "WUTONGGOU_WOMAN_CARRYING_WOUNDED_MAN_TORSO",
+    "manual_acceptance": "PENDING"
+  },
+  {
+    "beat": "Water",
+    "frame": 3444,
+    "object": "RIVER_SUPPORTING_SOLDIER_TORSO",
+    "bbox_projected_height": 0.08942252397537231,
+    "in_frustum": true,
+    "first_occluder": "RIVER_SUPPORTING_SOLDIER_LEFT_ARM",
+    "manual_acceptance": "PENDING"
+  },
+  {
+    "beat": "Box",
+    "frame": 4246,
+    "object": "RIVERBANK_HANDOFF_BOX",
+    "bbox_projected_height": 0.20256245136260986,
+    "in_frustum": true,
+    "first_occluder": "RIVERBANK_HANDOFF_BOX",
+    "manual_acceptance": "PENDING"
+  },
+  {
+    "beat": "Meng back",
+    "frame": 4570,
+    "object": "OLD_MENG_TORSO",
+    "bbox_projected_height": 0.3350759446620941,
+    "in_frustum": true,
+    "first_occluder": "OLD_MENG_CHARGE_04",
+    "manual_acceptance": "PENDING"
+  },
+  {
+    "beat": "Meng front",
+    "frame": 4923,
+    "object": "OLD_MENG_HEAD",
+    "bbox_projected_height": 0.24114763736724854,
+    "in_frustum": true,
+    "first_occluder": "OLD_MENG_HEAD",
+    "manual_acceptance": "PENDING"
+  }
+]

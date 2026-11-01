@@ -1,0 +1,96 @@
+        )
+
+
+# ============================================================
+# WEST PASS: HUGE VALLEY AND NATURAL FRAME
+# ============================================================
+
+def build_west_pass():
+    pass_coll = get_collection("BFP_V20_06_WEST_PASS")
+    markers = get_collection("BFP_V20_08_FUTURE_MARKERS")
+
+    # Huge valley walls: wide opening, very tall sides, clear central road.
+    for side in (-1, 1):
+        for i, x in enumerate((298, 316, 334, 352)):
+            y = side * random.uniform(43, 52)
+            ico(
+                "WEST_VALLEY_MASSIVE_SIDE_WALL_%s_%02d" % (side, i),
+                (x, y, random.uniform(24, 34)),
+                (random.uniform(22, 29), random.uniform(17, 23), random.uniform(30, 43)),
+                MATS["rock"] if i % 2 else MATS["rock_light"],
+                pass_coll,
+                sub=2
+            )
+
+    # High rock crown creates a natural frame above the valley opening.
+    # It remains far above the low camera path and does not form a cramped tunnel.
+    ico(
+        "WEST_VALLEY_HIGH_FRAME_CROWN",
+        (322, 0, 66),
+        (30, 58, 13),
+        MATS["rock"],
+        pass_coll,
+        sub=2
+    )
+
+    # Distant ridges behind the pass give the opening depth.
+    ico(
+        "WEST_VALLEY_BACK_LEFT_RIDGE",
+        (360, -70, 38),
+        (38, 28, 43),
+        MATS["mountain"],
+        pass_coll,
+        sub=2
+    )
+    ico(
+        "WEST_VALLEY_BACK_RIGHT_RIDGE",
+        (365, 70, 40),
+        (40, 30, 45),
+        MATS["mountain"],
+        pass_coll,
+        sub=2
+    )
+
+    empty(
+        "FUTURE_VALLEY_FRAME_CENTER",
+        (322, 0, 2),
+        markers,
+        display='CIRCLE',
+        size=5.0
+    )
+
+
+
+# ============================================================
+# WHITE-BLOCK ACTORS / PROPS / BATTLEFIELD INTERACTIONS
+# ============================================================
+
+def child_cube(name, parent, local_loc, dims, material, coll, rot=(0, 0, 0)):
+    obj = cube(name, local_loc, dims, material, coll, rot=rot)
+    obj.parent = parent
+    obj.location = local_loc
+    obj.rotation_euler = rot
+    return obj
+
+
+def child_ico(name, parent, local_loc, scale, material, coll, sub=1):
+    obj = ico(name, local_loc, scale, material, coll, sub=sub)
+    obj.parent = parent
+    obj.location = local_loc
+    return obj
+
+
+def child_cylinder(name, parent, local_loc, radius, depth, material, coll, rot=(0, 0, 0)):
+    obj = cylinder(name, local_loc, radius, depth, material, coll, vertices=7, rot=rot)
+    obj.parent = parent
+    obj.location = local_loc
+    obj.rotation_euler = rot
+    return obj
+
+
+def animate_actor(actor, path, run=True):
+    """
+    path entries: (frame, (x, y, z), yaw_radians)
+    Camera choreography is keyed against these actor paths and event positions.
+    """
+    root = actor["root"]

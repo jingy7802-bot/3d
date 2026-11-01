@@ -1,0 +1,96 @@
+    head.keyframe_insert(data_path="rotation_euler", frame=end_frame)
+
+
+
+def animate_rifle_burst(actor, shot_frames, recover_frame=None, recoil=0.10):
+    """Readable short firing burst: shoulders brace, rifle recoils, then settles."""
+    left = actor["left_arm"]
+    right = actor["right_arm"]
+    left_base = tuple(left.rotation_euler)
+    right_base = tuple(right.rotation_euler)
+    for arm, base, side in ((left, left_base, -1.0), (right, right_base, 1.0)):
+        if shot_frames:
+            arm.rotation_euler = base
+            arm.keyframe_insert(data_path="rotation_euler", frame=max(1, shot_frames[0] - 2))
+        for frame in shot_frames:
+            arm.rotation_euler = (base[0] + 0.05, base[1] + side * 0.08, base[2])
+            arm.keyframe_insert(data_path="rotation_euler", frame=frame)
+            arm.rotation_euler = (base[0], base[1] - side * 0.025, base[2])
+            arm.keyframe_insert(data_path="rotation_euler", frame=frame + 1)
+            arm.rotation_euler = base
+            arm.keyframe_insert(data_path="rotation_euler", frame=frame + 3)
+        if recover_frame is not None:
+            arm.rotation_euler = base
+            arm.keyframe_insert(data_path="rotation_euler", frame=recover_frame)
+
+    rifle = actor.get("rifle")
+    if rifle is not None:
+        base_loc = rifle.location.copy()
+        base_rot = rifle.rotation_euler.copy()
+        rifle.location = base_loc
+        rifle.rotation_euler = base_rot
+        rifle.keyframe_insert(data_path="location", frame=max(1, shot_frames[0] - 2))
+        rifle.keyframe_insert(data_path="rotation_euler", frame=max(1, shot_frames[0] - 2))
+        for frame in shot_frames:
+            rifle.location = (base_loc.x - recoil, base_loc.y, base_loc.z + 0.025)
+            rifle.rotation_euler = (base_rot.x, base_rot.y - 0.06, base_rot.z)
+            rifle.keyframe_insert(data_path="location", frame=frame)
+            rifle.keyframe_insert(data_path="rotation_euler", frame=frame)
+            rifle.location = base_loc
+            rifle.rotation_euler = base_rot
+            rifle.keyframe_insert(data_path="location", frame=frame + 2)
+            rifle.keyframe_insert(data_path="rotation_euler", frame=frame + 2)
+
+
+def animate_hit_fall_performance(actor, hit_frame, down_frame, direction=1.0):
+    """Multi-part hit reaction: impact recoil, arm release, loss of balance and fall."""
+    root = actor["root"]
+    base = root.location.copy()
+    yaw = root.rotation_euler.z
+    root.location = base
+    root.rotation_euler = (0.0, 0.0, yaw)
+    root.keyframe_insert(data_path="location", frame=hit_frame - 3)
+    root.keyframe_insert(data_path="rotation_euler", frame=hit_frame - 3)
+    root.location = (base.x - 0.18, base.y, base.z + 0.10)
+    root.rotation_euler = (0.08, direction * 0.16, yaw)
+    root.keyframe_insert(data_path="location", frame=hit_frame)
+    root.keyframe_insert(data_path="rotation_euler", frame=hit_frame)
+    root.location = (base.x + direction * 0.22, base.y, base.z - 0.28)
+    root.rotation_euler = (0.0, direction * 1.30, yaw)
+    root.keyframe_insert(data_path="location", frame=down_frame)
+    root.keyframe_insert(data_path="rotation_euler", frame=down_frame)
+
+    for arm_name, sign in (("left_arm", -1.0), ("right_arm", 1.0)):
+        arm = actor[arm_name]
+        base_rot = tuple(arm.rotation_euler)
+        arm.rotation_euler = base_rot
+        arm.keyframe_insert(data_path="rotation_euler", frame=hit_frame - 3)
+        arm.rotation_euler = (base_rot[0] + 0.20, base_rot[1] + sign * 0.72, base_rot[2])
+        arm.keyframe_insert(data_path="rotation_euler", frame=hit_frame)
+        arm.rotation_euler = (base_rot[0] + 0.10, base_rot[1] + sign * 1.05, base_rot[2])
+        arm.keyframe_insert(data_path="rotation_euler", frame=down_frame)
+
+    for leg_name, sign in (("left_leg", 1.0), ("right_leg", -1.0)):
+        leg = actor[leg_name]
+        base_rot = tuple(leg.rotation_euler)
+        leg.rotation_euler = base_rot
+        leg.keyframe_insert(data_path="rotation_euler", frame=hit_frame - 3)
+        leg.rotation_euler = (base_rot[0], base_rot[1] + sign * 0.34, base_rot[2])
+        leg.keyframe_insert(data_path="rotation_euler", frame=hit_frame)
+        leg.rotation_euler = (base_rot[0], base_rot[1] + sign * 0.62, base_rot[2])
+        leg.keyframe_insert(data_path="rotation_euler", frame=down_frame)
+
+    head = actor["head"]
+    head.rotation_euler = (0.0, 0.0, 0.0)
+    head.keyframe_insert(data_path="rotation_euler", frame=hit_frame - 3)
+    head.rotation_euler = (0.12, 0.0, direction * 0.22)
+    head.keyframe_insert(data_path="rotation_euler", frame=hit_frame)
+    head.rotation_euler = (0.0, 0.0, direction * 0.38)
+    head.keyframe_insert(data_path="rotation_euler", frame=down_frame)
+
+
+def animate_duck_and_recover(actor, start_frame, duck_frame, recover_frame, depth=0.16):
+    """Short tactical flinch/duck in response to nearby fire or blast."""
+    root = actor["root"]
+    base = root.location.copy()
+    yaw = root.rotation_euler.z
